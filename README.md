@@ -3,11 +3,11 @@ Veebirakendus
 =============
 
 
-Nimi              - Git'i nimi  - Amet
+Nimi              - Git'i nimi    - Amet
 
 
-Jaan Janno        - jaanjanno   - chief
+Jaan Janno        - jaanjanno     - chief
 
-Kristiina Ilves   - ilvesk      - superwoman
+Kristiina Ilves   - ilvesk        - superwoman
 
-Sixten Leemets    - sixten      - boss
+Sixten Leemets    - SixtenLeemets - boss
