@@ -10,4 +10,4 @@ Jaan Janno        - jaanjanno     - chief
 
 Kristiina Ilves   - ilvesk        - superwoman
 
-Sixten Leemets    - SixtenLeemets - timelord
+Sixten Leemets    - SixtenLeemets - das megahüper

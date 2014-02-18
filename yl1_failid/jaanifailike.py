@@ -5,3 +5,4 @@ input()
 
 
 ##Kiku poolt lisatud kommentaar, ha!
+##Sixten kommenteerib *_*
