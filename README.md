@@ -3,7 +3,7 @@ Veebirakendus
 =============
 
 
-Nimi                Git'i nimi    Amet
+Nimi              - Git'i nimi  - Amet
 
 
 Jaan Janno        - jaanjanno   - chief
