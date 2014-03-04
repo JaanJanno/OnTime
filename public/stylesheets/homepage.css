@@ -1,0 +1,40 @@
+﻿.photo-container{
+    background-image:url('/assets/images/foto3.png');
+	height:300px;
+	border-radius:10px;
+}
+
+#quote{
+    color:#fff;
+    font-size:25px;
+    text-shadow:inherit;
+    float:right;
+    padding-top:260px;
+    padding-right:15px;
+}
+
+#live-now-container{
+    width:49%;
+    float:left;
+}
+
+#latest-events-container{
+    width:49%;
+    float:right;
+}
+
+
+#live-now{
+    color:#800000;
+    font-weight:bold;
+    padding-left:10px;
+    padding-top: 8px;
+
+}
+
+#latest-events{
+    font-weight:bold;
+    padding-left:10px;
+    padding-top:8px;
+
+}

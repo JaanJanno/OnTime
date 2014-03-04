@@ -1,0 +1,17 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+.panel{
+    border-radius: 10px;
+	border:1px solid;
+	border-color:#DDD;
+}
+
+.panel-header{
+    height:30px;
+    background-image: linear-gradient(to bottom, #F5F5F5 0px, #DDD 100%);
+    border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	border-bottom: 1px solid;
+	border-bottom-color:#DDD;
+}

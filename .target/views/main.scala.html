@@ -1,45 +1,66 @@
 @(title: String)(content: Html)
 
 <!DOCTYPE html>
-
-<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8" />
-<title>OnTime</title>
-<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")">
+    <meta charset="utf-8" />
+    <title>OnTime</title>
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at"("stylesheets/main.css")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at"("stylesheets/homepage.css")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at"("stylesheets/elements.css")">
 </head>
 
 <body>
-<header>
-<div class="navigationBar">
-<div class="logo">OnTime</div>
-<div class="menu">
-<ul class="buttons">
-<li><a href="http://kava.ee">Sign Up</a></li>   
-<li><a href="http://kava.ee">Log In</a></li></ul></div>
-</div>
-</header>
+    <header>
+        <div class="nav-bar-container">
+            <div class="logo"><a href="#">OnTime</a></div>
+            <div class="search-container">
+                <input type="text" id="search" placeholder="search">
+            </div>
+            <div class="nav-bar">
+                <ul class="nav-bar-tabs">
+                    <li><a href="#">Sign up</a></li>
+                    <li><a href="#">Log in</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
-<div class="content">
+    <div class="content">
+        <div class="photo-container">
+        <div id="quote">Experience the ultimate timing!</div>
+        </div>
+        <br>
+     
+            <div id="live-now-container">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div id="live-now">LIVE NOW!</div>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>üritus1</li>
+                            <li>üritus2</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-<div class="photo">
-<div id="quote">Experience the ultimate timing!</div>
-</div>
-<br>
-<div class="liveNow">
-<div class="liveNowHeader"><div id="tekst">Live Now!</div></div>
-<div class="liveNowBody">
-<ul>
-<li>Üritus1</li><br>
-<li>Üritus2</li><br>
-<li>Üritus3</li><br>
-</ul>
-</div>
-</div>
+            <div id="latest-events-container">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div id="latest-events">Latest events</div>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>üritus3</li>
+                            <li>üritus4</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
 
-</div>
-
-<footer>
-</footer>
 </body>
 </html>
