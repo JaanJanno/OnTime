@@ -43,20 +43,6 @@ header{
     padding:0px 7px 0px 7px;
     }
 
-.search-container{
-    position:absolute;
-    padding-top:14px;
-    left:60%;
-}
-
-#search{
-    border:1px solid;
-    border-radius:5px;
-    opacity: 0.8;
-    padding-left:10px;
-
-}
-
 body{
     /*background-color: #f9f9ec;*/
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
