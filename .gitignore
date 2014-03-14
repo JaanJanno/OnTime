@@ -3,6 +3,7 @@
 .scala_dependencies
 .settings
 .cache
+.target
 bin
 target
 logs
