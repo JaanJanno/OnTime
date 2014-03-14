@@ -3,6 +3,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import models.Event;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.*;
 
@@ -28,17 +30,14 @@ import static org.fest.assertions.Assertions.*;
 public class ApplicationTest {
 
     @Test
-    public void simpleCheck() {
-        int a = 1 + 1;
-        assertThat(a).isEqualTo(2);
-    }
-
-    @Test
-    public void renderTemplate() {
-        Content html = views.html.index.render("Your new application is ready.");
+    public void htmlOlemas() {
+        Content html = views.html.index.render(new ArrayList<Event>());
         assertThat(contentType(html)).isEqualTo("text/html");
-        assertThat(contentAsString(html)).contains("Your new application is ready.");
     }
-
-
+    
+    @Test
+    public void pealkiriOlemas() {
+        Content html = views.html.index.render(new ArrayList<Event>());
+        assertThat(contentAsString(html)).contains("OnTime");
+    }
 }

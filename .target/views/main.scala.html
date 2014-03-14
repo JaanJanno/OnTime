@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(events: List[Event])(content: Html)
 
 <!DOCTYPE html>
 <html>
@@ -50,8 +50,11 @@
                     </div>
                     <div class="panel-body">
                         <ul>
-                            <li>üritus3</li>
-                            <li>üritus4</li>
+		                    @events.map { event =>
+		                        <li data-event-id="@event.id">
+		                            <a href="http://www.delfi.ee">@event.title @event.date</a>
+		                        </li>
+		                    }
                         </ul>
                     </div>
                 </div>
