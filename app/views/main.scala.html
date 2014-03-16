@@ -12,6 +12,8 @@
 
 	<script src="http://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
 	<script src="/assets/javascripts/login-popup.js" type="text/javascript" /></script>
+	<script src="/assets/javascripts/recent-min.js" type="text/javascript" /></script>
+	<script src="/assets/javascripts/live-min.js" type="text/javascript" /></script>
 </head>
 
 <body>
@@ -46,10 +48,10 @@
      	<div id="tabs-container">
             <div id="live-now-container">
                 <div class="panel">
-                    <div class="panel-header">
+                    <div class="panel-header live-header">
                         <div id="live-now">LIVE NOW!</div>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body live-body">
                         <ul>
                             <li>üritus1</li>
                             <li>üritus2</li>
@@ -60,10 +62,10 @@
             <br>
             <div id="latest-events-container">
                 <div class="panel">
-                    <div class="panel-header">
+                    <div class="panel-header latest-header">
                         <div id="latest-events">Latest events</div>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body latest-body">
                         <ul>
 		                    @events.map { event =>
 		                        <li data-event-id="@event.id">
