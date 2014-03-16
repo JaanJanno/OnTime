@@ -1,7 +1,17 @@
 ﻿.photo-container{
     background-image:url('/assets/images/foto3.png');
+    background-position:center; 
+    background-size: cover;
 	height:300px;
 	border-radius:10px;
+	align: center;
+}
+
+#tabs-container{
+}
+
+#tabs-container br {
+    display: none;
 }
 
 #quote{
@@ -12,6 +22,8 @@
     padding-top:260px;
     padding-right:15px;
 }
+
+
 
 #live-now-container{
     width:49%;
@@ -37,4 +49,59 @@
     padding-left:10px;
     padding-top:8px;
 
+}
+
+@media screen and (max-width: 960px) {
+
+    .photo-container {
+        height:200px;  
+    }
+    
+    #quote {
+    	position: absolute; 
+    	top: -30px;
+    	right: 170px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+    .photo-container {
+        height:120px;
+    }
+}
+
+@media(max-width: 700px) {
+
+    #quote {
+    	display:none;
+        position: absolute; 
+    	top: -80px;
+    	left: 130px;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+
+    .photo-container {
+        height:80px;
+    }
+    
+    #tabs-container br {
+    	display: initial;
+	}
+	
+	#live-now-container{
+		width:100%;
+		padding-bottom:10px;
+	}
+
+	#latest-events-container{
+		width:100%;
+	}
+	
+	.content {
+		width:80%;
+	}
 }
