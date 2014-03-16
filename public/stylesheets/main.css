@@ -10,6 +10,7 @@ header{
 .nav-bar-container{
     height:50px;
     width:60%;
+    max-width:900px;
     margin:auto;
     color:#CCC;
 }
@@ -51,5 +52,6 @@ body{
 
 .content{
     width:60%;
+    max-width:900px;
     margin:auto;
 }
