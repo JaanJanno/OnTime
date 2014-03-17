@@ -1,0 +1,13 @@
+@(form: Form[Application.Login], user: User)
+
+<div class="nav-bar">
+    <ul class="nav-bar-tabs">
+        
+        @if(user == null){
+        	<li><a href="#">Sign up</a></li>
+        	<li><a href="#" class="popup_button">Log in</a></li>
+        } else{
+        	<li><a href="@routes.Application.logout()">Log out</a></li>
+        }
+    </ul>
+</div>
