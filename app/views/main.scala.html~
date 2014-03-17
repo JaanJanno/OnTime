@@ -22,13 +22,8 @@
             <div class="logo"><a href="#">OnTime</a></div>
             <div class="nav-bar">
                 <ul class="nav-bar-tabs">
-                    
-                    @if(user == null){
-                    	<li><a href="#">Sign up</a></li>
-                    	<li><a href="#" class="popup_button">Log in</a></li>
-                    } else{
-                    	<li><a href="@routes.Application.logout()">Log out</a></li>
-                    }
+                    <li><a href="#">Sign up</a></li>
+                    <li><a href="#" class="popup_button">Log in</a></li>
                 </ul>
             </div>
         </div>
@@ -54,7 +49,7 @@
 
     <div class="content">
     	@if(user != null){
-        		<p>Tere tulemast @user.name!</p>
+        		<p>Tere tulemast @user.names!</p>
         }
         <div class="photo-container">
         	<div id="quote">Experience the ultimate timing!</div>

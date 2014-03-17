@@ -1,0 +1,22 @@
+
+# Event
+
+- &e1 !!models.Event
+    title:       Suusatamine
+    date:   12.12.2014
+
+- &e2 !!models.Event
+    title:       Uisutamine
+    date:   13.12.2014
+
+- &e3 !!models.Event
+    title:       Kelgutamine
+    date:   14.12.2014
+    
+# User
+
+- &a1 !!models.User
+    email:
+    name:
+    organizationName:
+    password:

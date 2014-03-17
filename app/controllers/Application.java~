@@ -11,13 +11,14 @@ public class Application extends Controller {
 
     public static Result index() {
     	User kasutaja = null;
+    	System.out.println(ctx.session().get("email"));
     	try{
-    		kasutaja = User.find.byId(session().get("email"));
+    		kasutaja = User.find.byId(request().username());
     	} catch(Exception e){}
         return ok(index.render( 
             Event.find.all(),
             form(Login.class),
-            kasutaja
+            User.find.byId("jaan911@ut.ee")
         )); 
     }
     
@@ -32,14 +33,10 @@ public class Application extends Controller {
 	public static Result authenticate() {
 		Form<Login> loginForm = form(Login.class).bindFromRequest();
 		if (loginForm.hasErrors()) {
-		    return redirect(
-		        routes.Application.index()
-		    );
+		    return badRequest(index.render(Event.find.all(), loginForm, null));
 		} else {
 		    session().clear();
 		    session("email", loginForm.get().email);
-		    System.out.println(session().toString());
-		    
 		    return redirect(
 		        routes.Application.index()
 		    );
