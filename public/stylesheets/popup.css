@@ -17,11 +17,6 @@
 }
 
 .sulge_popup{
-	font-weight: bold; 
-	color: #F00; 
-	position: absolute; 
-	bottom: 25px; 
-	right: 15px; 
 }
 
 .popup_kiri{
@@ -29,3 +24,30 @@
 	font-weight: bold; 
 	color: #FFF;
 }
+
+.textbox-popup{
+	height:40px;
+	border:5px;
+	border-radius:5px;
+	border:#CCC;
+	padding-left:10px;
+}
+
+.button-popup{
+    height:40px;
+    width:40%;
+    border-radius:5px;
+    border:1px solid;
+    border-color:#CCC;
+    margin-left:15px;
+}
+
+#popup-heading{
+	color:#eee;
+	font-size:16px;
+	font-weight: bold;
+	margin-left:5px;
+	
+	
+}
+

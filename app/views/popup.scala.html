@@ -7,12 +7,16 @@
 					@form.globalError.message
 				</p>
 			}
-        	<a href="#" class="sulge_popup">CLOSE</a>
+        	
         	@helper.form(routes.Application.authenticate) {
+		        <div id="popup-heading">
+		        	Log in
+		        </div>
 		        <form>
-		        	<p><span class="popup_kiri">E-mail</span> <input name="email" type="email" value="@form("email").value" /></p>
-		            <p><span class="popup_kiri">Password</span> <input name="password" type="password" /></p>
-		            <p><input name="" type="submit" value="Login" /></p>
+		        	<p><input class="textbox-popup" name="email" type="email" placeholder="E-mail" value="@form("email").value" /></p>
+		            <p><input class="textbox-popup" name="password" placeholder="Password" type="password" /></p>
+		            <div><input class="button-popup" name="" type="submit" value="Login" />
+		            <input class="sulge_popup button-popup" type="button" value="Close" /></div>
 		        </form>
 		    }
         </div>
