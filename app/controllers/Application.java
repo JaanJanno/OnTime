@@ -21,6 +21,17 @@ public class Application extends Controller {
         )); 
     }
     
+    public static Result register() {
+    	User kasutaja = null;
+    	try{
+    		kasutaja = User.find.byId(session().get("email"));
+    	} catch(Exception e){}
+        return ok(register.render( 
+            form(Login.class),
+            kasutaja
+        )); 
+    }
+    
     public static Result logout() {
 		session().clear();
 		flash("success", "You've been logged out");

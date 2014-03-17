@@ -18,29 +18,11 @@
 
 <body>
     <header>
-        <div class="nav-bar-container">
-            <div class="logo"><a href="#">OnTime</a></div>
+        
             @views.html.headerbar(form, user)
-        </div>
     </header>
     
-    <!--Popup-->
-        <div class="popup">
-        	@if(form.hasGlobalErrors) {
-				<p class="error">
-					@form.globalError.message
-				</p>
-			}
-        	<a href="#" class="sulge_popup">CLOSE</a>
-        	@helper.form(routes.Application.authenticate) {
-		        <form>
-		        	<p><span class="popup_kiri">E-mail</span> <input name="email" type="email" value="@form("email").value" /></p>
-		            <p><span class="popup_kiri">Password</span> <input name="password" type="password" /></p>
-		            <p><input name="" type="submit" value="Login" /></p>
-		        </form>
-		    }
-        </div>
-    <!--Popup läbi-->
+    @views.html.popup(form)
 
     <div class="content">
     	@if(user != null){

@@ -1,0 +1,19 @@
+@(form: Form[Application.Login])
+
+<!--Popup-->
+        <div class="popup">
+        	@if(form.hasGlobalErrors) {
+				<p class="error">
+					@form.globalError.message
+				</p>
+			}
+        	<a href="#" class="sulge_popup">CLOSE</a>
+        	@helper.form(routes.Application.authenticate) {
+		        <form>
+		        	<p><span class="popup_kiri">E-mail</span> <input name="email" type="email" value="@form("email").value" /></p>
+		            <p><span class="popup_kiri">Password</span> <input name="password" type="password" /></p>
+		            <p><input name="" type="submit" value="Login" /></p>
+		        </form>
+		    }
+        </div>
+    <!--Popup läbi-->
