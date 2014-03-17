@@ -1,7 +1,0 @@
-@(events: List[Event], form: Form[Application.Login])
-
-@main(events, form) {
-
-
-
-}
