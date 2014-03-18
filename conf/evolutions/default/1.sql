@@ -14,7 +14,7 @@ create table event (
 create table event_query (
   title                     varchar(255),
   date                      varchar(255),
-  korraldaja_email          varchar(255))
+  korraldaja                varchar(255))
 ;
 
 create table user (

@@ -1,4 +1,4 @@
-@(events: List[Event], form: Form[Application.Login], user: User)(content: Html)
+@(events: List[EventQuery], form: Form[Application.Login], user: User)(content: Html)
 
 <!DOCTYPE html>
 <html>
@@ -55,8 +55,8 @@
                     <div class="panel-body latest-body">
                         <ul>
 		                    @events.map { event =>
-		                        <li data-event-id="@event.id">
-		                            <a href="http://www.delfi.ee">@event.title @event.date @event.user.email</a>
+		                        <li>
+		                            @event.title @event.date @event.korraldaja
 		                        </li>
 		                    }
                         </ul>

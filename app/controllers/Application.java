@@ -25,7 +25,7 @@ public class Application extends Controller {
     		kasutaja = User.find.byId(session().get("email"));
     	} catch(Exception e){}
         return ok(index.render( 
-        	Event.find.all(),
+        	EventQuery.getTitleDateOrganization(),
             form(Login.class),
             kasutaja
         )); 
