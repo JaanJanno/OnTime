@@ -100,7 +100,6 @@ public class Application extends Controller {
 	}
 	
 	public static Result newEventFormSubmit() {
-		System.out.println("siin");
 		Form<NewEvent> regForm = form(NewEvent.class).bindFromRequest();
 		if (regForm.hasErrors()) {
 		    return redirect(
