@@ -52,6 +52,7 @@ public class Application extends Controller {
         return ok(events.render(
             form(Login.class),
             form(NewEvent.class),
+            Event.findUserEvents(session().get("email")),
             kasutaja
         )); 
     }
@@ -111,7 +112,7 @@ public class Application extends Controller {
 		    	Ebean.save(uusV);
 	    	} catch(Exception e){} finally{
 	    		return redirect(
-	    		        routes.Application.index()
+	    		        routes.Application.myevents()
 	    		    );
 	    	}
 		}

@@ -1,7 +1,11 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
+
+import com.avaje.ebean.Ebean;
+
 import play.db.ebean.*;
 
 @javax.persistence.Entity
@@ -20,6 +24,10 @@ public class Event extends Model {
       this.date = date;
       this.user = user;
     }
+    
+    public static List<Event> findUserEvents(String email) {
+        return Ebean.find(Event.class).where().eq("user.email", email).findList();
+     }
 
     public static Model.Finder<Long,Event> find = new Model.Finder(Long.class, Event.class);
 }

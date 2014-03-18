@@ -1,4 +1,4 @@
-@(form: Form[Application.Login], formNewEvent: Form[Application.NewEvent], user: User)
+@(form: Form[Application.Login], formNewEvent: Form[Application.NewEvent], events: List[Event], user: User)
 
 <!DOCTYPE html>
 <html>
@@ -52,18 +52,13 @@
                     </div>
                     <div class="panel-body">
                         <table id="my-events-table">
-                            <tr>
-                                <td>1. Suusahullude maraton</td>
-                                <td>Cross-Country</td>
-                                <td>http://siiamingilink.ee/uritus</td>
-                                <td>Settings</td>
-                            </tr>
-                            <tr>
-                                <td>1. Suusahullude maraton</td>
-                                <td>Cross-Country</td>
-                                <td>http://siiamingilink.ee/uritus</td>
-                                <td>Settings</td>
-                            </tr>
+                        	@events.map { event =>
+		                        <tr data-event-id="@event.id">
+		                            <td>@event.title</td>
+		                            <td>@event.date</td>
+		                            <td>@event.user.email</td>
+		                        </tr>
+		                    }
                         </table>
                     </div>
                 </div>
