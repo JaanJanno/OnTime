@@ -25,17 +25,13 @@
 
     <div class="content">
         <div class="sign-up-form-container">
-        	@helper.form(routes.Application.registerFormSubmit) {
-		        <form id="sign-up-form">
+        	@helper.form(routes.Application.registerFormSubmit, 'id -> "sign-up-form") {
 		            <input class="textbox" type="text" name="firstName" placeholder="First name" /><br>
 		            <input class="textbox" type="text" name="lastName" placeholder="Last name" /><br>
 		            <input class="textbox" type="text" name="organizatonName" placeholder="Organization name" /><br>
 		            <input class="textbox" type="email" name="email" placeholder="E-mail" /><br>
 		            <input class="textbox" type="password" name="password" placeholder="Password" /><br>
-
 		            <input id="button" type="submit" value="Submit">
-
-		        </form>
 		    }
         </div>
         

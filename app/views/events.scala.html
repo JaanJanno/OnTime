@@ -32,14 +32,13 @@
                         <div id="add-new">Add new event</div>
                     </div>
                     <div class="panel-body">
-                    	@helper.form(routes.Application.newEventFormSubmit) {
-		                    <form id="add-new-form">
+                    	@helper.form(routes.Application.newEventFormSubmit, 'id -> "add-new-form") {
 		                        <input class="textbox-add-new" type="text" name="title" placeholder="Event's name" />
 		                        <input class="textbox-add-new" type="text" name="date" placeholder="Date" />
-
+								
 		                        <input id="button-add-new" type="submit" value="OK!">
 
-		                    </form>
+
                         }
                     </div>
                 </div>
