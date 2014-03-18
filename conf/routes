@@ -12,4 +12,5 @@ GET     /assets/*file           controllers.Assets.at(path="/public", file)
 
 POST    /login                  controllers.Application.authenticate()
 POST    /register               controllers.Application.registerFormSubmit()
+POST    /newevent               controllers.Application.newEventFormSubmit()
 GET     /logout                 controllers.Application.logout()

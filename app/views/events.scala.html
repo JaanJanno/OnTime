@@ -1,4 +1,4 @@
-@(form: Form[Application.Login], user: User)
+@(form: Form[Application.Login], formNewEvent: Form[Application.NewEvent], user: User)
 
 <!DOCTYPE html>
 <html>
@@ -24,7 +24,6 @@
     </header>
     
     @views.html.popup(form)
-    
     <div class="content">
         <div id="events-container">
             <div id="add-new-container">
@@ -33,13 +32,15 @@
                         <div id="add-new">Add new event</div>
                     </div>
                     <div class="panel-body">
-                        <form id="add-new-form">
-                            <input class="textbox-add-new" type="text" name="event-name" placeholder="Event's name" />
-                            <input class="textbox-add-new" type="text" name="event-type" placeholder="Type" />
+                    	@helper.form(routes.Application.newEventFormSubmit) {
+		                    <form id="add-new-form">
+		                        <input class="textbox-add-new" type="text" name="name" placeholder="Event's name" />
+		                        <input class="textbox-add-new" type="text" name="date" placeholder="Date" />
 
-                            <input id="button-add-new" type="submit" value="OK!">
+		                        <input id="button-add-new" type="submit" value="OK!">
 
-                        </form>
+		                    </form>
+                        }
                     </div>
                 </div>
             </div>

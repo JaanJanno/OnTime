@@ -43,6 +43,7 @@ public class Application extends Controller {
         )); 
     }
     
+    @Security.Authenticated(Secured.class)
     public static Result myevents() {
     	User kasutaja = null;
     	try{
@@ -50,6 +51,7 @@ public class Application extends Controller {
     	} catch(Exception e){}
         return ok(events.render(
             form(Login.class),
+            form(NewEvent.class),
             kasutaja
         )); 
     }
@@ -95,6 +97,32 @@ public class Application extends Controller {
 	    		    );
 	    	}
 		}
+	}
+	
+	public static Result newEventFormSubmit() {
+		System.out.println("siin");
+		Form<NewEvent> regForm = form(NewEvent.class).bindFromRequest();
+		if (regForm.hasErrors()) {
+		    return redirect(
+		        routes.Application.index()
+		    );
+		} else {
+			try{
+		    	Event uusV = new Event(regForm.get().title, regForm.get().date, User.find.byId(session().get("email")));
+		    	Ebean.save(uusV);
+	    	} catch(Exception e){} finally{
+	    		return redirect(
+	    		        routes.Application.index()
+	    		    );
+	    	}
+		}
+	}
+	
+	public static class NewEvent {
+
+		public String title;
+		public String date;
+		public User user;
 	}
     
     public static class Login {
