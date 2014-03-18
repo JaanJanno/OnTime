@@ -19,10 +19,6 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result index() {
-
-/*    	SqlQuery q = Ebean.createSqlQuery("SELECT * FROM User");
-    	List<SqlRow> l = q.findList();
-    	System.out.println(l);*/
     	
     	User kasutaja = null;
     	try{
