@@ -56,7 +56,7 @@
                         <ul>
 		                    @events.map { event =>
 		                        <li data-event-id="@event.id">
-		                            <a href="http://www.delfi.ee">@event.title @event.date @event.user.email</a>
+		                            <a href="http://www.delfi.ee">@event.title @event.date</a>
 		                        </li>
 		                    }
                         </ul>

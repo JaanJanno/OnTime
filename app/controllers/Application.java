@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Query;
+import com.avaje.ebean.SqlQuery;
+import com.avaje.ebean.SqlRow;
 import com.avaje.ebean.SqlUpdate;
 
 import play.*;
@@ -16,11 +19,10 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result index() {
-    	//List<Event> haha = Ebean.find(Event.class).where().eq("title", "Suusatamine").join("User.name").where().eq("name", "Jaan Janno").findList();
-    	
-    	//SqlUpdate insert = Ebean.createSqlUpdate("INSERT INTO Event (title, date) VALUES (13,12)");
-    	//insert.execute();
-    	
+
+/*    	SqlQuery q = Ebean.createSqlQuery("SELECT * FROM User");
+    	List<SqlRow> l = q.findList();
+    	System.out.println(l);*/
     	
     	User kasutaja = null;
     	try{
@@ -41,6 +43,17 @@ public class Application extends Controller {
         return ok(register.render( 
             form(Login.class),
             form(Register.class),
+            kasutaja
+        )); 
+    }
+    
+    public static Result myevents() {
+    	User kasutaja = null;
+    	try{
+    		kasutaja = User.find.byId(session().get("email"));
+    	} catch(Exception e){}
+        return ok(events.render(
+            form(Login.class),
             kasutaja
         )); 
     }

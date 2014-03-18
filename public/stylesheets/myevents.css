@@ -1,0 +1,22 @@
+﻿#add-new-form{
+    margin-bottom:20px;
+    padding-left:20px;
+    
+}
+
+#add-new{
+    font-weight:bold;
+    padding-left:10px;
+    padding-top:8px;
+}
+
+#my-events{
+    font-weight:bold;
+    padding-left:10px;
+    padding-top:8px;
+}
+
+#my-events-table{
+    margin:10px;
+    width:100%;
+}
