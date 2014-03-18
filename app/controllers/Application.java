@@ -1,5 +1,11 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlUpdate;
+
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -10,12 +16,18 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result index() {
+    	//List<Event> haha = Ebean.find(Event.class).where().eq("title", "Suusatamine").join("User.name").where().eq("name", "Jaan Janno").findList();
+    	
+    	//SqlUpdate insert = Ebean.createSqlUpdate("INSERT INTO Event (title, date) VALUES (13,12)");
+    	//insert.execute();
+    	
+    	
     	User kasutaja = null;
     	try{
     		kasutaja = User.find.byId(session().get("email"));
     	} catch(Exception e){}
         return ok(index.render( 
-            Event.find.all(),
+        	Event.find.all(),
             form(Login.class),
             kasutaja
         )); 
@@ -28,6 +40,7 @@ public class Application extends Controller {
     	} catch(Exception e){}
         return ok(register.render( 
             form(Login.class),
+            form(Register.class),
             kasutaja
         )); 
     }
@@ -56,6 +69,24 @@ public class Application extends Controller {
 		    );
 		}
 	}
+	
+	public static Result registerFormSubmit() {
+		Form<Register> regForm = form(Register.class).bindFromRequest();
+		if (regForm.hasErrors()) {
+		    return redirect(
+		        routes.Application.index()
+		    );
+		} else {
+			try{
+		    	User uusK = new User(regForm.get().email, regForm.get().firstName+" "+regForm.get().lastName, regForm.get().companyName, regForm.get().password);
+		    	Ebean.save(uusK);
+	    	} catch(Exception e){} finally{
+	    		return redirect(
+	    		        routes.Application.index()
+	    		    );
+	    	}
+		}
+	}
     
     public static class Login {
 
@@ -69,6 +100,15 @@ public class Application extends Controller {
 			return null;
 		}
 
+	}
+    
+    public static class Register {
+
+    	public String firstName;
+    	public String lastName;
+    	public String companyName;
+		public String email;
+		public String password;
 	}
 
 }

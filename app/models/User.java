@@ -4,7 +4,7 @@ import javax.persistence.*;
 import play.db.ebean.*;
 import com.avaje.ebean.*;
 
-@Entity
+@javax.persistence.Entity
 public class User extends Model {
 
     @Id
