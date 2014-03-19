@@ -68,6 +68,7 @@ public class Application extends Controller {
 	public static Result authenticate() {
 		Form<Login> loginForm = form(Login.class).bindFromRequest();
 		if (loginForm.hasErrors()) {
+			flash("loginfail", "Invalid email or password.");
 		    return redirect(
 		        routes.Application.index()
 		    );
@@ -128,12 +129,12 @@ public class Application extends Controller {
 		} else {
 			try{
 				String title = regForm.get().title;
-				if (!title.equals("")){
-					String date = regForm.get().date;
+				String date = regForm.get().date;
+				if (!title.equals("") && !date.equals("")){	
 					Event uusV = new Event(title, date, User.find.byId(session().get("email")));
 					Ebean.save(uusV);
 		    	} else{
-		    		flash("nonameEvent","Event must have a name.");
+		    		flash("nonameEvent","Event must have a name and date.");
 		    	}
 	    	} catch(Exception e){} finally{
 	    		return redirect(
