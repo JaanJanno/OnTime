@@ -4,6 +4,10 @@
     
 }
 
+#add-new-form br{
+	display:none;
+}
+
 #add-new{
     font-weight:bold;
     padding-left:10px;
@@ -19,4 +23,32 @@
 #my-events-table{
     margin:10px;
     width:100%;
+}
+
+@media screen and (max-width: 640px) {
+
+    #add-new-form br {
+    	display: initial;
+    }
+    
+    ﻿#add-new{
+		margin-bottom:20px;
+		
+	}
+    
+    .textbox-add-new {
+    	margin-bottom:8px;
+    	margin-top:8px;
+    	width:90%;
+    }
+    
+    #button-add-new {
+    	margin-bottom:8px;
+    	margin-top:8px;
+    	width:50%;
+    }
+    
+    .content{
+    	width: 90%;
+    }
 }
