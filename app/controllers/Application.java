@@ -90,13 +90,32 @@ public class Application extends Controller {
 		    );
 		} else {
 			try{
-		    	User uusK = new User(regForm.get().email, regForm.get().firstName+" "+regForm.get().lastName, regForm.get().companyName, regForm.get().password);
-		    	Ebean.save(uusK);
-	    	} catch(Exception e){} finally{
-	    		return redirect(
+				String email = regForm.get().email;
+				String password = regForm.get().password;
+				boolean valid = true;
+				if (email.equals("")){
+					flash("noMail","Please enter email to register.");
+					valid = false;
+				}
+				if (password.equals("")){
+					flash("noPass","User must have a password.");
+					valid = false;
+				}
+				if (valid){
+		    		User uusK = new User(email, regForm.get().firstName+" "+regForm.get().lastName, regForm.get().companyName, password);
+		    		Ebean.save(uusK);
+		    	} else{
+		    		return redirect(
+	    		        routes.Application.register()
+	    		    );
+		    	}
+		    	return redirect(
 	    		        routes.Application.index()
 	    		    );
-	    	}
+		    	
+	    	} catch(Exception e){return redirect(
+	    		        routes.Application.index()
+	    		    );}
 		}
 	}
 	
@@ -108,8 +127,14 @@ public class Application extends Controller {
 		    );
 		} else {
 			try{
-		    	Event uusV = new Event(regForm.get().title, regForm.get().date, User.find.byId(session().get("email")));
-		    	Ebean.save(uusV);
+				String title = regForm.get().title;
+				if (!title.equals("")){
+					String date = regForm.get().date;
+					Event uusV = new Event(title, date, User.find.byId(session().get("email")));
+					Ebean.save(uusV);
+		    	} else{
+		    		flash("nonameEvent","Event must have a name.");
+		    	}
 	    	} catch(Exception e){} finally{
 	    		return redirect(
 	    		        routes.Application.myevents()

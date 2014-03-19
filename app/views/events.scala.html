@@ -27,6 +27,11 @@
     <div class="content">
         <div id="events-container">
             <div id="add-new-container">
+            	@if(flash.contains("nonameEvent")) {
+					<p>
+						@flash.get("nonameEvent")
+					</p>
+				}
                 <div class="panel">
                     <div class="panel-header new-header">
                         <div id="add-new">Add new event</div>

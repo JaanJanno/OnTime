@@ -22,9 +22,21 @@
     </header>
     
     @views.html.popup(form)
-
+	
     <div class="content">
+    	
         <div class="sign-up-form-container">
+        	@if(flash.contains("noMail")) {
+				<p>
+					@flash.get("noMail")
+				</p>
+			}
+				
+			@if(flash.contains("noPass")) {
+				<p>
+					@flash.get("noPass")
+				</p>
+			}
         	@helper.form(routes.Application.registerFormSubmit, 'id -> "sign-up-form") {
 		            <input class="textbox" type="text" name="firstName" placeholder="First name" /><br>
 		            <input class="textbox" type="text" name="lastName" placeholder="Last name" /><br>
