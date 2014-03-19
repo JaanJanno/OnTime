@@ -101,7 +101,7 @@ public class Application extends Controller {
 					valid = false;
 				}
 				if (valid){
-		    		User uusK = new User(email, regForm.get().firstName+" "+regForm.get().lastName, regForm.get().companyName, password);
+		    		User uusK = new User(email, regForm.get().firstName+" "+regForm.get().lastName, regForm.get().organizationName, password);
 		    		Ebean.save(uusK);
 		    	} else{
 		    		return redirect(
@@ -167,7 +167,7 @@ public class Application extends Controller {
 
     	public String firstName;
     	public String lastName;
-    	public String companyName;
+    	public String organizationName;
 		public String email;
 		public String password;
 	}
