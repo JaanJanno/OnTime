@@ -74,9 +74,7 @@ public class Application extends Controller {
 		    );
 		} else {
 		    session().clear();
-		    session("email", loginForm.get().email);
-		    System.out.println(session().toString());
-		    
+		    session("email", loginForm.get().email);		    
 		    return redirect(
 		        routes.Application.index()
 		    );
@@ -94,7 +92,7 @@ public class Application extends Controller {
 				String email = regForm.get().email;
 				String password = regForm.get().password;
 				boolean valid = true;
-				if (email.equals("")){
+				if (email.replaceAll("\\s+","").equals("")){
 					flash("noMail","Please enter email to register.");
 					valid = false;
 				}
@@ -130,7 +128,7 @@ public class Application extends Controller {
 			try{
 				String title = regForm.get().title;
 				String date = regForm.get().date;
-				if (!title.equals("") && !date.equals("")){	
+				if (!title.replaceAll("\\s+","").equals("") && !date.replaceAll("\\s+","").equals("")){	
 					Event uusV = new Event(title, date, User.find.byId(session().get("email")));
 					Ebean.save(uusV);
 		    	} else{
