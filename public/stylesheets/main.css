@@ -55,3 +55,12 @@ body{
     max-width:900px;
     margin:auto;
 }
+
+@media screen and (max-width: 400px) {
+
+    .nav-bar-container {
+        width:95%;
+    }
+    
+
+}
