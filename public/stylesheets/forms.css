@@ -1,7 +1,8 @@
 ﻿.sign-up-form-container{
     width:40%;
+    min-width:280px;
     margin:auto;
-
+    
 }
 
 #sign-up-form{
@@ -57,4 +58,63 @@
     border-radius:5px;
     border:1px solid;
     border-color:#CCC;
+}
+
+@media screen and (max-width: 700px) {
+
+    .photo-container {
+        height:120px;
+    }
+    
+    .content {
+		width:80%;
+	}
+	
+	#tabs-container br {
+    	display: initial;
+	}
+	
+	#live-now-container{
+		width:100%;
+		padding-bottom:10px;
+	}
+
+	#latest-events-container{
+		width:100%;
+	}
+}
+
+@media(max-width: 700px) {
+
+    #quote {
+    	display:none;
+        position: absolute; 
+    	top: -80px;
+    	left: 130px;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+
+    .photo-container {
+        height:80px;
+    }
+    
+    #tabs-container br {
+    	display: initial;
+	}
+	
+	#live-now-container{
+		width:100%;
+		padding-bottom:10px;
+	}
+
+	#latest-events-container{
+		width:100%;
+	}
+	
+	.content {
+		width:80%;
+	}
 }
