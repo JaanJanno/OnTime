@@ -13,8 +13,8 @@
 
 	<script src="http://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
 	<script src="/assets/javascripts/login-popup.js" type="text/javascript" /></script>
-	<script src="/assets/javascripts/recent-min.js" type="text/javascript" /></script>
-	<script src="/assets/javascripts/live-min.js" type="text/javascript" /></script>
+	<script src="/assets/javascripts/myevents-min.js" type="text/javascript" /></script>
+	<script src="/assets/javascripts/add-min.js" type="text/javascript" /></script>
 </head>
 
 <body>
@@ -28,10 +28,10 @@
         <div id="events-container">
             <div id="add-new-container">
                 <div class="panel">
-                    <div class="panel-header">
+                    <div class="panel-header new-header">
                         <div id="add-new">Add new event</div>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body new-body">
                     	@helper.form(routes.Application.newEventFormSubmit, 'id -> "add-new-form") {
 		                        <input class="textbox-add-new" type="text" name="title" placeholder="Event's name" /><br>
 		                        <input class="textbox-add-new" type="text" name="date" placeholder="Date" /><br>
@@ -45,10 +45,10 @@
             <br>
             <div id="my-events-container">
                 <div class="panel">
-                    <div class="panel-header">
+                    <div class="panel-header events-header">
                         <div id="my-events">My Events</div>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body events-body">
                         <table id="my-events-table">
                         	@events.map { event =>
 		                        <tr data-event-id="@event.id">
