@@ -19,7 +19,7 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result index() {
-    	
+    	System.out.println(Event.findUserEventsCount(session().get("email")));
     	User kasutaja = null;
     	try{
     		kasutaja = User.find.byId(session().get("email"));
@@ -53,8 +53,9 @@ public class Application extends Controller {
             form(Login.class),
             form(NewEvent.class),
             Event.findUserEvents(session().get("email")),
-            kasutaja
-        )); 
+            kasutaja,
+            Event.findUserEventsCount(session().get("email")))
+        ); 
     }
     
     public static Result logout() {

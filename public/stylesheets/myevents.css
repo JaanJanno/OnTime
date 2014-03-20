@@ -25,6 +25,12 @@
     width:100%;
 }
 
+#count{
+    font-weight:bold;
+    margin:10px;
+}
+
+
 @media screen and (max-width: 640px) {
 
     #add-new-form br {
