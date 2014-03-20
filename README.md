@@ -2,6 +2,9 @@ Veebirakendus
 
 =============
 
+Rakenduse testkeskkond: on-time.herokuapp.com
+
+=============
 
 Nimi              - Git'i nimi    - Amet
 
@@ -10,4 +13,4 @@ Jaan Janno        - jaanjanno     - chief
 
 Kristiina Ilves   - ilvesk        - superwoman
 
-Sixten Leemets    - SixtenLeemets - das megahüper
+Sixten Leemets    - SixtenLeemets - das megahï¿½per
