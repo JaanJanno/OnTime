@@ -46,7 +46,7 @@ public class Application extends Controller {
 	public static Result auth(String id){
 		Verifier v = new Verifier(id);
 		Token accessToken = service.getAccessToken(requestToken, v);
-		OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.twitter.com/1/account/verify_credentials.xml");
+		OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.twitter.com/1/account/verify_credentials.xml");
 		service.signRequest(accessToken, request); // the access token from step 4
 		Response response = request.send();
 		System.out.println(response.getBody());
