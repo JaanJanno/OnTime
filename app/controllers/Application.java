@@ -3,6 +3,16 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.scribe.builder.ServiceBuilder;
+import org.scribe.builder.api.TwitterApi;
+import org.scribe.model.OAuthRequest;
+import org.scribe.model.Token;
+import org.scribe.model.Verb;
+import org.scribe.model.Verifier;
+
+import org.scribe.model.Response;
+import org.scribe.oauth.OAuthService;
+
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Query;
 import com.avaje.ebean.SqlQuery;
@@ -17,6 +27,37 @@ import models.*;
 import views.html.*;
 
 public class Application extends Controller {
+	
+	static Token requestToken;
+	static OAuthService service;
+
+	public static Result autoriseerimine(){
+		service = new ServiceBuilder().provider(TwitterApi.SSL.class).apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
+		requestToken = service.getRequestToken();
+		String authUrl = service.getAuthorizationUrl(requestToken);
+		return redirect(
+				authUrl
+		    );
+		
+		
+		
+	}
+	
+	public static Result auth(String id){
+		Verifier v = new Verifier(id);
+		Token accessToken = service.getAccessToken(requestToken, v);
+		OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.twitter.com/1/account/verify_credentials.xml");
+		service.signRequest(accessToken, request); // the access token from step 4
+		Response response = request.send();
+		System.out.println(response.getBody());
+		return ok(index.render( 
+	        	EventQuery.getTitleDateOrganization(),
+	            form(Login.class),
+	            null
+	        )); 
+	}
+	
+	
 
     public static Result index() {
     	User kasutaja = null;
