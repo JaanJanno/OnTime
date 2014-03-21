@@ -50,10 +50,8 @@ public class Application extends Controller {
 		service.signRequest(accessToken, request); // the access token from step 4
 		Response response = request.send();
 		System.out.println(response.getBody());
-		return ok(index.render( 
-	        	EventQuery.getTitleDateOrganization(),
-	            form(Login.class),
-	            null
+		return ok(auth.render( 
+				response.getBody()
 	        )); 
 	}
 	
