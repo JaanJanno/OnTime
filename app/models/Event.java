@@ -27,7 +27,11 @@ public class Event extends Model {
     
     public static List<Event> findUserEvents(String email) {
         return Ebean.find(Event.class).where().eq("user.email", email).findList();
-     }
+    }
+    
+    public static int findUserEventsCount(String email) {
+        return (int)(Ebean.find(Event.class).where().eq("user.email", email).findRowCount());
+    }
 
     public static Model.Finder<Long,Event> find = new Model.Finder(Long.class, Event.class);
 }
