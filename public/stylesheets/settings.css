@@ -1,0 +1,51 @@
+﻿#general-settings-form{
+        margin:20px;
+    padding-left:20px;
+}
+
+#general-settings{
+    font-weight:bold;
+    padding-left:10px;
+    padding-top: 8px;
+}
+
+#password-settings{
+    font-weight:bold;
+    padding-left:10px;
+    padding-top: 8px;
+}
+
+#change-password-form{
+    margin:20px;
+    padding-left:20px;
+    
+}
+
+.textbox-change-settings{
+    width:40%;
+    height:36px;
+    border-radius:5px;
+    border:1px solid;
+    border-color:#CCC;
+    padding-left:10px;
+    margin-top:10px;
+ 
+}
+
+#button-change-password{
+    margin-top:20px;
+    height:40px;
+    width:10%;
+    border-radius:5px;
+    border:1px solid;
+    border-color:#CCC;
+}
+
+#button-save-settings{
+    margin-top:20px;
+    height:40px;
+    width:10%;
+    border-radius:5px;
+    border:1px solid;
+    border-color:#CCC;
+}
