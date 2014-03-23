@@ -1,0 +1,23 @@
+﻿#grid-view-table {
+    margin:auto;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+#grid-view-table td {
+    width:64px;
+    height:64px;
+    background-color:#CCC;
+}
+
+#buttons{
+    font-weight:bold;
+    padding-left:10px;
+    padding-top:8px;
+}
+
+#buttons-2{
+    font-weight:bold;
+    padding-left:10px;
+    padding-top:8px;
+}
