@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.scribe.builder.ServiceBuilder;
@@ -9,7 +10,6 @@ import org.scribe.model.OAuthRequest;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.model.Verifier;
-
 import org.scribe.model.Response;
 import org.scribe.oauth.OAuthService;
 
@@ -28,35 +28,9 @@ import views.html.*;
 
 public class Application extends Controller {
 	
-	static Token requestToken;
 	static OAuthService service;
-
-	public static Result autoriseerimine(){
-		service = new ServiceBuilder().provider(TwitterApi.SSL.class).apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
-		requestToken = service.getRequestToken();
-		String authUrl = service.getAuthorizationUrl(requestToken);
-		return redirect(
-				authUrl
-		    );
-		
-		
-		
-	}
+	static HashMap<String, Token> requestTokens;
 	
-	public static Result auth(String id){
-		Verifier v = new Verifier(id);
-		Token accessToken = service.getAccessToken(requestToken, v);
-		OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.twitter.com/1.1/account/verify_credentials.json");
-		service.signRequest(accessToken, request); // the access token from step 4
-		Response response = request.send();
-		System.out.println(response.getBody());
-		return ok(auth.render( 
-				response.getBody()
-	        )); 
-	}
-	
-	
-
     public static Result index() {
     	User kasutaja = null;
     	try{
@@ -157,6 +131,59 @@ public class Application extends Controller {
 		}
 	}
 	
+	public static Result twitter(){
+		User kasutaja = null;
+    	try{
+    		kasutaja = User.find.byId(session().get("email"));
+    	} catch(Exception e){}
+        return ok(twitter.render(
+        	form(TwitterLogin.class),
+            form(Login.class),
+            kasutaja
+        )); 
+	}
+	
+	public static Result twitterFormSubmit() {
+		Form<TwitterLogin> regForm = form(TwitterLogin.class).bindFromRequest();
+		if (regForm.hasErrors()) {
+		    return redirect(
+		        routes.Application.index()
+		    );
+		} else {
+			try{
+				String twitterAuth = regForm.get().twitterCode;
+		    	return redirect(
+	    		        routes.Application.auth(twitterAuth)
+	    		    );
+		    	
+	    	} catch(Exception e){return redirect(
+	    		        routes.Application.index()
+	    		    );}
+		}
+	}
+	
+	public static Result autoriseerimine(){
+		service = new ServiceBuilder().provider(TwitterApi.SSL.class).apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
+		requestTokens.put(session().get("email"), service.getRequestToken());
+		String authUrl = service.getAuthorizationUrl(requestTokens.get(session().get("email")));
+		return redirect(
+				authUrl
+		    );
+	}
+	
+	public static Result auth(String id){
+		Verifier v = new Verifier(id);
+		Token accessToken = service.getAccessToken(requestTokens.get("email"), v);
+		requestTokens.remove(session().get("email"));
+		OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.twitter.com/1.1/account/verify_credentials.json");
+		service.signRequest(accessToken, request); // the access token from step 4
+		Response response = request.send();
+		System.out.println(response.getBody());
+		return ok(auth.render( 
+				response.getBody()
+	        )); 
+	}
+	
 	public static Result newEventFormSubmit() {
 		Form<NewEvent> regForm = form(NewEvent.class).bindFromRequest();
 		if (regForm.hasErrors()) {
@@ -186,6 +213,11 @@ public class Application extends Controller {
 		public String title;
 		public String date;
 		public User user;
+	}
+	
+	public static class TwitterLogin{
+		
+		public String twitterCode;
 	}
     
     public static class Login {

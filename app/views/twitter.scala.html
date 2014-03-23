@@ -1,3 +1,5 @@
+@(formTwitter: Form[Application.TwitterLogin],form: Form[Application.Login], user: User)
+
 ﻿<!DOCTYPE html>
 <html>
 <head>
@@ -18,17 +20,12 @@
 
     <div class="content">
         <div class="twitter-container">
-            <form id="twitter-form">
+        	@helper.form(routes.Application.formTwitter, 'id -> "twitter-form") {
                 <span id="twitter-text">Palun sisesta twitteri kood siia:</span>
-                <input class="textbox" type="text" name="twitter" /><br>
-
-                <input id="button" type="submit" value="Submit">
-
-            </form>
+		            <input class="textbox" type="text" name="twitterCode" /><br>
+		            <input id="button" type="submit" value="Submit">
+            }
         </div>
-
-
     </div>
-
 </body>
 </html>
