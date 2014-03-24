@@ -42,7 +42,8 @@
     border-radius:5px;
     border:1px solid;
     border-color:#CCC;
-    margin-left:15px;
+    margin-left:0px;
+    margin-right:10px;
 }
 
 #popup-heading{

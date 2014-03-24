@@ -4,7 +4,7 @@
 
 # Home page
 GET     /                       controllers.Application.index()
-GET     /register               controllers.Application.register()
+GET     /register               controllers.RegistrationController.register()
 GET     /myevents               controllers.EventsController.myevents()
 GET		/twitter				controllers.TwitterController.twitter()
 GET     /auth               	controllers.TwitterController.auth()  
@@ -13,6 +13,6 @@ GET     /auth               	controllers.TwitterController.auth()
 GET     /assets/*file           controllers.Assets.at(path="/public", file)
 
 POST    /login                  controllers.Application.authenticate()
-POST    /register               controllers.Application.registerFormSubmit()
+POST    /register               controllers.RegistrationController.registerFormSubmit()
 POST    /newevent               controllers.EventsController.newEventFormSubmit()
 GET     /logout                 controllers.Application.logout()

@@ -1,4 +1,4 @@
-@(form: Form[Application.Login], formReg: Form[Application.Register], user: User)
+@(form: Form[Application.Login], formReg: Form[RegistrationController.Register], user: User)
 
 <!DOCTYPE html>
 <html>
@@ -37,7 +37,7 @@
 					@flash.get("noPass")
 				</p>
 			}
-        	@helper.form(routes.Application.registerFormSubmit, 'id -> "sign-up-form") {
+        	@helper.form(routes.RegistrationController.registerFormSubmit, 'id -> "sign-up-form") {
 		            <input class="textbox" type="text" name="firstName" placeholder="First name" /><br>
 		            <input class="textbox" type="text" name="lastName" placeholder="Last name" /><br>
 		            <input class="textbox" type="text" name="organizationName" placeholder="Organization name" /><br>
