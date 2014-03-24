@@ -75,7 +75,7 @@ public class TwitterController extends Application {
 		} catch(Exception e){} finally{
 			return redirect(
 					"/"
-		        ); 
+		    ); 
 		}
 	}
 }

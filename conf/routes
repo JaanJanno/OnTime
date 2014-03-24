@@ -7,7 +7,8 @@ GET     /                       controllers.Application.index()
 GET     /register               controllers.RegistrationController.register()
 GET     /myevents               controllers.EventsController.myevents()
 GET		/twitter				controllers.TwitterController.twitter()
-GET     /auth               	controllers.TwitterController.auth()  
+GET     /auth               	controllers.TwitterController.auth()
+GET     /game               	controllers.GameController.game()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file           controllers.Assets.at(path="/public", file)

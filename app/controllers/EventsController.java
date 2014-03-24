@@ -63,8 +63,8 @@ public class EventsController extends Application {
 		    	}
 	    	} catch(Exception e){} finally{
 	    		return redirect(
-	    		        routes.EventsController.myevents()
-	    		    );
+	    			routes.EventsController.myevents()
+	    		);
 	    	}
 		}
 	}

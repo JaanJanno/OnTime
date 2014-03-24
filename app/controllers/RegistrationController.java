@@ -71,8 +71,8 @@ public class RegistrationController extends Application {
 	    		    );
 		    	}
 		    	return redirect(
-	    		        routes.Application.index()
-	    		    );
+		    		routes.Application.index()
+	    		);
 		    	
 	    	} catch(Exception e){return redirect(
 	    		        routes.Application.index()

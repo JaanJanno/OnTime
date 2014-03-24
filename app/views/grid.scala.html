@@ -5,98 +5,30 @@
 <head>
     <meta charset="utf-8" />
     <title>OnTime</title>
-    <link rel="stylesheet" type="text/css" href="@routes.Assets.at(" stylesheets />main.css")">
-    <link rel="stylesheet" type="text/css" href="@routes.Assets.at(" stylesheets />elements.css")">
-    <link rel="stylesheet" type="text/css" href="@routes.Assets.at(" stylesheets />grid.css")">
-
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/elements.css")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/grid.css")">
 </head>
 
 <body>
-
     <header>
         @views.html.headerbar(form, user)
     </header>
 
     <div class="content">
         <div id="grid-view-container">
-
             <table id="grid-view-table">
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
+            	@for( y <- 1 to 10){
+            		<tr>
+					@for( x <- 1 to 10){
+						<td>
+							1
+						</td>
+					}
+					</tr>
+				}
             </table>
-
             <br>
-
             <div id="buttons-container">
                 <div class="panel">
                     <div class="panel-header">
@@ -119,9 +51,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
 </body>
 </html>

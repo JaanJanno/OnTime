@@ -31,7 +31,6 @@ import views.html.*;
 public class Application extends Controller {
 	
     public static Result index() {
-    	System.out.println(Play.isDev());
     	User kasutaja = null;
     	try{
     		kasutaja = User.find.byId(session().get("email"));
@@ -78,6 +77,5 @@ public class Application extends Controller {
 			}
 			return null;
 		}
-
 	}
 }
