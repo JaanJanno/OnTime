@@ -5,9 +5,9 @@
 <head>
     <meta charset="utf-8" />
     <title>OnTime</title>
-    <link rel="stylesheet" type="text/css" href="@routes.Assets.at(" stylesheets />main.css")">
-    <link rel="stylesheet" type="text/css" href="@routes.Assets.at(" stylesheets />forms.css")">
-    <link rel="stylesheet" type="text/css" href="@routes.Assets.at(" stylesheets />twitter.css")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/forms.css")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/twitter.css")">
 
 
 </head>
@@ -20,7 +20,7 @@
 
     <div class="content">
         <div class="twitter-container">
-        	@helper.form(routes.Application.formTwitter, 'id -> "twitter-form") {
+        	@helper.form(routes.Application.twitterFormSubmit, 'id -> "twitter-form") {
                 <span id="twitter-text">Palun sisesta twitteri kood siia:</span>
 		            <input class="textbox" type="text" name="twitterCode" /><br>
 		            <input id="button" type="submit" value="Submit">

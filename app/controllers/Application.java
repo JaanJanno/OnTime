@@ -28,8 +28,8 @@ import views.html.*;
 
 public class Application extends Controller {
 	
-	static OAuthService service;
-	static HashMap<String, Token> requestTokens;
+	static OAuthService service = new ServiceBuilder().provider(TwitterApi.SSL.class).apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
+	static HashMap<String, Token> requestTokens = new HashMap<String, Token>();
 	
     public static Result index() {
     	User kasutaja = null;
@@ -163,9 +163,10 @@ public class Application extends Controller {
 	}
 	
 	public static Result autoriseerimine(){
-		service = new ServiceBuilder().provider(TwitterApi.SSL.class).apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
-		requestTokens.put(session().get("email"), service.getRequestToken());
-		String authUrl = service.getAuthorizationUrl(requestTokens.get(session().get("email")));
+		String sid = Double.toString(Math.random());
+		session().put("twitter-sid", sid);
+		requestTokens.put(session().get("twitter-sid"), service.getRequestToken());
+		String authUrl = service.getAuthorizationUrl(requestTokens.get(session().get("twitter-sid")));
 		return redirect(
 				authUrl
 		    );
@@ -173,9 +174,11 @@ public class Application extends Controller {
 	
 	public static Result auth(String id){
 		Verifier v = new Verifier(id);
-		Token accessToken = service.getAccessToken(requestTokens.get("email"), v);
-		requestTokens.remove(session().get("email"));
+		System.out.println(session().get("twitter-sid"));
+		Token accessToken = service.getAccessToken(requestTokens.get(session().get("twitter-sid")), v);
+		requestTokens.remove(session().get("twitter-sid"));
 		OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.twitter.com/1.1/account/verify_credentials.json");
+		
 		service.signRequest(accessToken, request); // the access token from step 4
 		Response response = request.send();
 		System.out.println(response.getBody());
