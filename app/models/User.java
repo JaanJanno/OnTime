@@ -2,24 +2,31 @@ package models;
 
 import javax.persistence.*;
 
-import play.db.ebean.*;
+import com.avaje.ebean.Ebean;
 
-import com.avaje.ebean.*;
+import models.game.Tribe;
+import play.db.ebean.*;
 
 @javax.persistence.Entity
 public class User extends Model {
 
-    @Id
+	private static final long serialVersionUID = -9127957955088115789L;
+	
+	@Id
     public String email;
     public String name;
     public String organizationName;
     public String password;
+    //@OneToOne
+    public Tribe tribe;
     
     public User(String email, String name, String organizationName, String password) {
       this.email = email;
       this.name = name;
       this.password = password;
       this.organizationName = organizationName;
+      this.tribe = new Tribe("Default");
+      Ebean.save(tribe);
     }
 
     public static Finder<String,User> find = new Finder<String,User>(

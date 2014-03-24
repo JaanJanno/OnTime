@@ -11,7 +11,9 @@ import play.db.ebean.*;
 @javax.persistence.Entity
 public class Event extends Model {
 
-    @Id
+	private static final long serialVersionUID = 2011193620557634857L;
+	
+	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Long id;
     public String title;

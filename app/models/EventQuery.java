@@ -13,7 +13,9 @@ import play.db.ebean.*;
 @javax.persistence.Entity
 public class EventQuery extends Model {
 
-    public String title;
+	private static final long serialVersionUID = -4591907450459561553L;
+	
+	public String title;
     public String date;
     public String korraldaja;
     

@@ -26,6 +26,7 @@ import play.mvc.*;
 import play.data.*;
 import static play.data.Form.*;
 import models.*;
+import models.game.Terrain;
 import views.html.*;
 
 public class GameController extends Application {
@@ -38,6 +39,7 @@ public class GameController extends Application {
     	} catch(Exception e){}
     	
 		return(ok(grid.render(
+				Terrain.tere(),
 				form(Application.Login.class), 
 				kasutaja
 		)));

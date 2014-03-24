@@ -87,11 +87,13 @@ public class RegistrationController extends Application {
 		try{
 			User uusK = new User(id, name, "", Double.toString(Math.random()));
     		Ebean.save(uusK);
+    		System.out.println("uus");
 		} catch(Exception e){
 			
 		} finally{
 			session().clear();
 			session().put("email", id);
+			System.out.println("kavana");
 		}
 	}
     

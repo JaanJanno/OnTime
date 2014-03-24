@@ -17,6 +17,24 @@ create table event_query (
   korraldaja                varchar(255))
 ;
 
+create table terrain_object (
+  id                        bigint auto_increment not null,
+  terrain_type              integer,
+  constraint pk_terrain_object primary key (id))
+;
+
+create table tribe (
+  id                        bigint auto_increment not null,
+  name                      varchar(255),
+  people_amount             bigint,
+  fighting                  tinyint,
+  fishing                   tinyint,
+  hunting                   tinyint,
+  tracking                  tinyint,
+  food                      bigint,
+  constraint pk_tribe primary key (id))
+;
+
 create table user (
   email                     varchar(255) not null,
   name                      varchar(255),
@@ -39,6 +57,10 @@ SET REFERENTIAL_INTEGRITY FALSE;
 drop table if exists event;
 
 drop table if exists event_query;
+
+drop table if exists terrain_object;
+
+drop table if exists tribe;
 
 drop table if exists user;
 

@@ -1,4 +1,4 @@
-@(form: Form[Application.Login], user: User)
+@(i: Integer, form: Form[Application.Login], user: User)
 
 ﻿<!DOCTYPE html>
 <html>
@@ -14,11 +14,13 @@
     <header>
         @views.html.headerbar(form, user)
     </header>
+    
+    @i
 
     <div class="content">
         <div id="grid-view-container">
             <table id="grid-view-table">
-            	@for( y <- 1 to 10){
+				@for( y <- 1 to 10){
             		<tr>
 					@for( x <- 1 to 10){
 						<td>

@@ -43,14 +43,15 @@ public class TwitterController extends Application {
 	
 	static{
 		if (Play.isDev()){
-			service = service = new ServiceBuilder().provider(TwitterApi.SSL.class).callback("http://localhost:9000/auth").apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
+			service = new ServiceBuilder().provider(TwitterApi.SSL.class).callback("http://localhost:9000/auth").apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
 		} else{
-			service = service = new ServiceBuilder().provider(TwitterApi.SSL.class).callback("https://on-time.herokuapp.com/auth").apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
+			service = new ServiceBuilder().provider(TwitterApi.SSL.class).callback("https://on-time.herokuapp.com/auth").apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
 		}
 	}
 	
 	public static Result twitter(){
 		String sid = Double.toString(Math.random());
+		session().put("twitter-sid", sid);
 		requestTokens.put(session().get("twitter-sid"), service.getRequestToken());
 		String authUrl = service.getAuthorizationUrl(requestTokens.get(session().get("twitter-sid")));
 		return redirect(
@@ -60,18 +61,19 @@ public class TwitterController extends Application {
 	
 	public static Result auth(){
 		try{
-		Verifier v = new Verifier(request().getQueryString("oauth_verifier"));
-		Token accessToken = service.getAccessToken(requestTokens.get(session().get("twitter-sid")), v);
-		requestTokens.remove(session().get("twitter-sid"));
-		session().remove("twitter-sid");
-		OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.twitter.com/1.1/account/verify_credentials.json");
-		
-		service.signRequest(accessToken, request); // the access token from step 4
-		Response response = request.send();
-		JsonObject responseJson = new JsonParser().parse(response.getBody()).getAsJsonObject();
-		
-		RegistrationController.handleTwitterUser(responseJson.get("name").getAsString(), responseJson.get("id_str").getAsString());
-		
+			Verifier v = new Verifier(request().getQueryString("oauth_verifier"));
+			Token accessToken = service.getAccessToken(requestTokens.get(session().get("twitter-sid")), v);
+			requestTokens.remove(session().get("twitter-sid"));
+			session().remove("twitter-sid");
+			OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.twitter.com/1.1/account/verify_credentials.json");
+			
+			service.signRequest(accessToken, request); // the access token from step 4
+			Response response = request.send();
+			System.out.println(response.getBody());
+			JsonObject responseJson = new JsonParser().parse(response.getBody()).getAsJsonObject();
+			
+			RegistrationController.handleTwitterUser(responseJson.get("name").getAsString(), responseJson.get("id_str").getAsString());
+			System.out.println("sain hakkama");
 		} catch(Exception e){} finally{
 			return redirect(
 					"/"
