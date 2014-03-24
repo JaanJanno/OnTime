@@ -20,6 +20,8 @@ import com.avaje.ebean.SqlRow;
 import com.avaje.ebean.SqlUpdate;
 
 import play.*;
+import play.libs.OAuth;
+import play.libs.OAuth.RequestToken;
 import play.mvc.*;
 import play.data.*;
 import static play.data.Form.*;
@@ -27,9 +29,6 @@ import models.*;
 import views.html.*;
 
 public class Application extends Controller {
-	
-	static OAuthService service = new ServiceBuilder().provider(TwitterApi.SSL.class).apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
-	static HashMap<String, Token> requestTokens = new HashMap<String, Token>();
 	
     public static Result index() {
     	User kasutaja = null;
@@ -54,22 +53,7 @@ public class Application extends Controller {
             kasutaja
         )); 
     }
-    
-    @Security.Authenticated(Secured.class)
-    public static Result myevents() {
-    	User kasutaja = null;
-    	try{
-    		kasutaja = User.find.byId(session().get("email"));
-    	} catch(Exception e){}
-        return ok(events.render(
-            form(Login.class),
-            form(NewEvent.class),
-            Event.findUserEvents(session().get("email")),
-            kasutaja,
-            Event.findUserEventsCount(session().get("email")))
-        ); 
-    }
-    
+
     public static Result logout() {
 		session().clear();
 		flash("success", "You've been logged out");
@@ -131,98 +115,6 @@ public class Application extends Controller {
 		}
 	}
 	
-	public static Result twitter(){
-		User kasutaja = null;
-    	try{
-    		kasutaja = User.find.byId(session().get("email"));
-    	} catch(Exception e){}
-        return ok(twitter.render(
-        	form(TwitterLogin.class),
-            form(Login.class),
-            kasutaja
-        )); 
-	}
-	
-	public static Result twitterFormSubmit() {
-		Form<TwitterLogin> regForm = form(TwitterLogin.class).bindFromRequest();
-		if (regForm.hasErrors()) {
-		    return redirect(
-		        routes.Application.index()
-		    );
-		} else {
-			try{
-				String twitterAuth = regForm.get().twitterCode;
-		    	return redirect(
-	    		        routes.Application.auth(twitterAuth)
-	    		    );
-		    	
-	    	} catch(Exception e){return redirect(
-	    		        routes.Application.index()
-	    		    );}
-		}
-	}
-	
-	public static Result autoriseerimine(){
-		String sid = Double.toString(Math.random());
-		session().put("twitter-sid", sid);
-		requestTokens.put(session().get("twitter-sid"), service.getRequestToken());
-		String authUrl = service.getAuthorizationUrl(requestTokens.get(session().get("twitter-sid")));
-		return redirect(
-				authUrl
-		    );
-	}
-	
-	public static Result auth(String id){
-		Verifier v = new Verifier(id);
-		System.out.println(session().get("twitter-sid"));
-		Token accessToken = service.getAccessToken(requestTokens.get(session().get("twitter-sid")), v);
-		requestTokens.remove(session().get("twitter-sid"));
-		OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.twitter.com/1.1/account/verify_credentials.json");
-		
-		service.signRequest(accessToken, request); // the access token from step 4
-		Response response = request.send();
-		System.out.println(response.getBody());
-		return ok(auth.render( 
-				response.getBody()
-	        )); 
-	}
-	
-	public static Result newEventFormSubmit() {
-		Form<NewEvent> regForm = form(NewEvent.class).bindFromRequest();
-		if (regForm.hasErrors()) {
-		    return redirect(
-		        routes.Application.index()
-		    );
-		} else {
-			try{
-				String title = regForm.get().title;
-				String date = regForm.get().date;
-				if (!title.replaceAll("\\s+","").equals("") && !date.replaceAll("\\s+","").equals("")){	
-					Event uusV = new Event(title, date, User.find.byId(session().get("email")));
-					Ebean.save(uusV);
-		    	} else{
-		    		flash("nonameEvent","Event must have a name and date.");
-		    	}
-	    	} catch(Exception e){} finally{
-	    		return redirect(
-	    		        routes.Application.myevents()
-	    		    );
-	    	}
-		}
-	}
-	
-	public static class NewEvent {
-
-		public String title;
-		public String date;
-		public User user;
-	}
-	
-	public static class TwitterLogin{
-		
-		public String twitterCode;
-	}
-    
     public static class Login {
 
 		public String email;

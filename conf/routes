@@ -5,16 +5,14 @@
 # Home page
 GET     /                       controllers.Application.index()
 GET     /register               controllers.Application.register()
-GET     /myevents               controllers.Application.myevents()
-GET		/autoriseerimine		controllers.Application.autoriseerimine()
-GET		/auth					controllers.Application.twitter()
-GET     /auth/:id               controllers.Application.auth(id: String)  
+GET     /myevents               controllers.EventsController.myevents()
+GET		/twitter				controllers.TwitterController.twitter()
+GET     /auth               	controllers.TwitterController.auth()  
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file           controllers.Assets.at(path="/public", file)
 
 POST    /login                  controllers.Application.authenticate()
-POST	/auth					controllers.Application.twitterFormSubmit()
 POST    /register               controllers.Application.registerFormSubmit()
-POST    /newevent               controllers.Application.newEventFormSubmit()
+POST    /newevent               controllers.EventsController.newEventFormSubmit()
 GET     /logout                 controllers.Application.logout()
