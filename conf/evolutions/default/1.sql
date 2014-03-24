@@ -17,6 +17,11 @@ create table event_query (
   korraldaja                varchar(255))
 ;
 
+create table terrain (
+  id                        bigint auto_increment not null,
+  constraint pk_terrain primary key (id))
+;
+
 create table terrain_object (
   id                        bigint auto_increment not null,
   terrain_type              integer,
@@ -57,6 +62,8 @@ SET REFERENTIAL_INTEGRITY FALSE;
 drop table if exists event;
 
 drop table if exists event_query;
+
+drop table if exists terrain;
 
 drop table if exists terrain_object;
 
