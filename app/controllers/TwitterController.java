@@ -39,13 +39,14 @@ public class TwitterController extends Application {
 	static OAuthService service;
 	static HashMap<String, Token> requestTokens = new HashMap<String, Token>();
 	
+	static boolean isLocal = true;
+	
 	static{
-		try{
+		if (Play.isDev()){
 			service = service = new ServiceBuilder().provider(TwitterApi.SSL.class).callback("http://localhost:9000/auth").apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
-		} catch(Exception e){
+		} else{
 			service = service = new ServiceBuilder().provider(TwitterApi.SSL.class).callback("https://on-time.herokuapp.com/auth").apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
 		}
-		
 	}
 	
 	public static Result twitter(){
