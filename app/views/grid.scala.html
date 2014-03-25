@@ -1,4 +1,4 @@
-@(i: Integer, form: Form[Application.Login], user: User)
+@(tribe: models.game.Tribe, posx: Integer, posy: Integer, list: List[List[String]], i: Integer, form: Form[Application.Login], user: User)
 
 ﻿<!DOCTYPE html>
 <html>
@@ -20,16 +20,18 @@
     <div class="content">
         <div id="grid-view-container">
             <table id="grid-view-table">
-				@for( y <- 1 to 10){
+				@for( py <- 0 to 9){
             		<tr>
-					@for( x <- 1 to 10){
+					@for( px <- 0 to 9){
 						<td>
 							<div class="box">
 								<div class="inner-box">
-									<img src="assets/images/game/tiles/grass.png"></img>
+									<img src="@list.get(px).get(py)"></img>
 								</div>
 								<div class="inner-box">
-									<img src="assets/images/game/tiles/tribe.png"></img>
+									@if(posx == px && posy == py){
+										<img src="assets/images/game/tiles/tribe.png"></img>
+									}
 								</div>
 							</div>
 						</td>

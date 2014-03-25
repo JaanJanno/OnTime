@@ -25,8 +25,6 @@ public class User extends Model {
       this.name = name;
       this.password = password;
       this.organizationName = organizationName;
-      this.tribe = new Tribe("Default");
-      Ebean.save(tribe);
     }
 
     public static Finder<String,User> find = new Finder<String,User>(

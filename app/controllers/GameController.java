@@ -29,25 +29,38 @@ import static play.data.Form.*;
 import models.*;
 import models.game.Terrain;
 import models.game.TerrainObject;
+import models.game.Tribe;
 import views.html.*;
 
 public class GameController extends Application {
 	
 	public static Terrain mainTerrain;
 	
+	@Security.Authenticated(Secured.class)
 	public static Result game() {
 		
-		System.out.println(mainTerrain);
-		System.out.println(Terrain.findTerrainObjects(mainTerrain.id));
-		System.out.println(TerrainStreamer.streamAllUrl(mainTerrain));
+		User u = User.find.byId("jaan@ontime.ee");
+		
 		
 		
 		User kasutaja = null;
     	try{
     		kasutaja = User.find.byId(session().get("email"));
+    		if (kasutaja.tribe == null){
+    			Tribe uusTribe = new Tribe(kasutaja.name + "'s tribe."); 			
+    			Ebean.save(uusTribe);   			
+    			kasutaja.tribe = uusTribe;
+    			Ebean.update(kasutaja);
+    		}
     	} catch(Exception e){}
     	
+    	System.out.println(u.tribe.name);
+    	
 		return(ok(grid.render(
+				kasutaja.tribe,
+				6,
+				6,
+				TerrainStreamer.streamAllUrl(mainTerrain),
 				Terrain.tere(),
 				form(Application.Login.class), 
 				kasutaja

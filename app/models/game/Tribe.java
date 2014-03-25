@@ -3,28 +3,31 @@ package models.game;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import play.db.ebean.Model;
 
 @javax.persistence.Entity
 public class Tribe extends Model {
 	
 	private static final long serialVersionUID = -4000284550655639759L;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
-	String name;
+	public long id;
+	public String name;
 	
-	long peopleAmount;
+	public long peopleAmount;
 	
 	// Skill'id
-	byte fighting;
-	byte fishing;
-	byte hunting;
-	byte tracking;
+	public byte fighting;
+	public byte fishing;
+	public byte hunting;
+	public byte tracking;
+	@ManyToOne
+	public TerrainObject position;
 	
 	// Inventar
-	long food;
+	public long food;
 	
 	public Tribe(String name) {
 		this(
@@ -46,5 +49,6 @@ public class Tribe extends Model {
 		this.hunting 		= hunting;
 		this.tracking		= tracking;
 		this.food			= food;
+		this.position		= TerrainObject.randomLocation();
 	}
 }
