@@ -19,12 +19,17 @@ create table event_query (
 
 create table terrain (
   id                        bigint auto_increment not null,
+  width                     integer,
+  height                    integer,
   constraint pk_terrain primary key (id))
 ;
 
 create table terrain_object (
   id                        bigint auto_increment not null,
+  x                         integer,
+  y                         integer,
   terrain_type              integer,
+  terrain_area_id           bigint,
   constraint pk_terrain_object primary key (id))
 ;
 
@@ -45,6 +50,7 @@ create table user (
   name                      varchar(255),
   organization_name         varchar(255),
   password                  varchar(255),
+  tribe_id                  bigint,
   constraint pk_user primary key (email))
 ;
 
@@ -52,6 +58,10 @@ create sequence user_seq;
 
 alter table event add constraint fk_event_user_1 foreign key (user_email) references user (email) on delete restrict on update restrict;
 create index ix_event_user_1 on event (user_email);
+alter table terrain_object add constraint fk_terrain_object_terrainArea_2 foreign key (terrain_area_id) references terrain (id) on delete restrict on update restrict;
+create index ix_terrain_object_terrainArea_2 on terrain_object (terrain_area_id);
+alter table user add constraint fk_user_tribe_3 foreign key (tribe_id) references tribe (id) on delete restrict on update restrict;
+create index ix_user_tribe_3 on user (tribe_id);
 
 
 

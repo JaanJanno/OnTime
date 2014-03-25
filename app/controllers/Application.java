@@ -31,6 +31,8 @@ import views.html.*;
 public class Application extends Controller {
 	
     public static Result index() {
+    	//System.out.println(Terr);
+    	System.out.println();
     	User kasutaja = null;
     	try{
     		kasutaja = User.find.byId(session().get("email"));

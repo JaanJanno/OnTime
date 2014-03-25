@@ -17,7 +17,7 @@ public class User extends Model {
     public String name;
     public String organizationName;
     public String password;
-    //@OneToOne
+    @OneToOne
     public Tribe tribe;
     
     public User(String email, String name, String organizationName, String password) {

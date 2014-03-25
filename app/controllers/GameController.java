@@ -27,11 +27,18 @@ import play.data.*;
 import static play.data.Form.*;
 import models.*;
 import models.game.Terrain;
+import models.game.TerrainObject;
 import views.html.*;
 
 public class GameController extends Application {
 	
+	public static Terrain mainTerrain;
+	
 	public static Result game() {
+		
+		System.out.println(mainTerrain);
+		System.out.println(Terrain.findTerrainObjects(mainTerrain.id));
+		
 		
 		User kasutaja = null;
     	try{
