@@ -41,6 +41,7 @@ create table tribe (
   fishing                   tinyint,
   hunting                   tinyint,
   tracking                  tinyint,
+  position_id               bigint,
   food                      bigint,
   constraint pk_tribe primary key (id))
 ;
@@ -60,8 +61,10 @@ alter table event add constraint fk_event_user_1 foreign key (user_email) refere
 create index ix_event_user_1 on event (user_email);
 alter table terrain_object add constraint fk_terrain_object_terrainArea_2 foreign key (terrain_area_id) references terrain (id) on delete restrict on update restrict;
 create index ix_terrain_object_terrainArea_2 on terrain_object (terrain_area_id);
-alter table user add constraint fk_user_tribe_3 foreign key (tribe_id) references tribe (id) on delete restrict on update restrict;
-create index ix_user_tribe_3 on user (tribe_id);
+alter table tribe add constraint fk_tribe_position_3 foreign key (position_id) references terrain_object (id) on delete restrict on update restrict;
+create index ix_tribe_position_3 on tribe (position_id);
+alter table user add constraint fk_user_tribe_4 foreign key (tribe_id) references tribe (id) on delete restrict on update restrict;
+create index ix_user_tribe_4 on user (tribe_id);
 
 
 

@@ -11,6 +11,7 @@ import models.Event;
 
 import com.avaje.ebean.Ebean;
 
+import controllers.GameController;
 import play.db.ebean.Model;
 
 @javax.persistence.Entity
@@ -22,7 +23,7 @@ public class TerrainObject extends Model{
 	public static final int FOREST 	= 1;
 	public static final int LAKE	= 2;
 	
-	public static final String GRASS_URL = "assets/images/grass.png";
+	public static final String GRASS_URL = "assets/images/game/tiles/grass.png";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +59,10 @@ public class TerrainObject extends Model{
 	}
 	
 	public static Model.Finder<Long,TerrainObject> find = new Model.Finder(Long.class, TerrainObject.class);
+	
+	public static TerrainObject randomLocation(){
+		return Ebean.find(TerrainObject.class).where().eq("terrain_area_id", GameController.mainTerrain.id).orderBy("random()").findList().get(0);
+	}
 	
 	@Override
 	public String toString() {
