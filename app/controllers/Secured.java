@@ -10,6 +10,7 @@ public class Secured extends Security.Authenticator {
 
     @Override
     public String getUsername(Context ctx) {
+System.out.println("dfsad");
         return ctx.session().get("email");
     }
 
