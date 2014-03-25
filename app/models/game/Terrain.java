@@ -8,11 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import models.User;
+
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
 
 import play.db.ebean.Model;
+import play.db.ebean.Model.Finder;
 
 @javax.persistence.Entity
 public class Terrain extends Model{
@@ -24,10 +27,6 @@ public class Terrain extends Model{
 	public long id;
 	public int width;
 	public int height;
-
-	public static int tere(){
-		return 3;
-	}
 	
 	public Terrain(int width, int height) {
 		this.width  = width;
@@ -49,6 +48,8 @@ public class Terrain extends Model{
 			}
 		}
 	}
+	
+	public static Finder<Long, Terrain> find = new Finder<Long, Terrain> (Long.class, Terrain.class);
 	
 	public static List<TerrainObject> findTerrainObjects(long id) {
         return Ebean.find(TerrainObject.class).where().eq("terrain_area_id", id).orderBy("y").findList();

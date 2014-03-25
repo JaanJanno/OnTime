@@ -26,6 +26,7 @@ import play.mvc.*;
 import play.data.*;
 import static play.data.Form.*;
 import models.*;
+import models.game.Tribe;
 import views.html.*;
 
 public class Application extends Controller {
@@ -35,7 +36,8 @@ public class Application extends Controller {
     	try{
     		kasutaja = User.find.byId(session().get("email"));
     	} catch(Exception e){}
-        return ok(index.render( 
+        return ok(index.render(
+        	Tribe.find.all(),
         	EventQuery.getTitleDateOrganization(),
             form(Login.class),
             kasutaja

@@ -39,10 +39,6 @@ public class GameController extends Application {
 	@Security.Authenticated(Secured.class)
 	public static Result game() {
 		
-		User u = User.find.byId("jaan@ontime.ee");
-		
-		
-		
 		User kasutaja = null;
     	try{
     		kasutaja = User.find.byId(session().get("email"));
@@ -54,14 +50,12 @@ public class GameController extends Application {
     		}
     	} catch(Exception e){}
     	
-    	System.out.println(u.tribe.name);
+    	System.out.println(kasutaja.tribe.name);
     	
 		return(ok(grid.render(
+				Tribe.find.all(),
 				kasutaja.tribe,
-				6,
-				6,
 				TerrainStreamer.streamAllUrl(mainTerrain),
-				Terrain.tere(),
 				form(Application.Login.class), 
 				kasutaja
 		)));

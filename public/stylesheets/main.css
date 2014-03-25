@@ -7,6 +7,10 @@ header{
     background-image:linear-gradient(to bottom, #3b3b3b 0px, #242424 100%);
 }
 
+#gHeader{
+	margin:-24px -8px 15px;
+}
+
 .nav-bar-container{
     height:50px;
     width:80%;

@@ -7,6 +7,7 @@ import com.avaje.ebean.Ebean;
 
 import models.game.Terrain;
 import models.game.TerrainObject;
+import models.game.Tribe;
 
 public class TerrainStreamer {
 	

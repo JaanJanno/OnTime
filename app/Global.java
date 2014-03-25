@@ -18,6 +18,11 @@ public class Global extends GlobalSettings {
         if (Event.find.findRowCount() == 0) {
             Ebean.save((List) Yaml.load("test-data.yml"));
         }
-        GameController.mainTerrain = Terrain.initTerrain(10, 10);
+        if (Terrain.find.findRowCount() == 0) {
+        	GameController.mainTerrain = Terrain.initTerrain(10, 10);
+        }
+        if (GameController.mainTerrain == null){
+        	GameController.mainTerrain = Terrain.find.all().get(0);
+        }
     }
 }
