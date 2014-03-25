@@ -58,4 +58,18 @@ public class GameController extends Application {
 				kasutaja
 		)));
 	}
+	
+	public static Result move(Integer x, Integer y) {
+		
+	    User kasutaja = User.find.byId(session().get("email"));
+	    if (x >= 0 && y >= 0 && x < mainTerrain.width && x < mainTerrain.height){
+	    	TerrainObject selected = TerrainObject.getAtLocation(x, y);
+	    	Tribe muuta = kasutaja.tribe;
+	    	muuta.position = selected;
+	    	Ebean.update(muuta);
+	    	Ebean.update(selected);
+	    }
+	    	
+		return(redirect("/game"));
+	}
 }

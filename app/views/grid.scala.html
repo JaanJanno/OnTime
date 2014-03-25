@@ -27,13 +27,13 @@
 									<img src="@list.get(px).get(py)"></img>
 								</div>
 								<div class="inner-box">
-									@for(tribeB <- tribeList){
-										@if(tribe != tribeB && tribeB.position.x == px && tribeB.position.y == py){
-											<img src="assets/images/game/tiles/tribe.png"></img>
-										}
-									}
 									@if(tribe.position.x == px && tribe.position.y == py){
 										<img src="assets/images/game/tiles/mytribe.png"></img>
+									}
+									@for(tribeB <- tribeList){
+										@if(tribe.name != tribeB.name && tribeB.position.x == px && tribeB.position.y == py){
+											<img src="assets/images/game/tiles/tribe.png"></img>
+										}
 									}
 								</div>
 							</a>
@@ -62,10 +62,26 @@
             <div id="buttons-container-2">
                 <div class="panel">
                     <div class="panel-header">
-                        <div id="buttons-2">Buttons 2</div>
+                        <div id="buttons-2">Tribe Attributes</div>
                     </div>
                     <div class="panel-body">
-                        asd
+                    	<ul>
+                    		<li>
+                        		@tribe.name
+                        	</li><li>
+                        		People: @tribe.peopleAmount
+                        	</li><li>
+                        		Food left: @tribe.food
+                        	</li><li>
+                        		Fighting skill: @tribe.fighting
+							</li><li>
+                        		Fishing skill: @tribe.fishing
+                        	</li><li>
+                        		Hunting skill: @tribe.hunting
+                        	</li><li>
+                        		Tracking skill: @tribe.tracking
+                        	</li>
+                        </ul>
                     </div>
                 </div>
             </div>

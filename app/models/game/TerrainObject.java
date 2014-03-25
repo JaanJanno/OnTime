@@ -60,6 +60,10 @@ public class TerrainObject extends Model{
 	
 	public static Model.Finder<Long,TerrainObject> find = new Model.Finder(Long.class, TerrainObject.class);
 	
+	public static TerrainObject getAtLocation(int x, int y){
+		return Ebean.find(TerrainObject.class).where().eq("x", x).eq("y", y).eq("terrain_area_id", GameController.mainTerrain.id).findUnique();
+	}
+	
 	public static TerrainObject randomLocation(){
 		return Ebean.find(TerrainObject.class).where().eq("terrain_area_id", GameController.mainTerrain.id).orderBy("random()").findList().get(0);
 	}
