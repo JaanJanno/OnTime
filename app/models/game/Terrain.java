@@ -49,6 +49,25 @@ public class Terrain extends Model{
 		}
 	}
 	
+	public static void randomizeArea(Terrain maastik){
+		List<TerrainObject> alad = findTerrainObjects(maastik.id);
+		for(TerrainObject ala: alad){
+			if(Math.random() < 0.1){
+				ala.terrainType = TerrainObject.FOREST1;
+			}
+			if(Math.random() < 0.1){
+				ala.terrainType = TerrainObject.FOREST2;
+			}
+			if(Math.random() < 0.1){
+				ala.terrainType = TerrainObject.FOREST3;
+			}
+			if(Math.random() < 0.1){
+				ala.terrainType = TerrainObject.ROCK;
+			}
+			Ebean.update(ala);
+		}
+	}
+	
 	public static Finder<Long, Terrain> find = new Finder<Long, Terrain> (Long.class, Terrain.class);
 	
 	public static List<TerrainObject> findTerrainObjects(long id) {

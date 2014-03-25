@@ -1,4 +1,4 @@
-@(tribeList: List[models.game.Tribe],tribe: models.game.Tribe, list: List[List[String]], form: Form[Application.Login], user: User)
+@(tribeWarEvents: List[models.game.events.WarEvent], tribeEvents: List[models.game.events.SpecialEvent],tribeList: List[models.game.Tribe],tribe: models.game.Tribe, list: List[List[String]], form: Form[Application.Login], user: User)
 
 ﻿<!DOCTYPE html>
 <html>
@@ -28,11 +28,11 @@
 								</div>
 								<div class="inner-box">
 									@if(tribe.position.x == px && tribe.position.y == py){
-										<img src="assets/images/game/tiles/mytribe.png"></img>
+										<img src="assets/images/game/tiles/m2ngija_p.png"></img>
 									}
 									@for(tribeB <- tribeList){
 										@if(tribe.name != tribeB.name && tribeB.position.x == px && tribeB.position.y == py){
-											<img src="assets/images/game/tiles/tribe.png"></img>
+											<img src="assets/images/game/tiles/vaenlased_p.png"></img>
 										}
 									}
 								</div>
@@ -49,12 +49,36 @@
                         <div id="news-feed">News feed</div>
                     </div>
                     <div class="panel-body">
-                    <div id="news-feed-body">
-			15:55 25.03.2014 Congratz! You have just found a box of candies! :)
-			<hr>
-			15:40 25.03.2014 Congratz! You have just found a box of candies! :)	
-		    </div>
-
+		                <div id="news-feed-body">
+		                	<ul>
+				            	@tribeWarEvents.map { event =>
+								    <li>
+								    	@event.text
+								    </li>
+								    <hr>
+						        }
+				            </ul>
+			   			</div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div id="buttons-container">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div id="news-feed">News feed</div>
+                    </div>
+                    <div class="panel-body">
+		                <div id="news-feed-body">
+		                	<ul>
+				            	@tribeEvents.map { event =>
+								    <li>
+								    	@event.text
+								    </li>
+								    <hr>
+						        }
+				            </ul>
+			   			</div>
                     </div>
                 </div>
             </div>

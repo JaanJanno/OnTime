@@ -1,10 +1,15 @@
 package models.game;
 
+import java.util.List;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.avaje.ebean.Ebean;
+
+import models.game.events.SpecialEvent;
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
 
@@ -54,4 +59,8 @@ public class Tribe extends Model {
 	}
 	
 	public static Finder<Long, Tribe> find = new Finder<Long, Tribe> (Long.class, Tribe.class);
+	
+	public static List<Tribe> findEnemies(Tribe tribe){
+		return Ebean.find(Tribe.class).where().eq("POSITION_ID", tribe.position.id).ne("ID", tribe.id).findList();
+	}
 }

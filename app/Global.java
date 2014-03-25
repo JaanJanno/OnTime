@@ -20,6 +20,7 @@ public class Global extends GlobalSettings {
         }
         if (Terrain.find.findRowCount() == 0) {
         	GameController.mainTerrain = Terrain.initTerrain(10, 10);
+        	Terrain.randomizeArea(GameController.mainTerrain);
         }
         if (GameController.mainTerrain == null){
         	GameController.mainTerrain = Terrain.find.all().get(0);

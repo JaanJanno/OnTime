@@ -30,6 +30,8 @@ import models.*;
 import models.game.Terrain;
 import models.game.TerrainObject;
 import models.game.Tribe;
+import models.game.events.SpecialEvent;
+import models.game.events.WarEvent;
 import views.html.*;
 
 public class GameController extends Application {
@@ -51,6 +53,8 @@ public class GameController extends Application {
     	} catch(Exception e){}
     	
 		return(ok(grid.render(
+				WarEvent.findTribeWarEvents(kasutaja.tribe),
+				SpecialEvent.findTribeEvents(kasutaja.tribe),
 				Tribe.find.all(),
 				kasutaja.tribe,
 				TerrainStreamer.streamAllUrl(mainTerrain),
@@ -66,6 +70,10 @@ public class GameController extends Application {
 	    	TerrainObject selected = TerrainObject.getAtLocation(x, y);
 	    	Tribe muuta = kasutaja.tribe;
 	    	muuta.position = selected;
+	    	SpecialEvent.rollSpecialEvent(muuta);
+	    	for(Tribe tribe: Tribe.findEnemies(muuta)){
+	    		WarEvent.rollWarEvent(muuta, tribe);
+	    	}
 	    	Ebean.update(muuta);
 	    	Ebean.update(selected);
 	    }
