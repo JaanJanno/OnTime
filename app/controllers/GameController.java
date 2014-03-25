@@ -50,8 +50,6 @@ public class GameController extends Application {
     		}
     	} catch(Exception e){}
     	
-    	System.out.println(kasutaja.tribe.name);
-    	
 		return(ok(grid.render(
 				Tribe.find.all(),
 				kasutaja.tribe,

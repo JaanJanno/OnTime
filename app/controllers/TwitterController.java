@@ -69,11 +69,9 @@ public class TwitterController extends Application {
 			
 			service.signRequest(accessToken, request); // the access token from step 4
 			Response response = request.send();
-			System.out.println(response.getBody());
 			JsonObject responseJson = new JsonParser().parse(response.getBody()).getAsJsonObject();
 			
 			RegistrationController.handleTwitterUser(responseJson.get("name").getAsString(), responseJson.get("id_str").getAsString());
-			System.out.println("sain hakkama");
 		} catch(Exception e){} finally{
 			return redirect(
 					"/"
