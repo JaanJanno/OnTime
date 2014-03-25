@@ -26,11 +26,16 @@
 
     <div class="content">
     	@if(user != null){
-        		<p>Tere tulemast @user.name!</p>
+        		<p>Welcome, @user.name!</p>
         }
         @if(flash.contains("loginfail")) {
 			<p>
 				@flash.get("loginfail")
+			</p>
+		}
+		@if(flash.contains("loginToPlay")) {
+			<p>
+				@flash.get("loginToPlay")
 			</p>
 		}
 		<a href="/game">
