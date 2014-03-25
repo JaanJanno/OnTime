@@ -2,12 +2,32 @@
     margin:auto;
     border-collapse: collapse;
     border-spacing: 0px;
+    margin-top:0px;
 }
 
 #grid-view-table td {
     width:64px;
     height:64px;
-    background-color:#CCC;
+    padding:0px;
+}
+
+#grid-view-table img {
+    width:64px;
+    height:64px;
+    left:0;
+    top:0;
+    position:relative;
+}
+
+.box {
+	position: relative;
+	top:0px;
+}
+
+.inner-box {
+	position: absolute;
+	top: -32px;
+	left: 0px;
 }
 
 #buttons{

@@ -23,4 +23,18 @@ public class TerrainStreamer {
 		}
 		return tagastada;
 	}
+	
+	public static List<List<String>> streamAllUrl(Terrain target){
+		
+		List<TerrainObject> all = Terrain.findTerrainObjects(target.id);
+		
+		List<List<String>> tagastada = new ArrayList<List<String>>();
+		for(int j = 0; j < target.height; j++){
+			tagastada.add(new ArrayList<String>());
+		}
+		for(TerrainObject jupp: all){
+			tagastada.get(jupp.y).add(jupp.getImgUrl());
+		}
+		return tagastada;
+	}
 }

@@ -19,6 +19,7 @@ import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
 import com.avaje.ebean.SqlUpdate;
 
+import controllers.game.TerrainStreamer;
 import play.*;
 import play.libs.OAuth;
 import play.libs.OAuth.RequestToken;
@@ -38,6 +39,7 @@ public class GameController extends Application {
 		
 		System.out.println(mainTerrain);
 		System.out.println(Terrain.findTerrainObjects(mainTerrain.id));
+		System.out.println(TerrainStreamer.streamAllUrl(mainTerrain));
 		
 		
 		User kasutaja = null;

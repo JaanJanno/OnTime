@@ -51,9 +51,6 @@ public class Terrain extends Model{
 	}
 	
 	public static List<TerrainObject> findTerrainObjects(long id) {
-		SqlQuery q = Ebean.createSqlQuery("SELECT * FROM TERRAIN_OBJECT;");
-    	List<SqlRow> list = q.findList();
-    	System.out.println(list);
         return Ebean.find(TerrainObject.class).where().eq("terrain_area_id", id).orderBy("y").findList();
     }
 }
