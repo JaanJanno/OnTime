@@ -65,6 +65,7 @@ public class RegistrationController extends Application {
 				if (valid){
 		    		User uusK = new User(email, regForm.get().firstName+" "+regForm.get().lastName, regForm.get().organizationName, password);
 		    		Ebean.save(uusK);
+		    		session().put("email", email);
 		    	} else{
 		    		return redirect(
 	    		        routes.RegistrationController.register()
