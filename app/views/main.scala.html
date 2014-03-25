@@ -1,4 +1,4 @@
-@(events: List[EventQuery], form: Form[Application.Login], user: User)(content: Html)
+@(tribes: List[models.game.Tribe],events: List[EventQuery], form: Form[Application.Login], user: User)(content: Html)
 
 <!DOCTYPE html>
 <html>
@@ -33,20 +33,25 @@
 				@flash.get("loginfail")
 			</p>
 		}
-        <div class="photo-container">
-        	<div id="quote">Experience the ultimate timing!</div>
-        </div>
+		<a href="/game">
+		    <div class="photo-container">
+		    	<div id="quote">Enter the game!</div>
+		    </div>
+        </a>
         <br>
      	<div id="tabs-container">
             <div id="live-now-container">
                 <div class="panel">
                     <div class="panel-header live-header">
-                        <div id="live-now">LIVE NOW!</div>
+                        <div id="live-now">Hõimud praegu mängus!</div>
                     </div>
                     <div class="panel-body live-body">
                         <ul>
-                            <li>üritus1</li>
-                            <li>üritus2</li>
+                            @tribes.map { tribe =>
+		                        <li>
+		                            @tribe.name
+		                        </li>
+		                    }
                         </ul>
                     </div>
                 </div>

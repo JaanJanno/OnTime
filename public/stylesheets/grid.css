@@ -22,6 +22,7 @@
 .box {
 	position: relative;
 	top:0px;
+	outline:0;
 }
 
 .inner-box {
@@ -42,8 +43,11 @@
     padding-top:8px;
 }
 
+#body{
+	margin-top:0px;
+}
+
 #news-feed-body{
 	padding:10px;
 	
 }
-

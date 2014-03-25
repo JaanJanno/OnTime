@@ -39,10 +39,6 @@ public class GameController extends Application {
 	@Security.Authenticated(Secured.class)
 	public static Result game() {
 		
-		User u = User.find.byId("jaan@ontime.ee");
-		
-		
-		
 		User kasutaja = null;
     	try{
     		kasutaja = User.find.byId(session().get("email"));
@@ -54,16 +50,26 @@ public class GameController extends Application {
     		}
     	} catch(Exception e){}
     	
-    	System.out.println(u.tribe.name);
-    	
 		return(ok(grid.render(
+				Tribe.find.all(),
 				kasutaja.tribe,
-				6,
-				6,
 				TerrainStreamer.streamAllUrl(mainTerrain),
-				Terrain.tere(),
 				form(Application.Login.class), 
 				kasutaja
 		)));
+	}
+	
+	public static Result move(Integer x, Integer y) {
+		
+	    User kasutaja = User.find.byId(session().get("email"));
+	    if (x >= 0 && y >= 0 && x < mainTerrain.width && x < mainTerrain.height){
+	    	TerrainObject selected = TerrainObject.getAtLocation(x, y);
+	    	Tribe muuta = kasutaja.tribe;
+	    	muuta.position = selected;
+	    	Ebean.update(muuta);
+	    	Ebean.update(selected);
+	    }
+	    	
+		return(redirect("/game"));
 	}
 }

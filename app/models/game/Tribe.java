@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import play.db.ebean.Model;
+import play.db.ebean.Model.Finder;
 
 @javax.persistence.Entity
 public class Tribe extends Model {
@@ -51,4 +52,6 @@ public class Tribe extends Model {
 		this.food			= food;
 		this.position		= TerrainObject.randomLocation();
 	}
+	
+	public static Finder<Long, Tribe> find = new Finder<Long, Tribe> (Long.class, Tribe.class);
 }
