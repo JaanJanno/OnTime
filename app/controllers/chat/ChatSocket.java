@@ -14,8 +14,13 @@ public class ChatSocket extends Application {
 	static long chatSocketCount = 0;
 	
 	public static long getNewChatSocketId() {
-		ChatSocket.chatSocketCount += 1;
-		return (chatSocketCount - 1);
+		return (chatSocketCount++);
+	}
+	
+	public static void sendMessage(String text){
+		for(WebSocket.Out<String> session: sessions.values()){
+			session.write(text);
+		}
 	}
 
 	public static WebSocket<String> chat() {

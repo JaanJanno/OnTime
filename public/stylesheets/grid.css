@@ -1,4 +1,10 @@
-﻿#grid-view-table {
+﻿iframe{
+   border: 0px;
+   width: 0px;
+   height: 0px;
+}
+
+#grid-view-table {
     margin:auto;
     border-collapse: collapse;
     border-spacing: 0px;
