@@ -2,6 +2,7 @@ package controllers.chat;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import play.libs.F.Callback;
 import play.libs.F.Callback0;
 import play.mvc.WebSocket;
@@ -12,6 +13,7 @@ public class ChatSocket extends Application {
 	
 	static Map<Long, Out<String>> sessions = new HashMap<Long, WebSocket.Out<String>>();
 	static long chatSocketCount = 0;
+	static Pinger pinger = new Pinger();
 	
 	public static long getNewChatSocketId() {
 		return (chatSocketCount++);
@@ -39,7 +41,7 @@ public class ChatSocket extends Application {
 				});
 
 				in.onClose(new Callback0() {
-					public void invoke() {   
+					public void invoke() {
 						sessions.remove(id);
 						chatSocketCount -= 1;
 					}
@@ -48,5 +50,24 @@ public class ChatSocket extends Application {
 				sessions.put(id, out);
 			}  
 		};
+	}
+	
+	private static class Pinger extends Thread{
+		
+		public Pinger(){
+			this.start();
+		}
+		@Override
+		public synchronized void run() {
+			while(true){
+				sendMessage("");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }

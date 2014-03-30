@@ -13,6 +13,8 @@ if ("WebSocket" in window)
 	ws.onmessage = function (evt) 
 	{ 
 		var received_msg = evt.data;
-		writeToChat(received_msg);
+		if(!received_msg == ""){
+			writeToChat(received_msg);
+		}
 	};
 }
