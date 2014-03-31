@@ -17,10 +17,16 @@ create table event_query (
   korraldaja                varchar(255))
 ;
 
+create table game_event_query (
+  msg                       varchar(255),
+  count                     bigint)
+;
+
 create table special_event (
   id                        bigint auto_increment not null,
   text                      varchar(255),
   tribe_id                  bigint,
+  type                      varchar(255),
   constraint pk_special_event primary key (id))
 ;
 
@@ -93,6 +99,8 @@ SET REFERENTIAL_INTEGRITY FALSE;
 drop table if exists event;
 
 drop table if exists event_query;
+
+drop table if exists game_event_query;
 
 drop table if exists special_event;
 

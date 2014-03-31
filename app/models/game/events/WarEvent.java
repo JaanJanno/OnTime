@@ -25,8 +25,8 @@ public class WarEvent {
 	public Tribe tribe;
 	
 	public WarEvent(String lugu, Tribe tribe){
-		this.text = lugu;
-		this.tribe = tribe;
+		this.text	= lugu;
+		this.tribe 	= tribe;
 	}
 	
 	public static void rollWarEvent(Tribe tribe1, Tribe tribe2){

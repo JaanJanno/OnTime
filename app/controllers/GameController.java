@@ -30,6 +30,7 @@ import models.*;
 import models.game.Terrain;
 import models.game.TerrainObject;
 import models.game.Tribe;
+import models.game.events.GameEventQuery;
 import models.game.events.SpecialEvent;
 import models.game.events.WarEvent;
 import views.html.*;
@@ -53,6 +54,7 @@ public class GameController extends Application {
     	} catch(Exception e){}
     	
 		return(ok(grid.render(
+				GameEventQuery.getEventsStatistics(),
 				WarEvent.findTribeWarEvents(kasutaja.tribe),
 				SpecialEvent.findTribeEvents(kasutaja.tribe),
 				Tribe.find.all(),

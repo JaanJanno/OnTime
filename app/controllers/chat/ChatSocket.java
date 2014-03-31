@@ -3,11 +3,11 @@ package controllers.chat;
 import java.util.HashMap;
 import java.util.Map;
 
+import controllers.Application;
 import play.libs.F.Callback;
 import play.libs.F.Callback0;
 import play.mvc.WebSocket;
 import play.mvc.WebSocket.Out;
-import controllers.Application;
 
 public class ChatSocket extends Application {
 	

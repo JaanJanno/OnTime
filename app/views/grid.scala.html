@@ -1,4 +1,4 @@
-@(tribeWarEvents: List[models.game.events.WarEvent], tribeEvents: List[models.game.events.SpecialEvent],tribeList: List[models.game.Tribe],tribe: models.game.Tribe, list: List[List[String]], form: Form[Application.Login], user: User)
+@(statisticsEvents: List[models.game.events.GameEventQuery], tribeWarEvents: List[models.game.events.WarEvent], tribeEvents: List[models.game.events.SpecialEvent],tribeList: List[models.game.Tribe],tribe: models.game.Tribe, list: List[List[String]], form: Form[Application.Login], user: User)
 
 ﻿<!DOCTYPE html>
 <html>
@@ -127,6 +127,26 @@
                         		Tracking skill: @tribe.tracking
                         	</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div id="buttons-container">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div id="news-feed">World statistics (across all players).</div>
+                    </div>
+                    <div class="panel-body">
+		                <div id="news-feed-body">
+		                	<ul>
+				            	@statisticsEvents.map { event =>
+								    <li>
+								    	@event.msg @event.count
+								    </li>
+								    <hr>
+						        }
+				            </ul>
+			   			</div>
                     </div>
                 </div>
             </div>
