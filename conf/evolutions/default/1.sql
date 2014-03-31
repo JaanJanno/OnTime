@@ -26,7 +26,7 @@ create table special_event (
   id                        bigint auto_increment not null,
   text                      varchar(255),
   tribe_id                  bigint,
-  type                      varchar(255),
+  type                      integer,
   constraint pk_special_event primary key (id))
 ;
 

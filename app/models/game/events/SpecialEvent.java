@@ -23,9 +23,9 @@ public class SpecialEvent {
 	public String text;
 	@ManyToOne
 	public Tribe tribe;
-	public String type;
+	public int type;
 	
-	public SpecialEvent(String lugu, Tribe tribe, String type){
+	public SpecialEvent(String lugu, Tribe tribe, int type){
 		this.text	= lugu;
 		this.tribe 	= tribe;
 		this.type 	= type;
@@ -40,7 +40,7 @@ public class SpecialEvent {
 	private static void rollTravellers(double chance, Tribe tribe){
 		if (Math.random() < chance){
 			tribe.peopleAmount += 5;
-			SpecialEvent event = new SpecialEvent("You have found a group 5 of travellers who join your tribe.", tribe, "Travellers");
+			SpecialEvent event = new SpecialEvent("You have found a group 5 of travellers who join your tribe.", tribe, 2);
 			Ebean.save(event);
 		}
 	}
@@ -48,7 +48,7 @@ public class SpecialEvent {
 	private static void rollBerries(double chance, Tribe tribe){
 		if (Math.random() < chance){
 			tribe.food += 50;
-			SpecialEvent event = new SpecialEvent("You have found a bush with delicious berries. (+50 food)", tribe, "Berries");
+			SpecialEvent event = new SpecialEvent("You have found a bush with delicious berries. (+50 food)", tribe, 1);
 			Ebean.save(event);
 		}
 	}
@@ -56,7 +56,7 @@ public class SpecialEvent {
 	private static void rollCandy(double chance, Tribe tribe){
 		if (Math.random() < chance){
 			tribe.food += 25;
-			SpecialEvent event = new SpecialEvent("Congratz! You have just found a box of candies! :)	(+25 food)", tribe, "Candies");
+			SpecialEvent event = new SpecialEvent("Congratz! You have just found a box of candies! :)	(+25 food)", tribe, 3);
 			Ebean.save(event);
 		}
 	}

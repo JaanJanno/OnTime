@@ -17,13 +17,13 @@ public class GameEventQuery {
 		this.count = count;
 	}
 	
-	public static String msgSwitch(String type){
+	public static String msgSwitch(int type){
 		switch (type) {
-		case "Berries":	
+		case 1:	
 			return "Total berries found: ";
-		case "Travellers":	
+		case 2:	
 			return "Total times travellers found: ";
-		case "Candies":	
+		case 3:	
 			return "Total candies found: ";
 		default:
 			return null;
@@ -34,7 +34,7 @@ public class GameEventQuery {
     	
     	List<GameEventQuery> list = new ArrayList<GameEventQuery>();
     	for(SqlRow row: rows){
-    		GameEventQuery uus = new GameEventQuery(msgSwitch((String)row.get("type")), (Long)row.get("count(1)"));
+    		GameEventQuery uus = new GameEventQuery(msgSwitch((int)row.get("type")), (Long)row.get("count(1)"));
     		list.add(uus);
     	}
     	return list;
