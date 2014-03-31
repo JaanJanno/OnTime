@@ -34,7 +34,7 @@ public class GameEventQuery {
     	
     	List<GameEventQuery> list = new ArrayList<GameEventQuery>();
     	for(SqlRow row: rows){
-    		GameEventQuery uus = new GameEventQuery(msgSwitch((int)row.get("type")), (Long)row.get("count(1)"));
+    		GameEventQuery uus = new GameEventQuery(msgSwitch((Integer)row.get("type")), (Long)row.get("count(1)"));
     		list.add(uus);
     	}
     	return list;
