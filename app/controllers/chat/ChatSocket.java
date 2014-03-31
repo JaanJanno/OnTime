@@ -16,7 +16,8 @@ public class ChatSocket extends Application {
 	static Pinger pinger = new Pinger();
 	
 	public static long getNewChatSocketId() {
-		return (chatSocketCount++);
+		chatSocketCount += 1;
+		return (chatSocketCount);
 	}
 	
 	public static void sendMessage(String text){
@@ -43,7 +44,6 @@ public class ChatSocket extends Application {
 				in.onClose(new Callback0() {
 					public void invoke() {
 						sessions.remove(id);
-						chatSocketCount -= 1;
 					}
 				});
 				

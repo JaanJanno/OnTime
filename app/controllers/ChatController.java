@@ -10,7 +10,6 @@ import controllers.chat.ChatSocket;
 
 public class ChatController extends Application {
 
-	@Security.Authenticated(Secured.class)
 	public static Result chatSubmit() {
 		Form<NewChat> chatForm = form(NewChat.class).bindFromRequest();
 		if (chatForm.hasErrors()) {
