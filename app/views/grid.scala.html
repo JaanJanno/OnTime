@@ -62,8 +62,10 @@
 								    </li>
 						        }
 				            </ul>
-				            <input class="textbox-add-new" type="text" name="text" placeholder="Text" /><br>
-				           	<input id="button-add-new" type="button" value="OK!">
+				            @helper.form(routes.ChatController.chatSubmitNoscript) {
+				            	<input class="textbox-add-new" type="text" name="text" placeholder="Text" /><br>
+				           		<input id="button-add-new" type="submit" value="OK!">
+				           	}
 			   			</div>
                     </div>
                 </div>
