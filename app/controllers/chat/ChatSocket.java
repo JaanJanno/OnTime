@@ -3,6 +3,10 @@ package controllers.chat;
 import java.util.HashMap;
 import java.util.Map;
 
+import models.ChatEvent;
+
+import com.avaje.ebean.Ebean;
+
 import controllers.Application;
 import play.libs.F.Callback;
 import play.libs.F.Callback0;
@@ -21,6 +25,9 @@ public class ChatSocket extends Application {
 	}
 	
 	public static void sendMessage(String text){
+		if(!isPing(text)){
+			Ebean.save(new ChatEvent(text));
+		}
 		for(WebSocket.Out<String> session: sessions.values()){
 			session.write(text);
 		}
@@ -50,6 +57,14 @@ public class ChatSocket extends Application {
 				sessions.put(id, out);
 			}  
 		};
+	}
+	
+	private static boolean isPing(String s){
+		if(s.equals("")){
+			return true;
+		} else{
+			return false;
+		}
 	}
 	
 	private static class Pinger extends Thread{

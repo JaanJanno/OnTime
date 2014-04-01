@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class GameController extends Application {
     	} catch(Exception e){}
     	
 		return(ok(grid.render(
+				ChatEvent.findChatEvents(),
 				GameEventQuery.getEventsStatistics(),
 				WarEvent.findTribeWarEvents(kasutaja.tribe),
 				SpecialEvent.findTribeEvents(kasutaja.tribe),

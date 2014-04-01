@@ -3,6 +3,12 @@
 
 # --- !Ups
 
+create table chat_event (
+  id                        bigint auto_increment not null,
+  msg                       varchar(255),
+  constraint pk_chat_event primary key (id))
+;
+
 create table event (
   id                        bigint auto_increment not null,
   title                     varchar(255),
@@ -95,6 +101,8 @@ create index ix_war_event_tribe_6 on war_event (tribe_id);
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;
+
+drop table if exists chat_event;
 
 drop table if exists event;
 

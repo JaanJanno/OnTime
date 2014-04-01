@@ -1,4 +1,4 @@
-@(statisticsEvents: List[models.game.events.GameEventQuery], tribeWarEvents: List[models.game.events.WarEvent], tribeEvents: List[models.game.events.SpecialEvent],tribeList: List[models.game.Tribe],tribe: models.game.Tribe, list: List[List[String]], form: Form[Application.Login], user: User)
+@(chatEvents: List[models.ChatEvent],statisticsEvents: List[models.game.events.GameEventQuery], tribeWarEvents: List[models.game.events.WarEvent], tribeEvents: List[models.game.events.SpecialEvent],tribeList: List[models.game.Tribe],tribe: models.game.Tribe, list: List[List[String]], form: Form[Application.Login], user: User)
 
 ﻿<!DOCTYPE html>
 <html>
@@ -56,11 +56,14 @@
                     <div class="panel-body">
 		                <div id="news-feed-body">
 		                	<ul id="chatlist">
+		                		@chatEvents.map { event =>
+								    <li>
+								    	@event.msg
+								    </li>
+						        }
 				            </ul>
-                                
-				                    <input class="textbox-add-new" type="text" name="text" placeholder="Text" /><br>
-				                    <input id="button-add-new" type="button" value="OK!">
-                                
+				            <input class="textbox-add-new" type="text" name="text" placeholder="Text" /><br>
+				           	<input id="button-add-new" type="button" value="OK!">
 			   			</div>
                     </div>
                 </div>
