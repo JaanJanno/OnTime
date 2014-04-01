@@ -4,6 +4,7 @@ $(document).ready(function () {
     $("#button-add-new").click(function (event) {
     	event.preventDefault();
         var boxContent = $('.textbox-add-new').val();
+		$('.textbox-add-new').val("");
 
         $.ajax({
             type: "POST",
