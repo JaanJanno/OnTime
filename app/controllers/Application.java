@@ -51,6 +51,17 @@ public class Application extends Controller {
 		    routes.Application.index()
 		);
 	}
+    
+    public static Result login() {
+    	User kasutaja = null;
+    	try{
+    		kasutaja = User.find.byId(session().get("email"));
+    	} catch(Exception e){}
+        return ok(login.render(
+            form(Login.class),
+            kasutaja
+        )); 
+    }
 	
 	public static Result authenticate() {
 		Form<Login> loginForm = form(Login.class).bindFromRequest();

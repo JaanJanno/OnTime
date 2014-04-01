@@ -10,6 +10,7 @@ GET		/twitter		controllers.TwitterController.twitter()
 GET     /auth           controllers.TwitterController.auth()
 GET     /game           controllers.GameController.game()
 GET		/game/:x/:y		controllers.GameController.move(x: Integer, y: Integer)
+GET		/login			controllers.Application.login()
 
 #Sockets
 GET		/chat			controllers.chat.ChatSocket.chat()
