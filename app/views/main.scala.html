@@ -33,16 +33,21 @@
 				@flash.get("loginfail")
 			</p>
 		}
-		@if(flash.contains("loginToPlay")) {
-			<p>
-				@flash.get("loginToPlay")
-			</p>
-		}
-		<a href="/game">
-		    <div class="photo-container">
-		    	<div id="quote">Enter the game!</div>
-		    </div>
-        </a>
+		
+		@if(user != null){
+			<a href="/game">
+				<div class="photo-container">
+					<div id="quote">Enter the game!</div>
+				</div>
+		    </a>
+        } else{
+        	<a href="/login/game">
+				<div class="photo-container">
+					<div id="quote">Enter the game!</div>
+				</div>
+		    </a>
+        }
+        
         <br>
      	<div id="tabs-container">
             <div id="live-now-container">

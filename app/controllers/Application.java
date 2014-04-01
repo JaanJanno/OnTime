@@ -52,29 +52,30 @@ public class Application extends Controller {
 		);
 	}
     
-    public static Result login() {
+    public static Result login(String redir) {
     	User kasutaja = null;
     	try{
     		kasutaja = User.find.byId(session().get("email"));
     	} catch(Exception e){}
         return ok(login.render(
+        	redir,
             form(Login.class),
             kasutaja
         )); 
     }
 	
-	public static Result authenticate() {
+	public static Result authenticate(String redir) {
 		Form<Login> loginForm = form(Login.class).bindFromRequest();
 		if (loginForm.hasErrors()) {
 			flash("loginfail", "Invalid email or password.");
 		    return redirect(
-		        routes.Application.index()
+		        routes.Application.login(redir)
 		    );
 		} else {
 		    session().clear();
 		    session("email", loginForm.get().email);		    
 		    return redirect(
-		        routes.Application.index()
+		        "/"+redir
 		    );
 		}
 	}

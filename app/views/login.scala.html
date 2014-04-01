@@ -1,4 +1,4 @@
-@(form: Form[Application.Login], user: User)
+@(redir: String, form: Form[Application.Login], user: User)
 
 <!DOCTYPE html>
 <html>
@@ -18,8 +18,16 @@
     </header>
 
     <div class="content">
-        @helper.form(routes.Application.authenticate) {
+    
+        @helper.form(routes.Application.authenticate(redir)) {
         <div class="log-in-form-container">
+        
+		    @if(flash.contains("loginToPlay")) {
+				<p>
+					@flash.get("loginToPlay")
+				</p>
+			}
+        
             <form id="sign-up-form">
                 <input class="textbox" type="email" name="email" placeholder="E-mail" /><br>
                 <input class="textbox" type="password" name="password" placeholder="Password" /><br>
