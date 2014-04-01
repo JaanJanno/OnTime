@@ -37,7 +37,7 @@ import views.html.*;
 public class TwitterController extends Application {
 	
 	static OAuthService service;
-	static HashMap<String, Token> requestTokens = new HashMap<String, Token>();
+	static HashMap<String, TwitterLogin> requestTokens = new HashMap<String, TwitterLogin>();
 	
 	static boolean isLocal = true;
 	
@@ -49,11 +49,11 @@ public class TwitterController extends Application {
 		}
 	}
 	
-	public static Result twitter(){
+	public static Result twitter(String redir){
 		String sid = Double.toString(Math.random());
 		session().put("twitter-sid", sid);
-		requestTokens.put(session().get("twitter-sid"), service.getRequestToken());
-		String authUrl = service.getAuthorizationUrl(requestTokens.get(session().get("twitter-sid")));
+		requestTokens.put(session().get("twitter-sid"), new TwitterLogin(service.getRequestToken(), redir));
+		String authUrl = service.getAuthorizationUrl(requestTokens.get(session().get("twitter-sid")).token);
 		return redirect(
 				authUrl
 		    );
@@ -62,8 +62,9 @@ public class TwitterController extends Application {
 	public static Result auth(){
 		try{
 			Verifier v = new Verifier(request().getQueryString("oauth_verifier"));
-			Token accessToken = service.getAccessToken(requestTokens.get(session().get("twitter-sid")), v);
-			requestTokens.remove(session().get("twitter-sid"));
+			Token accessToken = service.getAccessToken(requestTokens.get(session().get("twitter-sid")).token, v);
+			String redir = requestTokens.get(session().get("twitter-sid")).redir;
+			
 			session().remove("twitter-sid");
 			OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.twitter.com/1.1/account/verify_credentials.json");
 			
@@ -72,10 +73,25 @@ public class TwitterController extends Application {
 			JsonObject responseJson = new JsonParser().parse(response.getBody()).getAsJsonObject();
 			
 			RegistrationController.handleTwitterUser(responseJson.get("name").getAsString(), responseJson.get("id_str").getAsString());
-		} catch(Exception e){} finally{
+			
+			return redirect(
+					"/"+redir
+		    ); 
+		} catch(Exception e){
 			return redirect(
 					"/"
 		    ); 
+		}
+	}
+	
+	private static class TwitterLogin{
+		
+		Token token;
+		String redir;
+		
+		public TwitterLogin(Token token, String redir){
+			this.token = token;
+			this.redir = redir;
 		}
 	}
 }
