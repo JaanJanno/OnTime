@@ -27,14 +27,20 @@
 					@flash.get("loginToPlay")
 				</p>
 			}
-        
+			
+			@if(flash.contains("loginfail")) {
+				<p>
+					@flash.get("loginfail")
+				</p>
+			}
+			
             <form id="sign-up-form">
                 <input class="textbox" type="email" name="email" placeholder="E-mail" /><br>
                 <input class="textbox" type="password" name="password" placeholder="Password" /><br>
 
                 <input id="button" type="submit" value="Log in"> <br>
 
-                <a href="twitter">
+                <a href="/twitter/@redir">
                     <img id="twitter-button-pic" src="/assets/images/twitter.png"><img>
                 </a>
 
