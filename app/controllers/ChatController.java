@@ -12,21 +12,15 @@ public class ChatController extends Application {
 
 	public static Result chatSubmit() {
 		Form<NewChat> chatForm = form(NewChat.class).bindFromRequest();
-		if (chatForm.hasErrors()) {
-		    return redirect(
-		        routes.GameController.game()
-		    );
-		} else {
-			try{
-				String text = chatForm.get().text;
-				String user = User.find.byId(session().get("email")).name;
-				if (!text.replaceAll("\\s+","").equals("")){	
-					ChatSocket.sendMessage(user + ": " +text);
-				}
-	    	} catch(Exception e){} finally{
-	    		return ok();
-	    	}
-		}
+		response().setHeader("Content-Type", "text/html");
+		try{
+			String text = chatForm.get().text;
+			String user = User.find.byId(session().get("email")).name;
+			if (!text.replaceAll("\\s+","").equals("")){	
+				ChatSocket.sendMessage(user + ": " +text);
+			}
+    	} catch(Exception e){}
+		return (ok("gotcha"));
 	}
 	
 	public static Result chatSubmitNoscript() {

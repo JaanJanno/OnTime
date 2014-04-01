@@ -11,8 +11,7 @@ $(document).ready(function () {
             data: {
                 'text': boxContent,
             },
-            success: function () {
-                alert('wow');
+            success: function (event) {
             },
             dataType: String
         });
