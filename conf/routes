@@ -6,7 +6,6 @@
 GET     /               controllers.Application.index()
 GET     /index          controllers.Application.index()
 GET     /register       controllers.RegistrationController.register()
-GET     /myevents       controllers.EventsController.myevents()
 GET		/twitter		controllers.TwitterController.twitter(s = "")
 GET		/twitter/:s		controllers.TwitterController.twitter(s: String)
 GET     /auth           controllers.TwitterController.auth()
@@ -25,5 +24,4 @@ GET     /assets/*file           controllers.Assets.at(path="/public", file)
 
 POST    /login/:redir           controllers.Application.authenticate(redir: String)
 POST    /register               controllers.RegistrationController.registerFormSubmit()
-POST    /newevent               controllers.EventsController.newEventFormSubmit()
 GET     /logout                 controllers.Application.logout()
