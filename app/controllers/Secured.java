@@ -15,6 +15,6 @@ public class Secured extends Security.Authenticator {
 
     public Result onUnauthorized(Context ctx) {
     	Application.flash("loginToPlay", "Please log in to play the game. :)");
-        return redirect(routes.Application.index());
+        return redirect(routes.Application.login("game"));
     }
 }
