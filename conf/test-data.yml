@@ -25,6 +25,12 @@
     organizationName: OnTime
     password: sixten
     
+- &a5 !!models.User
+    email: aurelius@rome.ee
+    name: Aurelius Maximus
+    organizationName: Rooma Leegion
+    password: aurelius
+    
 
 # Event
 
@@ -41,4 +47,4 @@
 - &e3 !!models.Event
     title:       Kelgutamine
     date:   14.12.2014
-    user: *a3 
+    user: *a3
