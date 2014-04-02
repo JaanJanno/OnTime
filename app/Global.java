@@ -29,7 +29,7 @@ public class Global extends GlobalSettings {
 			Ebean.save(uusTribe);   			
 			aurelius.tribe = uusTribe;
 			Ebean.update(aurelius);
-			for (int i = 0; i < 15; i++){
+			for (int i = 0; i < 50; i++){
 				SpecialEvent.rollSpecialEvent(uusTribe);
 			}		
         }
