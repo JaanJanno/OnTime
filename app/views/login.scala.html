@@ -19,7 +19,7 @@
 
     <div class="content">
     
-        @helper.form(routes.Application.authenticate(redir)) {
+        @helper.form(routes.Application.authenticate(redir), 'id -> "sign-up-form") {
         <div class="log-in-form-container">
         
 		    @if(flash.contains("loginToPlay")) {
@@ -32,23 +32,17 @@
 				<p>
 					@flash.get("loginfail")
 				</p>
-			}
-			
-            <form id="sign-up-form">
-                <input class="textbox" type="email" name="email" placeholder="E-mail" /><br>
-                <input class="textbox" type="password" name="password" placeholder="Password" /><br>
+			}	
+            <input class="textbox" type="email" name="email" placeholder="E-mail" /><br>
+            <input class="textbox" type="password" name="password" placeholder="Password" /><br>
 
-                <input id="button" type="submit" value="Log in"> <br>
+            <input id="button" type="submit" value="Log in"> <br>
 
-                <a href="/twitter/@redir">
-                    <img id="twitter-button-pic" src="/assets/images/twitter.png"><img>
-                </a>
-
-            </form>
+            <a href="/twitter/@redir">
+                <img alt="Twitter login" id="twitter-button-pic" src="/assets/images/twitter.png"/>
+            </a>
         </div>
-
         }
     </div>
-
 </body>
 </html>
