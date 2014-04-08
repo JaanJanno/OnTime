@@ -13,7 +13,7 @@ import play.libs.F.Callback0;
 import play.mvc.WebSocket;
 import play.mvc.WebSocket.Out;
 
-public class ChatSocket extends Application {
+public class WebSocketController extends Application {
 	
 	static Map<Long, Out<String>> sessions = new HashMap<Long, WebSocket.Out<String>>();
 	static long chatSocketCount = 0;

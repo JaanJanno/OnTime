@@ -6,7 +6,7 @@ import play.data.Form;
 import play.mvc.Result;
 import play.mvc.Security;
 import controllers.routes;
-import controllers.chat.ChatSocket;
+import controllers.chat.WebSocketController;
 
 public class ChatController extends Application {
 
@@ -17,7 +17,7 @@ public class ChatController extends Application {
 			String text = chatForm.get().text;
 			String user = User.find.byId(session().get("email")).name;
 			if (!text.replaceAll("\\s+","").equals("")){	
-				ChatSocket.sendMessage(user + ": " +text);
+				WebSocketController.sendMessage(user + ": " +text);
 			}
     	} catch(Exception e){}
 		return (ok("gotcha"));
@@ -30,7 +30,7 @@ public class ChatController extends Application {
 			String text = chatForm.get().text;
 			String user = User.find.byId(session().get("email")).name;
 			if (!text.replaceAll("\\s+","").equals("")){	
-				ChatSocket.sendMessage(user + ": " +text);
+				WebSocketController.sendMessage(user + ": " +text);
 			}
     	} catch(Exception e){}
 		
