@@ -6,7 +6,7 @@ import play.data.Form;
 import play.mvc.Result;
 import play.mvc.Security;
 import controllers.routes;
-import controllers.chat.WebSocketController;
+import controllers.websocket.WebSocketController;
 
 public class ChatController extends Application {
 

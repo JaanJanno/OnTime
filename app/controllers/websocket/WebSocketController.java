@@ -1,4 +1,4 @@
-package controllers.chat;
+package controllers.websocket;
 
 import java.util.HashMap;
 import java.util.Map;
