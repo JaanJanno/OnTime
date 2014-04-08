@@ -10,7 +10,7 @@ public class WebSocketController extends Application {
 	public static WebSocket<String> ws() {
 		return new WebSocket<String>() {
 			
-			final long id = WebSocketSessionController.getNewChatSocketId();
+			final long id = WebSocketSessionController.getNewWebSocketId();
 
 			public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
 
