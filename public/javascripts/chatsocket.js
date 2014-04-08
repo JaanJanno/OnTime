@@ -8,7 +8,7 @@ function writeToChat(message)
 
 if ("WebSocket" in window)
 {
-	var ws = new WebSocket("ws"+document.URL.substring(4, document.URL.length-4)+"chat");
+	var ws = new WebSocket("ws"+document.URL.substring(4, document.URL.length-4)+"ws");
 	
 	ws.onmessage = function (evt) 
 	{ 
