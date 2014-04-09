@@ -21,6 +21,7 @@ import com.avaje.ebean.SqlRow;
 import com.avaje.ebean.SqlUpdate;
 
 import controllers.game.TerrainStreamer;
+import controllers.websocket.GridHandler;
 import play.*;
 import play.libs.OAuth;
 import play.libs.OAuth.RequestToken;
@@ -42,7 +43,7 @@ public class GameController extends Application {
 	
 	@Security.Authenticated(Secured.class)
 	public static Result game() {
-		
+	
 		User kasutaja = null;
     	try{
     		kasutaja = User.find.byId(session().get("email"));
@@ -59,7 +60,7 @@ public class GameController extends Application {
 				GameEventQuery.getEventsStatistics(),
 				WarEvent.findTribeWarEvents(kasutaja.tribe),
 				SpecialEvent.findTribeEvents(kasutaja.tribe),
-				Tribe.find.all(),
+				TerrainStreamer.streamAllPlayerUrl(kasutaja.tribe),
 				kasutaja.tribe,
 				TerrainStreamer.streamAllUrl(mainTerrain),
 				form(Application.Login.class), 
@@ -69,19 +70,25 @@ public class GameController extends Application {
 	
 	public static Result move(Integer x, Integer y) {
 		
-	    User kasutaja = User.find.byId(session().get("email"));
-	    if (x >= 0 && y >= 0 && x < mainTerrain.width && x < mainTerrain.height){
-	    	TerrainObject selected = TerrainObject.getAtLocation(x, y);
-	    	Tribe muuta = kasutaja.tribe;
-	    	muuta.position = selected;
-	    	SpecialEvent.rollSpecialEvent(muuta);
-	    	for(Tribe tribe: Tribe.findEnemies(muuta)){
-	    		WarEvent.rollWarEvent(muuta, tribe);
-	    	}
-	    	Ebean.update(muuta);
-	    	Ebean.update(selected);
-	    }
-	    	
+	    tryMove(x, y);
+	    GridHandler.sendObjectStream();
 		return(redirect("/game"));
+	}
+	
+	public static void tryMove(Integer y, Integer x){		
+		try {
+			User kasutaja = User.find.byId(session().get("email"));
+		    if (x >= 0 && y >= 0 && x < mainTerrain.width && x < mainTerrain.height){
+		    	TerrainObject selected = TerrainObject.getAtLocation(x, y);
+		    	Tribe muuta = kasutaja.tribe;
+		    	muuta.position = selected;
+		    	SpecialEvent.rollSpecialEvent(muuta);
+		    	for(Tribe tribe: Tribe.findEnemies(muuta)){
+		    		WarEvent.rollWarEvent(muuta, tribe);
+		    	}
+		    	Ebean.update(muuta);
+		    	Ebean.update(selected);
+		    }
+		} catch (Exception e) {}
 	}
 }

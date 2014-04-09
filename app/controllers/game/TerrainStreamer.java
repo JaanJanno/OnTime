@@ -38,4 +38,26 @@ public class TerrainStreamer {
 		}
 		return tagastada;
 	}
+	
+	public static List<List<String>> streamAllPlayerUrl(Tribe tribe){
+		
+		List<Tribe> all = tribe.find.all();
+		
+		List<List<String>> tagastada = new ArrayList<List<String>>();
+		for(int j = 0; j < 10; j++){
+			List<String> rida = new ArrayList<String>();
+			for(int i = 0; i < 10; i++){
+				rida.add("assets/images/game/tiles/void.png");
+			}	
+			tagastada.add(rida);
+		}
+		for(Tribe jupp: all){
+			tagastada.get(jupp.position.y).remove(jupp.position.x);
+			tagastada.get(jupp.position.y).add(jupp.position.x, "assets/images/game/tiles/vaenlased_p.png");
+		}
+		tagastada.get(tribe.position.y).remove(tribe.position.y);
+		tagastada.get(tribe.position.y).add(tribe.position.x, "assets/images/game/tiles/m2ngija_p.png");
+		
+		return tagastada;
+	}
 }

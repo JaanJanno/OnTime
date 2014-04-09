@@ -3,12 +3,14 @@ package controllers.websocket;
 import java.util.HashMap;
 import java.util.Map;
 
+import models.User;
 import play.mvc.WebSocket;
 import play.mvc.WebSocket.Out;
 
 public class WebSocketSessionController {
 	
 	static Map<Long, Out<String>> sessions = new HashMap<Long, WebSocket.Out<String>>();
+	static Map<Out<String>, User> userSessions = new HashMap<WebSocket.Out<String>, User>();
 	static long webSocketCount = 0;
 	
 	public static long getNewWebSocketId() {

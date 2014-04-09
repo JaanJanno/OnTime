@@ -10,7 +10,7 @@ public class ChatHandler {
 	public static void sendMessage(String text){
 		Ebean.save(new ChatEvent(text));
 		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){
-			session.write(text);
+			session.write("m;"+text);
 		}
 	}
 	
