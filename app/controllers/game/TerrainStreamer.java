@@ -55,7 +55,7 @@ public class TerrainStreamer {
 			tagastada.get(jupp.position.y).remove(jupp.position.x);
 			tagastada.get(jupp.position.y).add(jupp.position.x, "assets/images/game/tiles/vaenlased_p.png");
 		}
-		tagastada.get(tribe.position.y).remove(tribe.position.y);
+		tagastada.get(tribe.position.y).remove(tribe.position.x);
 		tagastada.get(tribe.position.y).add(tribe.position.x, "assets/images/game/tiles/m2ngija_p.png");
 		
 		return tagastada;
