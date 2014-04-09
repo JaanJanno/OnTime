@@ -72,7 +72,7 @@ public class GameController extends Application {
 		
 	    tryMove(x, y);
 	    GridHandler.sendObjectStream();
-		return(ok());
+		return(redirect("/game"));
 	}
 	
 	public static void tryMove(Integer y, Integer x){		
