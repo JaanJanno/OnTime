@@ -26,4 +26,8 @@ public class SimplexLeveler {
 			return new Color(0, 25, 0).getRGB();
 		}
 	}
+	
+	public static int levelAsRgb(int i){
+		return new Color(i,i,i).getRGB();
+	}
 }

@@ -26,10 +26,10 @@ public class SimplexStreamer {
 		double octaveDivisor = octaveDiv(octave, frequency) / xSlices * 2;
 		
 		return (int)(amplitude * (((noise.noise(
-				(((-Math.cos((x / xSlices) * PI) + 1)) 	/ octaveDivisor), 	// x-kooridnaat - sõõri ringjoone asukoha muutumine. 
-				(Math.sin((y / ySlices) * PI)			/ octaveDivisor),	// y  	// y, z moodustavad sõõri
-				(Math.cos((y / ySlices) * PI)			/ octaveDivisor),	// z  	// ümbritseva ringjoone.
-				(Math.sin((x / xSlices) * PI) 			/ octaveDivisor)	// w - x koordinaadi tekitatud liikumine ei lõiku seetõttu iseendaga.
+				(Math.sin((x / xSlices) * PI) / octaveDivisor),	// x - y koordinaadi tekitatud liikumine ei lõiku seetõttu iseendaga.
+				(Math.cos((x / xSlices) * PI) / octaveDivisor), // y-kooridnaat - sõõri ringjoone asukoha muutumine. 
+				(Math.sin((y / ySlices) * PI) / octaveDivisor),	// z  	// z, w moodustavad sõõri
+				(Math.cos((y / ySlices) * PI) / octaveDivisor)	// w  	// ümbritseva ringjoone.			
 			)) + 1) / 2
 		));
 	}
