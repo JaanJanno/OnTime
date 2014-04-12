@@ -6,7 +6,8 @@ import models.game.TerrainObject;
 
 public class SimplexLeveler {
 	
-	static private int level1 = 115;
+	static private int level1 = 110;
+	static private int level1_liiv = 120;
 	static private int level2 = 138;
 	static private int level3 = 140;
 	static private int level4 = 142;
@@ -16,6 +17,8 @@ public class SimplexLeveler {
 		
 		if (i < level1){
 			return new Color(0, 0, 255).getRGB();
+		} else if (i < level1_liiv){
+			return new Color(255, 255, 0).getRGB();
 		} else if (i < level2){
 			return new Color(0, 255, 0).getRGB();
 		} else if (i < level3){
@@ -32,6 +35,8 @@ public class SimplexLeveler {
 	public static int levelTransformTerrain(int i){
 		if (i < level1){
 			return TerrainObject.WATER;
+		} else if (i < level1_liiv){
+			return TerrainObject.SAND;
 		} else if (i < level2){
 			return TerrainObject.GRASS;
 		} else if (i < level3){

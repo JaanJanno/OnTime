@@ -21,6 +21,8 @@ public class SimplexTest extends JPanel {
 	int xc = 0;
 	int yc = 0;
 	
+	int suurus = 125;
+	
 	public SimplexTest(JFrame f) {
 		this.f = f;
 		addKeyListener(new Nuputaja(this));
@@ -53,7 +55,7 @@ public class SimplexTest extends JPanel {
 	public void plotSimplex4D(BufferedImage img, int x, int y, double div){
 		for (int i = 0; i < x; i++){
 			for (int j = 0; j < x; j++){
-				img.setRGB(i, j, SimplexStreamer.getPointColor(i+xc, j+yc, 125, 125));
+				img.setRGB(i, j, SimplexStreamer.getPointColor(i+xc, j+yc, suurus, suurus));
 			}
 		}
 	}
@@ -90,6 +92,9 @@ public class SimplexTest extends JPanel {
 			}
 			if (key == KeyEvent.VK_RIGHT){
 				m.xc += mul;
+			}
+			if (key == KeyEvent.VK_PLUS){
+				m.suurus += 10;
 			}
 			m.repaint();
 		} 
