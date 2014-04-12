@@ -1,9 +1,6 @@
 package models;
 
 import java.util.*;
-
-import javax.persistence.*;
-
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
@@ -42,5 +39,5 @@ public class EventQuery extends Model {
     	return createFromSqlRows(list);
     }
 
-    public static Model.Finder<Long,EventQuery> find = new Model.Finder(Long.class, EventQuery.class);
+    public static Model.Finder<Long,EventQuery> find = new Model.Finder<Long, EventQuery>(Long.class, EventQuery.class);
 }

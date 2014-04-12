@@ -1,8 +1,6 @@
 package controllers.websocket;
 
 import models.User;
-import models.game.TerrainObject;
-import models.game.Tribe;
 import controllers.Application;
 import play.libs.F.Callback;
 import play.libs.F.Callback0;

@@ -35,7 +35,9 @@ if ("WebSocket" in window)
 			for(var rida in partsOfStr){		
 				var parts = partsOfStr[rida].split(',');
 				var id = "f"+"+"+parts[1]+"+"+parts[0]
-				document.getElementById(id).src = parts[2];
+				if (document.getElementById(id).src != parts[2]){
+					document.getElementById(id).src = parts[2];
+				}
 			}		
 		}
 		
@@ -45,7 +47,9 @@ if ("WebSocket" in window)
 			for(var rida in partsOfStr){		
 				var parts = partsOfStr[rida].split(',');
 				var id = "b"+"+"+parts[1]+"+"+parts[0]
-				document.getElementById(id).src = parts[2];
+				if (document.getElementById(id).src != parts[2]){
+					document.getElementById(id).src = parts[2];
+				}
 			}		
 		}
 	};

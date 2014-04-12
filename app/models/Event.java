@@ -1,11 +1,8 @@
 package models;
 
 import java.util.*;
-
 import javax.persistence.*;
-
 import com.avaje.ebean.Ebean;
-
 import play.db.ebean.*;
 
 @javax.persistence.Entity
@@ -35,5 +32,5 @@ public class Event extends Model {
         return (int)(Ebean.find(Event.class).where().eq("user.email", email).findRowCount());
     }
 
-    public static Model.Finder<Long,Event> find = new Model.Finder(Long.class, Event.class);
+    public static Model.Finder<Long,Event> find = new Model.Finder<Long, Event>(Long.class, Event.class);
 }

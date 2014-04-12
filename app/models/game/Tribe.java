@@ -1,19 +1,13 @@
 package models.game;
 
 import java.util.List;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
 import com.avaje.ebean.Ebean;
-
-import models.Event;
 import models.User;
-import models.game.events.SpecialEvent;
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
 
 @javax.persistence.Entity
 public class Tribe extends Model {

@@ -1,21 +1,11 @@
 package models.game;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import models.User;
-
 import com.avaje.ebean.Ebean;
-import com.avaje.ebean.SqlQuery;
-import com.avaje.ebean.SqlRow;
-
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
 
 @javax.persistence.Entity
 public class Terrain extends Model{

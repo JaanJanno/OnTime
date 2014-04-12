@@ -1,17 +1,8 @@
 package controllers.websocket;
 
 import java.util.List;
-
-import org.h2.engine.Session;
-
-import models.ChatEvent;
-import models.User;
 import models.game.Tribe;
 import play.mvc.WebSocket;
-
-import com.avaje.ebean.Ebean;
-
-import controllers.GameController;
 import controllers.game.TerrainStreamer;
 
 public class GridHandler {
@@ -19,17 +10,18 @@ public class GridHandler {
 	public static void sendObjectStream(){
 	
 		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){
-			String terrainStream = "";
+			
 			Tribe currentTribe = null;
 			
 			if (WebSocketSessionController.userSessions.containsKey(session)){
-				currentTribe = WebSocketSessionController.userSessions.get(session).tribe;
+				currentTribe = Tribe.find.byId(WebSocketSessionController.userSessions.get(session).tribe.id);
 			} else{
-				break;
+				continue;
 			}
 			
+			String terrainStream = "";
 			List<List<String>> list = TerrainStreamer.streamAllPlayerUrl(currentTribe);
-			
+
 			for(int j = 0; j < list.size(); j++){
 				List<String> rida = list.get(j);
 				for(int i = 0; i < rida.size(); i++){
@@ -41,19 +33,17 @@ public class GridHandler {
 		}
 	}
 	
-	public static void sendTerrainStream(){
+	public static void sendTerrainStream(Tribe tribe){
 		
 		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){
-			String terrainStream = "";
-			Tribe currentTribe = null;
 			
-			if (WebSocketSessionController.userSessions.containsKey(session)){
-				currentTribe = WebSocketSessionController.userSessions.get(session).tribe;
-			} else{
-				break;
+			if (WebSocketSessionController.userSessions.get(session).tribe.id != tribe.id){
+				continue;
 			}
+
+			String terrainStream = "";
 			
-			List<List<String>> list = TerrainStreamer.streamAllUrl(currentTribe);
+			List<List<String>> list = TerrainStreamer.streamAllUrl(tribe);
 			
 			for(int j = 0; j < list.size(); j++){
 				List<String> rida = list.get(j);
