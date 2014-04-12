@@ -2,11 +2,9 @@ import play.*;
 import play.libs.*;
 
 import com.avaje.ebean.Ebean;
-
-import controllers.GameController;
+import controllers.game.TerrainStreamer;
 import models.*;
 import models.game.Terrain;
-import models.game.TerrainObject;
 import models.game.Tribe;
 import models.game.events.SpecialEvent;
 
@@ -18,11 +16,11 @@ public class Global extends GlobalSettings {
     public void onStart(Application app) {
         // Check if the database is empty
         if (Event.find.findRowCount() == 0) {
-            Ebean.save((List) Yaml.load("test-data.yml"));
+            Ebean.save((List<?>) Yaml.load("test-data.yml"));
         }
         if (Terrain.find.findRowCount() == 0) {
-        	GameController.mainTerrain = Terrain.initTerrain(10, 10);
-        	Terrain.randomizeArea(GameController.mainTerrain);
+        	TerrainStreamer.mainTerrain = Terrain.initTerrain(10, 10);
+        	Terrain.randomizeArea(TerrainStreamer.mainTerrain);
         	
         	User aurelius = User.find.byId("aurelius@rome.ee");
         	Tribe uusTribe = new Tribe(aurelius.name + "'s tribe.");		
@@ -33,8 +31,8 @@ public class Global extends GlobalSettings {
 				SpecialEvent.rollSpecialEvent(uusTribe);
 			}		
         }
-        if (GameController.mainTerrain == null){
-        	GameController.mainTerrain = Terrain.find.all().get(0);
+        if (TerrainStreamer.mainTerrain == null){
+        	TerrainStreamer.mainTerrain = Terrain.find.all().get(0);
         }
     }
 }

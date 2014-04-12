@@ -53,16 +53,16 @@ public class Terrain extends Model{
 		List<TerrainObject> alad = findTerrainObjects(maastik.id);
 		for(TerrainObject ala: alad){
 			if(Math.random() < 0.1){
-				ala.terrainType = TerrainObject.FOREST1;
+				ala.terrainType = TerrainObject.FOREST;
 			}
 			if(Math.random() < 0.1){
-				ala.terrainType = TerrainObject.FOREST2;
+				ala.terrainType = TerrainObject.FOREST;
 			}
 			if(Math.random() < 0.1){
-				ala.terrainType = TerrainObject.FOREST3;
+				ala.terrainType = TerrainObject.FOREST;
 			}
 			if(Math.random() < 0.1){
-				ala.terrainType = TerrainObject.ROCK;
+				ala.terrainType = TerrainObject.FOREST;
 			}
 			Ebean.update(ala);
 		}

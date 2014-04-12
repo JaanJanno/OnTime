@@ -1,4 +1,4 @@
-@(chatEvents: List[models.ChatEvent],statisticsEvents: List[models.game.events.GameEventQuery], tribeWarEvents: List[models.game.events.WarEvent], tribeEvents: List[models.game.events.SpecialEvent],tribeList: List[models.game.Tribe],tribe: models.game.Tribe, list: List[List[String]], form: Form[Application.Login], user: User)
+@(chatEvents: List[models.ChatEvent],statisticsEvents: List[models.game.events.GameEventQuery], tribeWarEvents: List[models.game.events.WarEvent], tribeEvents: List[models.game.events.SpecialEvent],tribeList: List[List[String]],tribe: models.game.Tribe, list: List[List[String]], form: Form[Application.Login], user: User)
 
 <!DOCTYPE html>
 <html>
@@ -23,23 +23,16 @@
     <div class="content">
         <div id="grid-view-container">
             <table id="grid-view-table">
-				@for( py <- 0 to 9){
+				@for( py <- 0 to 10){
             		<tr>
-					@for( px <- 0 to 9){
+					@for( px <- 0 to 10){
 						<td>
 							<a class="box" href="/game/@px/@py">
 								<div class="inner-box">
-									<img alt="O" src="@list.get(px).get(py)"/>
+									<img alt="O" id="b+@px+@py" src="@list.get(px).get(py)"/>
 								</div>
 								<div class="inner-box">
-									@if(tribe.position.x == px && tribe.position.y == py){
-										<img alt="M" src="assets/images/game/tiles/m2ngija_p.png"/>
-									}
-									@for(tribeB <- tribeList){
-										@if(tribe.name != tribeB.name && tribeB.position.x == px && tribeB.position.y == py){
-											<img alt="V" src="assets/images/game/tiles/vaenlased_p.png"/>
-										}
-									}
+									<img alt="M" id="f+@px+@py" src="@tribeList.get(px).get(py)"/>
 								</div>
 							</a>
 						</td>

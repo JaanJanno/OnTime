@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 
 import com.avaje.ebean.Ebean;
 
+import models.Event;
+import models.User;
 import models.game.events.SpecialEvent;
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
@@ -31,6 +33,8 @@ public class Tribe extends Model {
 	public byte tracking;
 	@ManyToOne
 	public TerrainObject position;
+	public int x = 0;
+	public int y = 0;
 	
 	// Inventar
 	public long food;
@@ -60,7 +64,11 @@ public class Tribe extends Model {
 	
 	public static Finder<Long, Tribe> find = new Finder<Long, Tribe> (Long.class, Tribe.class);
 	
+	public static User findUser(Tribe tribe) {
+        return Ebean.find(User.class).where().eq("TRIBE_ID", tribe.id).findUnique();
+    }
+	
 	public static List<Tribe> findEnemies(Tribe tribe){
-		return Ebean.find(Tribe.class).where().eq("POSITION_ID", tribe.position.id).ne("ID", tribe.id).findList();
+		return Ebean.find(Tribe.class).where().eq("X", tribe.x).eq("Y", tribe.y).ne("ID", tribe.id).findList();
 	}
 }

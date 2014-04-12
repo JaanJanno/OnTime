@@ -15,7 +15,7 @@ GET		/login			controllers.Application.login(s="index")
 GET		/login/:s		controllers.Application.login(s: String)
 
 #Sockets
-GET		/chat			controllers.chat.ChatSocket.chat()
+GET		/ws				controllers.websocket.WebSocketController.ws()
 POST	/chat			controllers.ChatController.chatSubmit()
 POST	/chatnoscript	controllers.ChatController.chatSubmitNoscript()
 
