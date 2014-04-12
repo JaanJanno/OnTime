@@ -73,8 +73,8 @@ public class TerrainStreamer {
 	
 	public static int getYDistance(int x1, int x2){
 		int distance1 = x2 - x1;
-		int distance2 = (x2 + TerrainController.getWorldWidth()) - x1;
-		int distance3 = (x2 - TerrainController.getWorldWidth()) - x1;
+		int distance2 = (x2 + TerrainController.getWorldHeight()) - x1;
+		int distance3 = (x2 - TerrainController.getWorldHeight()) - x1;
 		if (Math.abs(distance2) < Math.abs(distance3)){
 			if (Math.abs(distance1) < Math.abs(distance2)){
 				return distance1;
