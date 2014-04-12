@@ -33,6 +33,8 @@ public class Tribe extends Model {
 	public byte tracking;
 	@ManyToOne
 	public TerrainObject position;
+	public int x = 0;
+	public int y = 0;
 	
 	// Inventar
 	public long food;
@@ -67,6 +69,6 @@ public class Tribe extends Model {
     }
 	
 	public static List<Tribe> findEnemies(Tribe tribe){
-		return Ebean.find(Tribe.class).where().eq("POSITION_ID", tribe.position.id).ne("ID", tribe.id).findList();
+		return Ebean.find(Tribe.class).where().eq("X", tribe.x).eq("Y", tribe.y).ne("ID", tribe.id).findList();
 	}
 }

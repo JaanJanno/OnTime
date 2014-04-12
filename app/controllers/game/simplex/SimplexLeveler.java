@@ -2,9 +2,11 @@ package controllers.game.simplex;
 
 import java.awt.Color;
 
+import models.game.TerrainObject;
+
 public class SimplexLeveler {
 	
-	static private int level1 = 105;
+	static private int level1 = 115;
 	static private int level2 = 138;
 	static private int level3 = 140;
 	static private int level4 = 142;
@@ -24,6 +26,22 @@ public class SimplexLeveler {
 			return new Color(0, 95, 0).getRGB();
 		} else{
 			return new Color(0, 25, 0).getRGB();
+		}
+	}
+	
+	public static int levelTransformTerrain(int i){
+		if (i < level1){
+			return TerrainObject.WATER;
+		} else if (i < level2){
+			return TerrainObject.GRASS;
+		} else if (i < level3){
+			return TerrainObject.BUSHES1;
+		} else if (i < level4){
+			return TerrainObject.BUSHES2;
+		} else if (i < level5){
+			return TerrainObject.BUSHES3;
+		} else{
+			return TerrainObject.FOREST;
 		}
 	}
 	

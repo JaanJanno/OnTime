@@ -61,6 +61,8 @@ create table tribe (
   hunting                   tinyint,
   tracking                  tinyint,
   position_id               bigint,
+  x                         integer,
+  y                         integer,
   food                      bigint,
   constraint pk_tribe primary key (id))
 ;

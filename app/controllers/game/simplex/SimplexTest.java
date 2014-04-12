@@ -31,7 +31,7 @@ public class SimplexTest extends JPanel {
 	public void paintComponent(Graphics g) {
 		g.setColor(new Color(0,0,0));
 		g.fillRect(0, 0, f.getWidth(), f.getHeight());
-		g.drawImage(simplex(250, 16).getScaledInstance(f.getWidth(), f.getHeight(), 0), 0, 0, null);
+		g.drawImage(simplex(250, 16).getScaledInstance(f.getWidth(), f.getWidth(), 0), 0, 0, null);
 	}
 	
 	public BufferedImage simplex(int x, double frequency){
@@ -53,9 +53,7 @@ public class SimplexTest extends JPanel {
 	public void plotSimplex4D(BufferedImage img, int x, int y, double div){
 		for (int i = 0; i < x; i++){
 			for (int j = 0; j < x; j++){
-				int sim  = SimplexStreamer.plotOctave4D(250, 250, i +xc, j +yc, div, 0,  60);
-				sim 	+= SimplexStreamer.plotOctave4D(250, 250, i +xc, j +yc, div, 3, 195);
-				img.setRGB(i, j, SimplexLeveler.levelTransformColor(sim));
+				img.setRGB(i, j, SimplexStreamer.getPointColor(i+xc, j+yc, 125, 125));
 			}
 		}
 	}

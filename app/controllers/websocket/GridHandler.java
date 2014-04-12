@@ -24,16 +24,44 @@ public class GridHandler {
 			
 			if (WebSocketSessionController.userSessions.containsKey(session)){
 				currentTribe = WebSocketSessionController.userSessions.get(session).tribe;
+			} else{
+				break;
 			}
 			
-			for (Tribe tribe: Tribe.find.all()){
-				if (currentTribe != null && tribe.id == currentTribe.id){
-					terrainStream += tribe.position.x + "," + tribe.position.y + "," + "assets/images/game/tiles/m2ngija_p.png" + ";";
-				} else{
-					terrainStream += tribe.position.x + "," + tribe.position.y + "," + "assets/images/game/tiles/vaenlased_p.png" + ";";	
+			List<List<String>> list = TerrainStreamer.streamAllPlayerUrl(currentTribe);
+			
+			for(int j = 0; j < list.size(); j++){
+				List<String> rida = list.get(j);
+				for(int i = 0; i < rida.size(); i++){
+					terrainStream += i + "," + j + "," + rida.get(i) + ";";
 				}
 			}
+			
 			session.write("t;" + terrainStream.substring(0, terrainStream.length()-1));
+		}
+	}
+	
+	public static void sendTerrainStream(){
+		
+		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){
+			String terrainStream = "";
+			Tribe currentTribe = null;
+			
+			if (WebSocketSessionController.userSessions.containsKey(session)){
+				currentTribe = WebSocketSessionController.userSessions.get(session).tribe;
+			} else{
+				break;
+			}
+			
+			List<List<String>> list = TerrainStreamer.streamAllUrl(currentTribe);
+			
+			for(int j = 0; j < list.size(); j++){
+				List<String> rida = list.get(j);
+				for(int i = 0; i < rida.size(); i++){
+					terrainStream += i + "," + j + "," + rida.get(i) + ";";
+				}
+			}
+			session.write("r;" + terrainStream.substring(0, terrainStream.length()-1));
 		}
 	}
 }

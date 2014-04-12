@@ -20,6 +20,7 @@ import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
 import com.avaje.ebean.SqlUpdate;
 
+import controllers.game.MovementController;
 import controllers.game.TerrainStreamer;
 import controllers.websocket.GridHandler;
 import play.*;
@@ -39,7 +40,7 @@ import views.html.*;
 
 public class GameController extends Application {
 	
-	public static Terrain mainTerrain;
+	
 	
 	@Security.Authenticated(Secured.class)
 	public static Result game() {
@@ -62,33 +63,17 @@ public class GameController extends Application {
 				SpecialEvent.findTribeEvents(kasutaja.tribe),
 				TerrainStreamer.streamAllPlayerUrl(kasutaja.tribe),
 				kasutaja.tribe,
-				TerrainStreamer.streamAllUrl(mainTerrain),
+				TerrainStreamer.streamAllUrl(kasutaja.tribe),
 				form(Application.Login.class), 
 				kasutaja
 		)));
 	}
 	
-	public static Result move(Integer x, Integer y) {
-		
-	    tryMove(x, y);
+	@Security.Authenticated(Secured.class)
+	public static Result move(Integer x, Integer y) {	
+	    MovementController.tryMove(User.find.byId(session().get("email")), x, y);
 	    GridHandler.sendObjectStream();
+	    GridHandler.sendTerrainStream();
 		return(redirect("/game"));
-	}
-	
-	public static void tryMove(Integer y, Integer x){		
-		try {
-			User kasutaja = User.find.byId(session().get("email"));
-		    if (x >= 0 && y >= 0 && x < mainTerrain.width && x < mainTerrain.height){
-		    	TerrainObject selected = TerrainObject.getAtLocation(x, y);
-		    	Tribe muuta = kasutaja.tribe;
-		    	muuta.position = selected;
-		    	SpecialEvent.rollSpecialEvent(muuta);
-		    	for(Tribe tribe: Tribe.findEnemies(muuta)){
-		    		WarEvent.rollWarEvent(muuta, tribe);
-		    	}
-		    	Ebean.update(muuta);
-		    	Ebean.update(selected);
-		    }
-		} catch (Exception e) {}
 	}
 }

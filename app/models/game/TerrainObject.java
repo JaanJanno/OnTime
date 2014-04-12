@@ -1,13 +1,12 @@
 package models.game;
 
-import java.util.List;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import models.Event;
 import com.avaje.ebean.Ebean;
-import controllers.GameController;
+import controllers.game.TerrainStreamer;
 import play.db.ebean.Model;
 
 @javax.persistence.Entity
@@ -15,19 +14,19 @@ public class TerrainObject extends Model{
 
 	private static final long serialVersionUID = -6629892109275694783L;
 	
-	public static final int GRASS  	= 0;
-	public static final int FOREST1 	= 2;
-	public static final int FOREST2 	= 3;
-	public static final int FOREST3 	= 4;
-	public static final int LAKE	= 1;
-	public static final int ROCK	= 5;
+	public static final int WATER  	= 0;
+	public static final int GRASS   = 1;
+	public static final int BUSHES1 = 2;
+	public static final int BUSHES2 = 3;
+	public static final int BUSHES3	= 4;
+	public static final int FOREST	= 5;
 	
-	public static final String GRASS_URL = "assets/images/game/tiles/grass.png";
-	public static final String LAKE_URL = "assets/images/game/tiles/lake.png";
-	public static final String FOREST1_URL = "assets/images/game/tiles/forest.png";
-	public static final String FOREST2_URL = "assets/images/game/tiles/forest2.png";
-	public static final String FOREST3_URL = "assets/images/game/tiles/forest3.png";
-	public static final String ROCK_URL = "assets/images/game/tiles/forest3.png";
+	public static final String WATER_URL	= "assets/images/game/tiles/water.png";
+	public static final String GRASS_URL 	= "assets/images/game/tiles/grass.png";
+	public static final String BUSHES1_URL 	= "assets/images/game/tiles/bushes1.png";
+	public static final String BUSHES2_URL 	= "assets/images/game/tiles/bushes2.png";
+	public static final String BUSHES3_URL 	= "assets/images/game/tiles/bushes3.png";
+	public static final String FOREST_URL	= "assets/images/game/tiles/forest.png";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,31 +54,50 @@ public class TerrainObject extends Model{
 	
 	public String getImgUrl(){
 		switch (getType()) {
+		case WATER:
+			return WATER_URL;
 		case GRASS:
 			return GRASS_URL;
-		case ROCK:
-			return ROCK_URL;
-		case LAKE:
-			return LAKE_URL;
-		case FOREST1:
-			return FOREST1_URL;
-		case FOREST2:
-			return FOREST2_URL;
-		case FOREST3:
-			return FOREST3_URL;
+		case BUSHES1:
+			return BUSHES1_URL;
+		case BUSHES2:
+			return BUSHES2_URL;
+		case BUSHES3:
+			return BUSHES3_URL;
+		case FOREST:
+			return FOREST_URL;
 		default:
 			return GRASS_URL;
 		}
 	}
 	
-	public static Model.Finder<Long,TerrainObject> find = new Model.Finder(Long.class, TerrainObject.class);
+	public static String getImgUrl(int i){
+		switch (i) {
+		case WATER:
+			return WATER_URL;
+		case GRASS:
+			return GRASS_URL;
+		case BUSHES1:
+			return BUSHES1_URL;
+		case BUSHES2:
+			return BUSHES2_URL;
+		case BUSHES3:
+			return BUSHES3_URL;
+		case FOREST:
+			return FOREST_URL;
+		default:
+			return GRASS_URL;
+		}
+	}
+	
+	public static Model.Finder<Long,TerrainObject> find = new Model.Finder<Long, TerrainObject>(Long.class, TerrainObject.class);
 	
 	public static TerrainObject getAtLocation(int x, int y){
-		return Ebean.find(TerrainObject.class).where().eq("x", x).eq("y", y).eq("terrain_area_id", GameController.mainTerrain.id).findUnique();
+		return Ebean.find(TerrainObject.class).where().eq("x", x).eq("y", y).eq("terrain_area_id", TerrainStreamer.mainTerrain.id).findUnique();
 	}
 	
 	public static TerrainObject randomLocation(){
-		return Ebean.find(TerrainObject.class).where().eq("terrain_area_id", GameController.mainTerrain.id).orderBy("random()").findList().get(0);
+		return Ebean.find(TerrainObject.class).where().eq("terrain_area_id", TerrainStreamer.mainTerrain.id).orderBy("random()").findList().get(0);
 	}
 	
 	@Override
