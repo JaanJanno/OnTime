@@ -9,49 +9,31 @@ public class GridHandler {
 	
 	public static void sendObjectStream(){
 	
-		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){
-			
-			Tribe currentTribe = null;
-			
-			if (WebSocketSessionController.userSessions.containsKey(session)){
-				currentTribe = Tribe.find.byId(WebSocketSessionController.userSessions.get(session).tribe.id);
-			} else{
-				continue;
-			}
-			
-			String terrainStream = "";
-			List<List<String>> list = TerrainStreamer.streamAllPlayerUrl(currentTribe);
-
-			for(int j = 0; j < list.size(); j++){
-				List<String> rida = list.get(j);
-				for(int i = 0; i < rida.size(); i++){
-					terrainStream += i + "," + j + "," + rida.get(i) + ";";
-				}
-			}
-			
-			session.write("t;" + terrainStream.substring(0, terrainStream.length()-1));
+		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){				
+			Tribe currentTribe = Tribe.find.byId(WebSocketSessionController.userSessions.get(session).tribe.id);		
+			String objectStream = generateStreamFromList(TerrainStreamer.streamAllPlayerUrl(currentTribe));			
+			session.write("t;" + objectStream.substring(0, objectStream.length()-1));
 		}
 	}
 	
 	public static void sendTerrainStream(Tribe tribe){
 		
-		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){
-			
-			if (WebSocketSessionController.userSessions.get(session).tribe.id != tribe.id){
-				continue;
-			}
-
-			String terrainStream = "";
-			
-			List<List<String>> list = TerrainStreamer.streamAllUrl(tribe);
-			
-			for(int j = 0; j < list.size(); j++){
-				List<String> rida = list.get(j);
-				for(int i = 0; i < rida.size(); i++){
-					terrainStream += i + "," + j + "," + rida.get(i) + ";";
-				}
-			}
+		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){			
+			if (WebSocketSessionController.userSessions.get(session).tribe.id != tribe.id)
+				continue;		
+			String terrainStream = generateStreamFromList(TerrainStreamer.streamAllUrl(tribe));	
 			session.write("r;" + terrainStream.substring(0, terrainStream.length()-1));
 		}
+	}
+	
+	public static String generateStreamFromList(List<List<String>> list){
+		String stream = "";		
+		for(int j = 0; j < list.size(); j++){
+			List<String> rida = list.get(j);
+			for(int i = 0; i < rida.size(); i++){
+				stream += i + "," + j + "," + rida.get(i) + ";";
+			}
+		}
+		return stream;
 	}
 }

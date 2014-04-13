@@ -10,11 +10,11 @@ public class SimplexStreamer {
 	static private int defXSlices, defYSlices, defDiv;
 	
 	static{
-		noise = new SimplexNoise_octave(433446896);
+		noise = new SimplexNoise_octave(63276821);
 		PI = Math.PI;
 		defXSlices	= TerrainController.getWorldWidth();
 		defYSlices 	= TerrainController.getWorldHeight();
-		defDiv		= 16;
+		defDiv		= 64;
 	}
 	
 	public static int plotOctave2D(int x, int y, double frequency, int octave, int amplitude){
@@ -46,14 +46,14 @@ public class SimplexStreamer {
 	}
 	
 	public static int getPointColor(double x, double y, int w, int h) {
-		int sim  = SimplexStreamer.plotOctave4D(w, h, x, y, defDiv, 0,  60);
-		sim 	+= SimplexStreamer.plotOctave4D(w, h, x, y, defDiv, 3, 195);
+		int sim  = SimplexStreamer.plotOctave4D(w, h, x, y, defDiv, 0, 160);
+		sim 	+= SimplexStreamer.plotOctave4D(w, h, x, y, defDiv, 2, 95);
 		return SimplexLeveler.levelTransformColor(sim);
 	}
 	
 	public static int getPointTerrain(double x, double y) {
-		int sim  = SimplexStreamer.plotOctave4D(defXSlices, defYSlices, x, y, defDiv, 0,  60);
-		sim 	+= SimplexStreamer.plotOctave4D(defXSlices, defYSlices, x, y, defDiv, 3, 195);
+		int sim  = SimplexStreamer.plotOctave4D(defXSlices, defYSlices, x, y, defDiv, 0, 160);
+		sim 	+= SimplexStreamer.plotOctave4D(defXSlices, defYSlices, x, y, defDiv, 2, 95);
 		return SimplexLeveler.levelTransformTerrain(sim);
 	}
 	

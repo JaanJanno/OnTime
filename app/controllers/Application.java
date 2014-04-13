@@ -12,7 +12,7 @@ public class Application extends Controller {
     public static Result index() {
     	User kasutaja = null;
     	try{
-    		kasutaja = User.find.byId(session().get("email"));
+    		kasutaja = SessionController.getCurrentUser();
     	} catch(Exception e){}
         return ok(index.render(
         	Tribe.find.all(),
@@ -33,7 +33,7 @@ public class Application extends Controller {
     public static Result login(String redir) {
     	User kasutaja = null;
     	try{
-    		kasutaja = User.find.byId(session().get("email"));
+    		kasutaja = SessionController.getCurrentUser();
     	} catch(Exception e){}
         return ok(login.render(
         	redir,

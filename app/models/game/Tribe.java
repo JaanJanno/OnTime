@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import com.avaje.ebean.Ebean;
+
+import controllers.SessionController;
 import models.User;
 import play.db.ebean.Model;
 
@@ -64,5 +66,16 @@ public class Tribe extends Model {
 	
 	public static List<Tribe> findEnemies(Tribe tribe){
 		return Ebean.find(Tribe.class).where().eq("X", tribe.x).eq("Y", tribe.y).ne("ID", tribe.id).findList();
+	}
+	
+	public static void generateUserTribe(User user){
+		Tribe uusTribe = new Tribe(user.name + "'s tribe."); 			
+		Ebean.save(uusTribe);   			
+		user.tribe = uusTribe;
+		Ebean.update(user);
+	}
+	
+	public static Tribe getCurrentTribe(){
+		return SessionController.getCurrentUser().tribe;
 	}
 }

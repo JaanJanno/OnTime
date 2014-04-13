@@ -21,7 +21,7 @@ public class SimplexTest extends JPanel {
 	int xc = 0;
 	int yc = 0;
 	
-	int suurus = 125;
+	int suurus = 50;
 	
 	public SimplexTest(JFrame f) {
 		this.f = f;
@@ -33,7 +33,7 @@ public class SimplexTest extends JPanel {
 	public void paintComponent(Graphics g) {
 		g.setColor(new Color(0,0,0));
 		g.fillRect(0, 0, f.getWidth(), f.getHeight());
-		g.drawImage(simplex(250, 16).getScaledInstance(f.getWidth(), f.getWidth(), 0), 0, 0, null);
+		g.drawImage(simplex(150, 16).getScaledInstance(f.getWidth(), f.getWidth(), 0), 0, 0, null);
 	}
 	
 	public BufferedImage simplex(int x, double frequency){

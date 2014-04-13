@@ -7,7 +7,7 @@ import models.game.TerrainObject;
 public class SimplexLeveler {
 	
 	static private int level1 = 110;
-	static private int level1_liiv = 120;
+	static private int level1_liiv = 115;
 	static private int level2 = 138;
 	static private int level3 = 140;
 	static private int level4 = 142;
