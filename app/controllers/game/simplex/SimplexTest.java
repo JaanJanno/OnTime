@@ -21,7 +21,8 @@ public class SimplexTest extends JPanel {
 	int xc = 0;
 	int yc = 0;
 	
-	int suurus = 50;
+	int suurus = 70;
+	boolean advanced = false;
 	
 	public SimplexTest(JFrame f) {
 		this.f = f;
@@ -33,12 +34,18 @@ public class SimplexTest extends JPanel {
 	public void paintComponent(Graphics g) {
 		g.setColor(new Color(0,0,0));
 		g.fillRect(0, 0, f.getWidth(), f.getHeight());
-		g.drawImage(simplex(150, 16).getScaledInstance(f.getWidth(), f.getWidth(), 0), 0, 0, null);
+		g.drawImage(simplex(150, 16, advanced).getScaledInstance(f.getWidth(), f.getWidth(), 0), 0, 0, null);
 	}
 	
-	public BufferedImage simplex(int x, double frequency){
-		BufferedImage img = new BufferedImage(x, x, BufferedImage.TYPE_INT_ARGB);
-		plotSimplex4D(img, x, x, frequency);
+	public BufferedImage simplex(int x, double frequency, boolean advanced){
+		BufferedImage img;
+		if (advanced){
+			img = new BufferedImage(768, 768, BufferedImage.TYPE_INT_ARGB);
+			plotSimplex4DAdvanced(img, 768, 768, frequency);
+		}else{
+			img = new BufferedImage(x, x, BufferedImage.TYPE_INT_ARGB);
+			plotSimplex4D(img, x, x, frequency);
+		}		
 		return img;
 	}
 	
@@ -59,11 +66,29 @@ public class SimplexTest extends JPanel {
 			}
 		}
 	}
+	
+	public void plotSimplex4DAdvanced(BufferedImage img, int x, int y, double div){
+		for (int i = 0; i < x; i++){
+			for (int j = 0; j < x; j++){
+				img.setRGB(i, j, SimplexTest.getPointColorAdvanced(i+xc*25, j+yc*25, suurus, suurus));
+			}
+		}
+	}
+	
+	public static int getPointColorAdvanced(double x, double y, int w, int h) {
+		double frequency = 1024;
+		w = 1024;
+		h = 1024;
+		int sim  = SimplexStreamer.plotOctave4D(w, h, x, y, frequency, 0, 155);
+		sim 	+= SimplexStreamer.plotOctave4D(w, h, x, y, frequency, 1, 70);
+		sim 	+= SimplexStreamer.plotOctave4D(w, h, x, y, frequency, 2, 30);
+		return SimplexLeveler.levelTransformColorAdvanced(sim);
+	}
 
 	public static void main(String[] args) {
 		JFrame f = new JFrame();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(1000, 1000);
+		f.setSize(768, 768);
 	    f.setLocation(100, 100);
 	    f.setTitle("SimplexTest");
 	    f.add(new SimplexTest(f));
@@ -95,6 +120,9 @@ public class SimplexTest extends JPanel {
 			}
 			if (key == KeyEvent.VK_PLUS){
 				m.suurus += 10;
+			}
+			if (key == KeyEvent.VK_ENTER){
+				m.advanced = !m.advanced;
 			}
 			m.repaint();
 		} 
