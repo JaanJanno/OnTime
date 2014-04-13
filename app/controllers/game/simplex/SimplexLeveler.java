@@ -8,10 +8,10 @@ public class SimplexLeveler {
 	
 	static private int level1 = 110;
 	static private int level1_liiv = 115;
-	static private int level2 = 136;
-	static private int level3 = 138;
-	static private int level4 = 140;
-	static private int level5 = 142;
+	static private int level2 = 126;
+	static private int level3 = 128;
+	static private int level4 = 130;
+	static private int level5 = 132;
 	
 	public static int levelTransformColor(int i){
 		

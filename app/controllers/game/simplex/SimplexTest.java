@@ -79,6 +79,8 @@ public class SimplexTest extends JPanel {
 		double frequency = 1024;
 		w = 1024;
 		h = 1024;
+		x += 364;
+		y += 264;
 		int sim  = SimplexStreamer.plotOctave4D(w, h, x, y, frequency, 0, 155);
 		sim 	+= SimplexStreamer.plotOctave4D(w, h, x, y, frequency, 1, 70);
 		sim 	+= SimplexStreamer.plotOctave4D(w, h, x, y, frequency, 2, 30);
@@ -122,6 +124,8 @@ public class SimplexTest extends JPanel {
 				m.suurus += 10;
 			}
 			if (key == KeyEvent.VK_ENTER){
+				m.xc = 0;
+				m.yc = 0;
 				m.advanced = !m.advanced;
 			}
 			m.repaint();
