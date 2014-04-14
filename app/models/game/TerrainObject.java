@@ -20,6 +20,7 @@ public class TerrainObject extends Model{
 	public static final int BUSHES2 = 3;
 	public static final int BUSHES3	= 4;
 	public static final int FOREST	= 5;
+	public static final int SAND	= 6;
 	
 	public static final String WATER_URL	= "assets/images/game/tiles/water.png";
 	public static final String GRASS_URL 	= "assets/images/game/tiles/grass.png";
@@ -27,6 +28,7 @@ public class TerrainObject extends Model{
 	public static final String BUSHES2_URL 	= "assets/images/game/tiles/bushes2.png";
 	public static final String BUSHES3_URL 	= "assets/images/game/tiles/bushes3.png";
 	public static final String FOREST_URL	= "assets/images/game/tiles/forest.png";
+	public static final String SAND_URL		= "assets/images/game/tiles/liiv.png";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -85,6 +87,8 @@ public class TerrainObject extends Model{
 			return BUSHES3_URL;
 		case FOREST:
 			return FOREST_URL;
+		case SAND:
+			return SAND_URL;
 		default:
 			return GRASS_URL;
 		}

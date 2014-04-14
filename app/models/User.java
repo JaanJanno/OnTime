@@ -1,9 +1,6 @@
 package models;
 
 import javax.persistence.*;
-
-import com.avaje.ebean.Ebean;
-
 import models.game.Tribe;
 import play.db.ebean.*;
 

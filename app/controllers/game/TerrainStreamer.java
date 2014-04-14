@@ -2,9 +2,6 @@ package controllers.game;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.avaje.ebean.Ebean;
-
 import controllers.game.simplex.SimplexStreamer;
 
 import models.game.Terrain;
@@ -30,7 +27,7 @@ public class TerrainStreamer {
 	
 	public static List<List<String>> streamAllPlayerUrl(Tribe tribe){
 		
-		List<Tribe> all = tribe.find.all();
+		List<Tribe> all = Tribe.find.all();
 		
 		List<List<String>> tagastada = new ArrayList<List<String>>();
 		for(int j = 0; j < 11; j++){
@@ -56,37 +53,29 @@ public class TerrainStreamer {
 		int distance1 = x2 - x1;
 		int distance2 = (x2 + TerrainController.getWorldWidth()) - x1;
 		int distance3 = (x2 - TerrainController.getWorldWidth()) - x1;
-		if (Math.abs(distance2) < Math.abs(distance3)){
-			if (Math.abs(distance1) < Math.abs(distance2)){
-				return distance1;
-			} else{
-				return distance2;
-			}
-		} else{
-			if (Math.abs(distance1) < Math.abs(distance3)){
-				return distance1;
-			} else{
-				return distance3;
-			}
-		}
+		return findLowestDistance(distance1, distance2, distance3);
 	}
 	
 	public static int getYDistance(int x1, int x2){
 		int distance1 = x2 - x1;
 		int distance2 = (x2 + TerrainController.getWorldHeight()) - x1;
 		int distance3 = (x2 - TerrainController.getWorldHeight()) - x1;
+		return findLowestDistance(distance1, distance2, distance3);
+	}
+	
+	public static int findLowestDistance(int distance1, int distance2, int distance3){
 		if (Math.abs(distance2) < Math.abs(distance3)){
-			if (Math.abs(distance1) < Math.abs(distance2)){
-				return distance1;
-			} else{
-				return distance2;
-			}
+			return findLowestDistance(distance1, distance2);
 		} else{
-			if (Math.abs(distance1) < Math.abs(distance3)){
-				return distance1;
-			} else{
-				return distance3;
-			}
+			return findLowestDistance(distance1, distance3);
+		}
+	}
+	
+	public static int findLowestDistance(int distance1, int distance2){
+		if (Math.abs(distance1) < Math.abs(distance2)){
+			return distance1;
+		} else{
+			return distance2;
 		}
 	}
 }

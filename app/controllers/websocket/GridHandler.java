@@ -1,67 +1,39 @@
 package controllers.websocket;
 
 import java.util.List;
-
-import org.h2.engine.Session;
-
-import models.ChatEvent;
-import models.User;
 import models.game.Tribe;
 import play.mvc.WebSocket;
-
-import com.avaje.ebean.Ebean;
-
-import controllers.GameController;
 import controllers.game.TerrainStreamer;
 
 public class GridHandler {
 	
 	public static void sendObjectStream(){
 	
-		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){
-			String terrainStream = "";
-			Tribe currentTribe = null;
-			
-			if (WebSocketSessionController.userSessions.containsKey(session)){
-				currentTribe = WebSocketSessionController.userSessions.get(session).tribe;
-			} else{
-				break;
-			}
-			
-			List<List<String>> list = TerrainStreamer.streamAllPlayerUrl(currentTribe);
-			
-			for(int j = 0; j < list.size(); j++){
-				List<String> rida = list.get(j);
-				for(int i = 0; i < rida.size(); i++){
-					terrainStream += i + "," + j + "," + rida.get(i) + ";";
-				}
-			}
-			
-			session.write("t;" + terrainStream.substring(0, terrainStream.length()-1));
+		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){				
+			Tribe currentTribe = Tribe.find.byId(WebSocketSessionController.userSessions.get(session).tribe.id);		
+			String objectStream = generateStreamFromList(TerrainStreamer.streamAllPlayerUrl(currentTribe));			
+			session.write("t;" + objectStream.substring(0, objectStream.length()-1));
 		}
 	}
 	
-	public static void sendTerrainStream(){
+	public static void sendTerrainStream(Tribe tribe){
 		
-		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){
-			String terrainStream = "";
-			Tribe currentTribe = null;
-			
-			if (WebSocketSessionController.userSessions.containsKey(session)){
-				currentTribe = WebSocketSessionController.userSessions.get(session).tribe;
-			} else{
-				break;
-			}
-			
-			List<List<String>> list = TerrainStreamer.streamAllUrl(currentTribe);
-			
-			for(int j = 0; j < list.size(); j++){
-				List<String> rida = list.get(j);
-				for(int i = 0; i < rida.size(); i++){
-					terrainStream += i + "," + j + "," + rida.get(i) + ";";
-				}
-			}
+		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){			
+			if (WebSocketSessionController.userSessions.get(session).tribe.id != tribe.id)
+				continue;		
+			String terrainStream = generateStreamFromList(TerrainStreamer.streamAllUrl(tribe));	
 			session.write("r;" + terrainStream.substring(0, terrainStream.length()-1));
 		}
+	}
+	
+	public static String generateStreamFromList(List<List<String>> list){
+		String stream = "";		
+		for(int j = 0; j < list.size(); j++){
+			List<String> rida = list.get(j);
+			for(int i = 0; i < rida.size(); i++){
+				stream += i + "," + j + "," + rida.get(i) + ";";
+			}
+		}
+		return stream;
 	}
 }

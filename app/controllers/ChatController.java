@@ -1,7 +1,6 @@
 package controllers;
 
 import static play.data.Form.form;
-import models.User;
 import play.data.Form;
 import play.mvc.Result;
 import controllers.routes;
@@ -24,7 +23,7 @@ public class ChatController extends Application {
 		Form<NewChat> chatForm = form(NewChat.class).bindFromRequest();	
 		try{
 			String text = chatForm.get().text;
-			String user = User.find.byId(session().get("email")).name;
+			String user = SessionController.getCurrentUser().name;
 			trySend(user, text);
     	} catch(Exception e){}
 	}

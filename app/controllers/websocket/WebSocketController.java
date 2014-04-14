@@ -1,22 +1,24 @@
 package controllers.websocket;
 
 import models.User;
-import models.game.TerrainObject;
-import models.game.Tribe;
 import controllers.Application;
+import controllers.Secured;
+import controllers.SessionController;
 import play.libs.F.Callback;
 import play.libs.F.Callback0;
+import play.mvc.Security;
 import play.mvc.WebSocket;
 
 public class WebSocketController extends Application {
 	
+	@Security.Authenticated(Secured.class)
 	public static WebSocket<String> ws() {
 		
 		final User kasutaja;
 		
 		User potentialUser;		
 		try {
-			potentialUser = User.find.byId(session().get("email"));		
+			potentialUser = SessionController.getCurrentUser();		
 		} catch (Exception e) {
 			potentialUser = null;
 		}
