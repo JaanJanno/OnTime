@@ -13,6 +13,7 @@ GET     /game           controllers.GameController.game()
 GET		/game/:x/:y		controllers.GameController.moveNoscript(x: Integer, y: Integer)
 GET		/login			controllers.Application.login(s="index")
 GET		/login/:s		controllers.Application.login(s: String)
+GET     /help           controllers.Instructions.instructions()
 
 #Sockets
 GET		/ws				controllers.websocket.WebSocketController.ws()
