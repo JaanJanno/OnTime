@@ -1,9 +1,33 @@
 $(document).ready(function() {
     $(".popup_button").click(function (event) {
         event.preventDefault();
-		$(".popup").show();
-		$(".sulge_popup").click(function() {
-			$(".popup").hide();
-		});
+
+        history.pushState({place: 'popup'}, "Log in opened", "#popup");
+
+        openPopup();
     });
+
+    $(".sulge_popup").click(function () {
+        history.pushState({}, "Log in closed", "/");
+        closePopup();
+    });
+
+    function openPopup() {
+        $(".popup").show();
+    }
+
+    function closePopup() {
+        $(".popup").hide();
+    }
+
+    if (document.location.hash == "#popup") openPopup();
+
+    window.addEventListener("popstate", function (e) {
+        if (e.state && e.state.place == "popup") {
+            openPopup();
+        } else {
+            closePopup();
+        }
+    });
+
 });
