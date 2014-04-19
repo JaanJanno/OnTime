@@ -1,12 +1,13 @@
 package controllers.offline;
 
 import controllers.Application;
+import play.mvc.*;
+import views.html.*;
 
 public class OfflineController extends Application {
 
-	public static void appcache() {
-		response.setContentTypeIfNotSet("text/cache-manifest");
-		renderTemplate("appcache.manifest");
+	public static Result appcache() {
+		response().setContentType("text/cache-manifest");
+		return ok(appcache.render());
 	}
-
 }
