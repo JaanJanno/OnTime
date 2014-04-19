@@ -1,18 +1,19 @@
 @(form: Form[Application.Login], user: User)
 
 <!DOCTYPE html>
-<html>
+<html manifest="off.appcache">
 <head>
     <meta charset="utf-8" />
     <title>OnTime</title>
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")">
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/elements.css")">
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/instructions.css")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/popup.css")">
 
     <script src="https://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
-    <script src="/assets/javascripts/login-popup.js" type="text/javascript" /></script>
-    <script src="/assets/javascripts/recent-min.js" type="text/javascript" /></script>
-    <script src="/assets/javascripts/live-min.js" type="text/javascript" /></script>
+    <script src="/assets/javascripts/login-popup.js" type="text/javascript"></script>
+    <script src="/assets/javascripts/recent-min.js" type="text/javascript"></script>
+    <script src="/assets/javascripts/live-min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -20,6 +21,8 @@
 
         @views.html.headerbar(form, user)
     </header>
+
+    @views.html.popup(form)
 
     <div class="content">
 
@@ -29,7 +32,16 @@
                     <div id="instructions">Juhised</div>
                 </div>
                 <div class="panel-body">
-                    1)
+                    <div class="instrucion-text">
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare purus at mauris rutrum, et accumsan magna ultrices. Duis dapibus dolor eros. Curabitur vitae tempus eros. Donec laoreet lorem a leo euismod, vel volutpat elit molestie. Nulla faucibus neque diam, ac sodales nisi egestas quis. Sed a semper tortor. Vestibulum malesuada eleifend leo ut lacinia. Donec a tortor laoreet, varius augue non, luctus elit. Cras in diam est. Duis vitae pulvinar neque.</p>
+
+                        <p>Mauris hendrerit mauris eget lorem aliquet, nec varius nisi mattis. Nam vulputate nisl eget auctor pretium. Cras ullamcorper quam sed justo faucibus, congue rhoncus velit aliquam. Nullam mollis ante at ullamcorper facilisis. Nunc eros nisi, hendrerit a consectetur sit amet, interdum non quam. Sed sit amet orci eget felis dapibus tempus feugiat eu quam. Duis tempus mi sed consequat vestibulum. Praesent blandit tortor ut libero varius luctus. Aenean faucibus enim augue, et posuere enim laoreet ut. Donec placerat nisl fringilla, pharetra tortor quis, mollis neque. Phasellus vel justo nec ipsum tempus porta. Nulla consectetur velit in tortor accumsan porttitor. Quisque porta sodales vulputate. Nulla facilisi. Donec a turpis sodales, dictum justo sed, condimentum ligula.</p>
+
+                        <p>
+                            Etiam tempor rhoncus metus a volutpat. Donec posuere felis eu pharetra dictum. Integer dignissim enim sem, sed tincidunt nibh tempor feugiat. Nunc laoreet facilisis nunc, sit amet sagittis mauris rutrum non. Fusce interdum egestas nunc, at facilisis est facilisis in. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas id consequat neque. Mauris vehicula semper lectus in varius.
+                            Quisque mi nisi, tempor et consequat eget, ultrices et tortor. Sed leo orci, interdum vitae dolor ac, interdum laoreet lacus. Nam adipiscing sodales leo, et eleifend nulla. Donec dictum cursus erat ac volutpat. Nullam vel dictum quam, nec volutpat augue. Donec cursus, nulla eu tincidunt iaculis, elit diam scelerisque ante, a dictum mi magna at nibh. Vivamus quis viverra urna. Mauris iaculis felis non faucibus vestibulum. Nunc quis sagittis lacus, vel molestie purus. Quisque egestas imperdiet aliquet. Integer at dolor velit. Mauris vestibulum vehicula tellus, ornare ultrices ipsum iaculis et.
+                        </p>
+                    </div>
                 </div>
             </div>
 
