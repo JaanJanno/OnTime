@@ -5,10 +5,12 @@
 		<ul class="nav-bar-tabs">
 		    
 		    @if(user == null){
+                <li><a href="/help">Help</a></li>
 		    	<li><a href="register">Sign up</a></li>
 		    	<li><a href="/login" class="popup_button">Log in</a>
                 </li>
 		    } else{
+                <li><a href="/help">Help</a></li>
 		    	<li><a href="@routes.Application.logout()">Log out</a></li>
 		    }
 		</ul>

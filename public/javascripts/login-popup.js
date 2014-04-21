@@ -8,7 +8,7 @@ $(document).ready(function() {
     });
 
     $(".sulge_popup").click(function () {
-        history.pushState({}, "Log in closed", "/");
+        history.pushState({}, "Log in closed", document.location.pathname);
         closePopup();
     });
 
