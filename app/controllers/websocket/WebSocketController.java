@@ -47,8 +47,11 @@ public class WebSocketController extends Application {
 				
 				WebSocketSessionController.sessions.put(id, out);
 				
+				
 				if (kasutaja != null)
 					WebSocketSessionController.userSessions.put(out, kasutaja);
+					GridHandler.sendObjectStream();
+					GridHandler.sendTerrainStream(kasutaja.tribe);
 			}
 		};
 	}	
