@@ -22,12 +22,13 @@ $(document).ready(function() {
 
     if (document.location.hash == "#popup") openPopup();
 
-    window.addEventListener("popstate", function (e) {
-        if (e.state && e.state.place == "popup") {
-            openPopup();
-        } else {
-            closePopup();
-        }
-    });
-
+	if(typeof addEventListener == 'function'){
+		window.addEventListener("popstate", function (e) {
+		    if (e.state && e.state.place == "popup") {
+		        openPopup();
+		    } else {
+		        closePopup();
+		    }
+		});
+	}
 });
