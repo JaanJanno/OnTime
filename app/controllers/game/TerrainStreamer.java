@@ -3,14 +3,9 @@ package controllers.game;
 import java.util.ArrayList;
 import java.util.List;
 import controllers.game.simplex.SimplexStreamer;
-
-import models.game.Terrain;
-import models.game.TerrainObject;
 import models.game.Tribe;
 
 public class TerrainStreamer {
-	
-	public static Terrain mainTerrain;
 	
 	public static List<List<String>> streamAllUrl(Tribe target){
 		List<List<String>> tagastada = new ArrayList<List<String>>();
@@ -19,7 +14,7 @@ public class TerrainStreamer {
 		}
 		for(int j = 0; j < 11; j++){
 			for(int i = 0; i < 11; i++){
-				tagastada.get(j).add(TerrainObject.getImgUrl(SimplexStreamer.getPointTerrain(j+target.x, i+target.y)));
+				tagastada.get(j).add(TerrainTypeController.getImgUrl(SimplexStreamer.getPointTerrain(j+target.x, i+target.y)));
 			}
 		}
 		return tagastada;

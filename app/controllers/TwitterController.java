@@ -48,19 +48,15 @@ public class TwitterController extends Application {
 			session().remove("twitter-sid");
 			OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.twitter.com/1.1/account/verify_credentials.json");
 			
-			service.signRequest(accessToken, request); // the access token from step 4
+			service.signRequest(accessToken, request);
 			Response response = request.send();
 			JsonObject responseJson = new JsonParser().parse(response.getBody()).getAsJsonObject();
 			
 			RegistrationController.handleTwitterUser(responseJson.get("name").getAsString(), responseJson.get("id_str").getAsString());
 			
-			return redirect(
-					"/"+redir
-		    ); 
+			return redirect("/"+redir); 
 		} catch(Exception e){
-			return redirect(
-					"/"
-		    ); 
+			return redirect("/"); 
 		}
 	}
 	

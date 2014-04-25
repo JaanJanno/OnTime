@@ -45,5 +45,4 @@ public class ChatController extends Application {
 
 		public String text;
 	}
-	
 }

@@ -43,7 +43,7 @@ public class GameController extends Application {
 		response().setHeader("Content-Type", "text/html");	
 		try {
 			Form<MoveSubmit> moveForm = form(MoveSubmit.class).bindFromRequest();
-		    MovementController.tryMove(SessionController.getCurrentUser(), moveForm.get().x, moveForm.get().y);
+		    MovementController.tryMove(Tribe.getCurrentTribe(), moveForm.get().x, moveForm.get().y);
 		    GridHandler.sendObjectStream();
 		    GridHandler.sendTerrainStream(Tribe.getCurrentTribe());
 		} catch (Exception e) {}   		
@@ -53,7 +53,7 @@ public class GameController extends Application {
 	@Security.Authenticated(Secured.class)
 	public static Result moveNoscript(Integer x, Integer y) {
 		try {
-		    MovementController.tryMove(SessionController.getCurrentUser(), x, y);
+		    MovementController.tryMove(Tribe.getCurrentTribe(), x, y);
 		    GridHandler.sendObjectStream();
 		} catch (Exception e) {}		
 		return(redirect("/game"));

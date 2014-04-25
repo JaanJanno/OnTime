@@ -17,8 +17,7 @@
 </head>
 
 <body>
-    <header>
-        
+    <header>      
             @views.html.headerbar(form, user,"index")
     </header>
     
@@ -28,26 +27,25 @@
     	@if(user != null){
         		<p>Welcome, @user.name!</p>
         }
+        
         @if(flash.contains("loginfail")) {
 			<p>
 				@flash.get("loginfail")
 			</p>
-		}
-		
+		}		
 		@if(user != null){
 			<a href="/game">
 				<div class="photo-container">
 					<div id="quote">Enter the game!</div>
 				</div>
 		    </a>
-        } else{
+        } else {
         	<a href="/login/game">
 				<div class="photo-container">
 					<div id="quote">Enter the game!</div>
 				</div>
 		    </a>
-        }
-        
+        }       
         <br>
      	<div id="tabs-container">
             <div id="live-now-container">
@@ -85,6 +83,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>

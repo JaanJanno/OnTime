@@ -2,7 +2,6 @@ package controllers.websocket;
 
 import models.ChatEvent;
 import play.mvc.WebSocket;
-
 import com.avaje.ebean.Ebean;
 
 public class ChatHandler {

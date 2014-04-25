@@ -1,28 +1,25 @@
 @(form: Form[Application.Login])
 
-<!--Popup-->
-        <div class="popup">
-        	@if(form.hasGlobalErrors) {
-				<p class="error">
-					@form.globalError.message
-				</p>
-			}
-        	
-        	@helper.form(routes.Application.authenticate("#")) {
-		        <div id="popup-heading">
-		        	Log in
-		        </div>
-		        	<p><input class="textbox-popup" name="email" type="email" placeholder="E-mail" value="@form("email").value" /></p>
-		            <p><input class="textbox-popup" name="password" placeholder="Password" type="password" /></p>
-		            <div>
-		            	<input class="button-popup" name="" type="submit" value="Login" />
-		            	<input class="sulge_popup button-popup" type="button" value="Close" />
-		            </div>
-		            <div id="twitter">
-		            	<a href="twitter">
-		            		<img src="/assets/images/twitter.png" alt="Twitter login"/>
-		            	</a>
-		            </div>
-		    }
+<div class="popup">
+	@if(form.hasGlobalErrors) {
+		<p class="error">
+			@form.globalError.message
+		</p>
+	}
+	@helper.form(routes.Application.authenticate("#")) {
+        <div id="popup-heading">
+        	Log in
         </div>
-    <!--Popup läbi-->
+    	<p><input class="textbox-popup" name="email" type="email" placeholder="E-mail" value="@form("email").value" /></p>
+        <p><input class="textbox-popup" name="password" placeholder="Password" type="password" /></p>
+        <div>
+        	<input class="button-popup" name="" type="submit" value="Login" />
+        	<input class="sulge_popup button-popup" type="button" value="Close" />
+        </div>
+        <div id="twitter">
+        	<a href="twitter">
+        		<img src="/assets/images/twitter.png" alt="Twitter login"/>
+        	</a>
+		</div>
+    }
+</div>

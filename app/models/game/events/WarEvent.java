@@ -5,11 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
 import play.db.ebean.Model.Finder;
-
 import com.avaje.ebean.Ebean;
-
 import models.game.Tribe;
 
 @javax.persistence.Entity
@@ -28,20 +25,29 @@ public class WarEvent {
 	}
 	
 	public static void rollWarEvent(Tribe tribe1, Tribe tribe2){
-		long deaths1		= Math.min((int)(Math.random()*5), tribe1.peopleAmount);
-		long deaths2		= Math.min((int)(Math.random()*5), tribe2.peopleAmount);
-		long foodStolen		= Math.min((int)(Math.random()*15),tribe2.food);
+		long deaths1 = generateRandomDeaths(tribe1, 5);
+		long deaths2 = generateRandomDeaths(tribe2, 5);
+		long foodStolen	= generateRandomStolenFood(tribe2, 15);
 		
-		tribe1.peopleAmount	-= deaths1;
-		tribe1.food 		+= foodStolen;
-		Ebean.update(tribe1);
-	
-		tribe2.peopleAmount -= deaths2;
-		tribe2.food 		-= foodStolen;
-		Ebean.update(tribe2);
+		handleWarResults(tribe1, deaths1, foodStolen);
+		handleWarResults(tribe2, deaths2, -foodStolen);
 		
 		attackerEventGen(tribe1, tribe2, deaths1, deaths2, foodStolen);
 		defenderEventGen(tribe2, tribe1, deaths2, deaths1, foodStolen);
+	}
+	
+	private static long generateRandomStolenFood(Tribe tribe, int max){
+		return Math.min((int)(Math.random() * max),tribe.food);
+	}
+	
+	private static long generateRandomDeaths(Tribe tribe, int max){
+		return Math.min((int)(Math.random() * max), tribe.peopleAmount);
+	}
+	
+	private static void handleWarResults(Tribe tribe, long deaths, long foodStolen){
+		tribe.peopleAmount	-= deaths;
+		tribe.food 		+= foodStolen;
+		Ebean.update(tribe);
 	}
 	
 	private static void attackerEventGen(Tribe tribe, Tribe tribeEnemy, long deaths, long kills, long foodStolen){

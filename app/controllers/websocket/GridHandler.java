@@ -7,8 +7,7 @@ import controllers.game.TerrainStreamer;
 
 public class GridHandler {
 	
-	public static void sendObjectStream(){
-	
+	public static void sendObjectStream(){	
 		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){				
 			Tribe currentTribe = Tribe.find.byId(WebSocketSessionController.userSessions.get(session).tribe.id);		
 			String objectStream = generateStreamFromList(TerrainStreamer.streamAllPlayerUrl(currentTribe));			
@@ -16,8 +15,7 @@ public class GridHandler {
 		}
 	}
 	
-	public static void sendTerrainStream(Tribe tribe){
-		
+	public static void sendTerrainStream(Tribe tribe){	
 		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){			
 			if (WebSocketSessionController.userSessions.get(session).tribe.id != tribe.id)
 				continue;		
@@ -27,7 +25,7 @@ public class GridHandler {
 	}
 	
 	public static String generateStreamFromList(List<List<String>> list){
-		String stream = "";		
+		String stream = "";
 		for(int j = 0; j < list.size(); j++){
 			List<String> rida = list.get(j);
 			for(int i = 0; i < rida.size(); i++){

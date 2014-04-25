@@ -4,7 +4,6 @@ import java.util.*;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
-
 import play.db.ebean.*;
 
 @javax.persistence.Entity
@@ -22,8 +21,7 @@ public class EventQuery extends Model {
       this.korraldaja = korraldaja;
     }
     
-    public static List<EventQuery> createFromSqlRows(List<SqlRow> rows){
-    	
+    public static List<EventQuery> createFromSqlRows(List<SqlRow> rows){  	
     	List<EventQuery> list = new ArrayList<EventQuery>();
     	for(SqlRow row: rows){
     		EventQuery uus = new EventQuery((String)row.get("title"), (String)row.get("date"), (String)row.get("organization_name"));
@@ -32,8 +30,7 @@ public class EventQuery extends Model {
     	return list;
     }
     
-    public static List<EventQuery> getTitleDateOrganization(){
-    	
+    public static List<EventQuery> getTitleDateOrganization(){  	
     	SqlQuery q = Ebean.createSqlQuery("SELECT title, date, organization_name FROM event JOIN user ON event.user_email = user.email;");
     	List<SqlRow> list = q.findList();
     	return createFromSqlRows(list);

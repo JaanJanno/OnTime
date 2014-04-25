@@ -1,8 +1,6 @@
 import play.libs.F.*;
 import static play.test.Helpers.*;
-
 import org.junit.*;
-
 import play.test.*;
 import models.*;
 import static org.junit.Assert.*;

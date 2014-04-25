@@ -2,7 +2,6 @@ package controllers.websocket;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import models.User;
 import play.mvc.WebSocket;
 import play.mvc.WebSocket.Out;

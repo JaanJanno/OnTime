@@ -6,7 +6,6 @@ public class SimplexStreamer {
 	
 	static private SimplexNoise_octave noise;
 	static private double PI;
-	
 	static private int defXSlices, defYSlices, defDiv, defL1, defL2, defL3;
 	
 	static{
@@ -61,5 +60,4 @@ public class SimplexStreamer {
 		sim 	+= SimplexStreamer.plotOctave4D(defXSlices, defYSlices, x, y, defDiv, 2, defL3);
 		return SimplexLeveler.levelTransformTerrain(sim);
 	}
-	
 }

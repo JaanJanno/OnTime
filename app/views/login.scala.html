@@ -8,11 +8,9 @@
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")">
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/forms.css")">
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/login.css")">
-
 </head>
 
 <body>
-
     <header>
         @views.html.headerbar(form, user,"login")
     </header>
@@ -20,27 +18,27 @@
     <div class="content">
     
         @helper.form(routes.Application.authenticate(redir), 'id -> "sign-up-form") {
-        <div class="log-in-form-container">
-        
-		    @if(flash.contains("loginToPlay")) {
-				<p>
-					@flash.get("loginToPlay")
-				</p>
-			}
+		    <div class="log-in-form-container">
+		    
+				@if(flash.contains("loginToPlay")) {
+					<p>
+						@flash.get("loginToPlay")
+					</p>
+				}
 			
-			@if(flash.contains("loginfail")) {
-				<p>
-					@flash.get("loginfail")
-				</p>
-			}	
-            <input class="textbox" id="email" type="email" name="email" placeholder="E-mail" /><br>
-            <input class="textbox" id="password" type="password" name="password" placeholder="Password" /><br>
-            <input id="button" type="submit" value="Log in"> <br>
+				@if(flash.contains("loginfail")) {
+					<p>
+						@flash.get("loginfail")
+					</p>
+				}	
+		        <input class="textbox" id="email" type="email" name="email" placeholder="E-mail" /><br>
+		        <input class="textbox" id="password" type="password" name="password" placeholder="Password" /><br>
+		        <input id="button" type="submit" value="Log in"> <br>
 
-            <a href="/twitter/@redir">
-                <img alt="Twitter login" id="twitter-button-pic" src="/assets/images/twitter.png"/>
-            </a>
-        </div>
+		        <a href="/twitter/@redir">
+		            <img alt="Twitter login" id="twitter-button-pic" src="/assets/images/twitter.png"/>
+		        </a>
+		    </div>
         }
     </div>
 </body>

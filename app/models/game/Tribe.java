@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import com.avaje.ebean.Ebean;
-
 import controllers.SessionController;
 import models.User;
 import play.db.ebean.Model;
@@ -28,7 +27,6 @@ public class Tribe extends Model {
 	public byte hunting;
 	public byte tracking;
 	@ManyToOne
-	public TerrainObject position;
 	public int x = 0;
 	public int y = 0;
 	
@@ -55,7 +53,6 @@ public class Tribe extends Model {
 		this.hunting 		= hunting;
 		this.tracking		= tracking;
 		this.food			= food;
-		this.position		= TerrainObject.randomLocation();
 	}
 	
 	public static Finder<Long, Tribe> find = new Finder<Long, Tribe> (Long.class, Tribe.class);
