@@ -15,11 +15,10 @@ public class GridHandler {
 		}
 	}
 	
-	public static void sendTerrainStream(Tribe tribe){	
-		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){			
-			if (WebSocketSessionController.userSessions.get(session).tribe.id != tribe.id)
-				continue;		
-			String terrainStream = generateStreamFromList(TerrainStreamer.streamAllUrl(tribe));	
+	public static void sendTerrainStream(Tribe tribe){
+		WebSocket.Out<String> session = WebSocketSessionController.getTribeSocket(tribe);
+		if (session != null){
+			String terrainStream = generateStreamFromList(TerrainStreamer.streamAllUrl(tribe));
 			session.write("r;" + terrainStream.substring(0, terrainStream.length()-1));
 		}
 	}

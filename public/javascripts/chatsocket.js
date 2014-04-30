@@ -6,6 +6,22 @@ function writeToChat(message)
 	li.innerHTML = message;
 }
 
+function writeToEvents(message)
+{
+	var chat = document.getElementById("eventlist");
+	var li = document.createElement("LI");
+	chat.appendChild(li);
+	li.innerHTML = message;
+}
+
+function writeToWars(message)
+{
+	var chat = document.getElementById("warlist");
+	var li = document.createElement("LI");
+	chat.appendChild(li);
+	li.innerHTML = message;
+}
+
 function clear()
 {
 	for(var i=0;i<11;i++){
@@ -51,6 +67,16 @@ if ("WebSocket" in window)
 					document.getElementById(id).src = parts[2];
 				}
 			}		
+		}
+		
+		if(!received_msg == "" && received_msg[0] == "e"){
+
+			writeToEvents(received_msg.substring(2));
+		}
+		
+		if(!received_msg == "" && received_msg[0] == "w"){
+
+			writeToWars(received_msg.substring(2));
 		}
 	};
 }

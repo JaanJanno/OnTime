@@ -19,11 +19,11 @@ public class SimplexStreamer {
 		defL3		= 50;
 	}
 	
-	public static int plotOctave2D(int x, int y, double frequency, int octave, int amplitude){
+	public static double plotOctave2D(int x, int y, double frequency, int octave, int amplitude){
 		
 		// Triviaalne teisendus 2d simplex mürast 2d tasandil asuvale punktile.
 		
-		return (int)(amplitude * (((noise.noise((x / octaveDiv(octave, frequency)), 
+		return (amplitude * (((noise.noise((x / octaveDiv(octave, frequency)), 
 												(y / octaveDiv(octave, frequency)))) + 1) / 2
 		));
 	}

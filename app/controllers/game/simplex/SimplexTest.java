@@ -22,7 +22,7 @@ public class SimplexTest extends JPanel {
 	int yc = 0;
 	
 	int suurus = 70;
-	boolean advanced = false;
+	int mode = 0;
 	
 	public SimplexTest(JFrame f) {
 		this.f = f;
@@ -34,27 +34,30 @@ public class SimplexTest extends JPanel {
 	public void paintComponent(Graphics g) {
 		g.setColor(new Color(0,0,0));
 		g.fillRect(0, 0, f.getWidth(), f.getHeight());
-		g.drawImage(simplex(150, 16, advanced).getScaledInstance(f.getWidth(), f.getWidth(), 0), 0, 0, null);
+		g.drawImage(simplex(150, 16, mode).getScaledInstance(f.getWidth(), f.getWidth(), 0), 0, 0, null);
 	}
 	
-	public BufferedImage simplex(int x, double frequency, boolean advanced){
+	public BufferedImage simplex(int x, double frequency, int mode){
 		BufferedImage img;
-		if (advanced){
+		if (mode == 2){
 			img = new BufferedImage(768, 768, BufferedImage.TYPE_INT_ARGB);
 			plotSimplex4DAdvanced(img, 768, 768, frequency);
-		}else{
+		}else if (mode == 1){
 			img = new BufferedImage(x, x, BufferedImage.TYPE_INT_ARGB);
 			plotSimplex4D(img, x, x, frequency);
-		}		
+		} else{
+			img = new BufferedImage(x, x, BufferedImage.TYPE_INT_ARGB);
+			plotSimplex2D(img, x, x, frequency);
+		}
 		return img;
 	}
 	
 	public void plotSimplex2D(BufferedImage img, int x, int y, double div){
 		for (int i = 0; i < x; i++){
 			for (int j = 0; j < x; j++){
-				int sim  = SimplexStreamer.plotOctave2D(i +xc, j +yc, div, 0,  60);
-				sim 	+= SimplexStreamer.plotOctave2D(i +xc, j +yc, div, 3, 195);
-				img.setRGB(i, j, SimplexLeveler.levelTransformColor(sim));
+				double sim  = SimplexStreamer.plotOctave2D(i +xc, j +yc, div*2, 0,  60);
+				sim 	+= SimplexStreamer.plotOctave2D(i +xc, j +yc, div*2, 1, 195);
+				img.setRGB(i, j, SimplexLeveler.levelAsRgb((int)sim));
 			}
 		}
 	}
@@ -126,7 +129,7 @@ public class SimplexTest extends JPanel {
 			if (key == KeyEvent.VK_ENTER){
 				m.xc = 0;
 				m.yc = 0;
-				m.advanced = !m.advanced;
+				m.mode = (m.mode + 1) % 3;
 			}
 			m.repaint();
 		} 

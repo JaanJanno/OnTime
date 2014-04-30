@@ -1,12 +1,18 @@
 package models.game.events;
 
+import java.util.Collections;
 import java.util.List;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 import play.db.ebean.Model.Finder;
+
 import com.avaje.ebean.Ebean;
+
+import controllers.websocket.EventHandler;
 import models.game.Tribe;
 
 @javax.persistence.Entity
@@ -37,6 +43,7 @@ public class SpecialEvent {
 			tribe.peopleAmount += 5;
 			SpecialEvent event = new SpecialEvent("You have found a group 5 of travellers who join your tribe.", tribe, 2);
 			Ebean.save(event);
+			EventHandler.sendSpecialEvent(tribe, event.text);
 		}
 	}
 	
@@ -45,6 +52,7 @@ public class SpecialEvent {
 			tribe.food += 50;
 			SpecialEvent event = new SpecialEvent("You have found a bush with delicious berries. (+50 food)", tribe, 1);
 			Ebean.save(event);
+			EventHandler.sendSpecialEvent(tribe, event.text);
 		}
 	}
 	
@@ -53,12 +61,15 @@ public class SpecialEvent {
 			tribe.food += 25;
 			SpecialEvent event = new SpecialEvent("Congratz! You have just found a box of candies! :)	(+25 food)", tribe, 3);
 			Ebean.save(event);
+			EventHandler.sendSpecialEvent(tribe, event.text);
 		}
 	}
 	
 	public static Finder<Long, Tribe> find = new Finder<Long, Tribe> (Long.class, Tribe.class);
 	
 	public static List<SpecialEvent> findTribeEvents(Tribe tribe){
-		return Ebean.find(SpecialEvent.class).where().eq("tribe_id", tribe.id).orderBy("ID DESC").setMaxRows(5).findList();
+		List<SpecialEvent> events = Ebean.find(SpecialEvent.class).where().eq("tribe_id", tribe.id).orderBy("ID DESC").setMaxRows(5).findList();
+		Collections.reverse(events);
+		return events;
 	}
 }

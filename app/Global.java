@@ -13,8 +13,8 @@ public class Global extends GlobalSettings {
         // Check if the database is empty
         if (Event.find.findRowCount() == 0) {
             Ebean.save((List<?>) Yaml.load("test-data.yml"));
-        }
-        addTestTribe();
+            addTestTribe();
+        }       
     }
     
     private static void addTestTribe(){

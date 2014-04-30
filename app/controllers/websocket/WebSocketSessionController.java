@@ -2,7 +2,9 @@ package controllers.websocket;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import models.User;
+import models.game.Tribe;
 import play.mvc.WebSocket;
 import play.mvc.WebSocket.Out;
 
@@ -14,6 +16,15 @@ public class WebSocketSessionController {
 	
 	public static long getNewWebSocketId() {
 		return (webSocketCount++);
+	}
+	
+	public static WebSocket.Out<String> getTribeSocket(Tribe tribe){
+		WebSocket.Out<String> socket = null;
+		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){			
+			if (WebSocketSessionController.userSessions.get(session).tribe.id == tribe.id)
+				socket = session;
+		}
+		return socket;
 	}
 	
 	static Pinger pinger = new Pinger();
