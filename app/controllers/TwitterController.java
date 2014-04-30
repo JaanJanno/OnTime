@@ -25,7 +25,7 @@ public class TwitterController extends Application {
 		if (Play.isDev()){
 			service = new ServiceBuilder().provider(TwitterApi.SSL.class).callback("http://localhost:9000/auth").apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
 		} else{
-			service = new ServiceBuilder().provider(TwitterApi.SSL.class).callback("https://on-time.herokuapp.com/auth").apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
+			service = new ServiceBuilder().provider(TwitterApi.SSL.class).callback("https://tribal-age.herokuapp.com/auth").apiKey("t7wdeQkSRkkIgnHeeevQ").apiSecret("49tQJGLjvDtKzy4mJWSuVdDRzdVh4AwXzLZ2XN5wtg").build();
 		}
 	}
 	
