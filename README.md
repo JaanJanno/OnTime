@@ -2,7 +2,7 @@ Veebirakendus
 
 =============
 
-Rakenduse testkeskkond: on-time.herokuapp.com
+Rakenduse testkeskkond: tribal-age.herokuapp.com
 
 =============
 
