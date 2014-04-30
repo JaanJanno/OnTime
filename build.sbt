@@ -1,4 +1,4 @@
-name := "OnTime"
+name := "TribalAge"
 
 version := "1.0-SNAPSHOT"
 
