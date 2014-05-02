@@ -14,7 +14,7 @@ public class RegistrationTest {
                               
                 // Üritab leida olematut kasutajat.
                 
-                User registeredUser = User.find.byId("testibar@ontime.ee");               
+                User registeredUser = User.find.byId("testibar@tribalage.ee");               
                 assertNull(registeredUser);
                 
                 // Registreerib uue kasutaja.
@@ -23,7 +23,7 @@ public class RegistrationTest {
                 browser.$("#firstName")			.text("Testibar");
                 browser.$("#lastName")			.text("McQueen");
                 browser.$("#organizationName")	.text("Pies Inc.");
-                browser.$("#email")				.text("testibar@ontime.ee");
+                browser.$("#email")				.text("testibar@tribalage.ee");
                 browser.$("#password")			.text("testibarsPass");
                 browser.$("#button").click();
                 
@@ -31,11 +31,11 @@ public class RegistrationTest {
                  *	kontrollib selle andmete õigsust.
                  */
                 
-                registeredUser = User.find.byId("testibar@ontime.ee");               
+                registeredUser = User.find.byId("testibar@tribalage.ee");               
                 assertNotNull("User was not registered.", registeredUser);
                 assertEquals("Wrong name in database.", registeredUser.name, "Testibar McQueen");
                 assertEquals("Wrong organization in database.", registeredUser.organizationName, "Pies Inc.");
-                assertEquals("Wrong email in database.", registeredUser.email, "testibar@ontime.ee");
+                assertEquals("Wrong email in database.", registeredUser.email, "testibar@tribalage.ee");
                 assertEquals("Wrong password in database.", registeredUser.password, "testibarsPass");
             }
         });
@@ -52,7 +52,7 @@ public class RegistrationTest {
                 browser.$("#firstName")			.text("Testibar");
                 browser.$("#lastName")			.text("McQueen");
                 browser.$("#organizationName")	.text("Pies Inc.");
-                browser.$("#email")				.text("testibar@ontime.ee");
+                browser.$("#email")				.text("testibar@tribalage.ee");
                 browser.$("#password")			.text("testibarsPass");
                 browser.$("#button").click();
                 
@@ -64,11 +64,11 @@ public class RegistrationTest {
                 browser.$("#firstName")			.text("Testibar");
                 browser.$("#lastName")			.text("McQueen");
                 browser.$("#organizationName")	.text("Pies Inc.");
-                browser.$("#email")				.text("testibar@ontime.ee");
+                browser.$("#email")				.text("testibar@tribalage.ee");
                 browser.$("#password")			.text("myPiratePassword"); //Erinev!
                 browser.$("#button").click();
                 
-                User registeredPirateUser = User.find.byId("testibar@ontime.ee");               
+                User registeredPirateUser = User.find.byId("testibar@tribalage.ee");               
                 assertEquals("Password overide by second registration.", "testibarsPass", registeredPirateUser.password);
             }
         });

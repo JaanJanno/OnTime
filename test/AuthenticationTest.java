@@ -26,11 +26,11 @@ public class AuthenticationTest {
             	
             	// Katse korrektsete andmetega sisse logida.
             	
-                logTestUserIn(browser, "jaan@ontime.ee", "jaan");              
+                logTestUserIn(browser, "jaan@tribalage.ee", "jaan");              
                 Cookie loginCookie = browser.getCookie("PLAY_SESSION");
                 
                 assertNotNull("User wasn't logged in.", loginCookie);                
-                assertEquals("Wrong user was logged in.", getEmailFromCookie(loginCookie), "jaan@ontime.ee");
+                assertEquals("Wrong user was logged in.", getEmailFromCookie(loginCookie), "jaan@tribalage.ee");
             }
         });
     }
@@ -43,7 +43,7 @@ public class AuthenticationTest {
             	
             	// Katse valede andmetega sisse logida.
             	
-                logTestUserIn(browser, "jaan@ontime.ee", "wrongPassword");              
+                logTestUserIn(browser, "jaan@tribalage.ee", "wrongPassword");              
                 Cookie loginCookie = browser.getCookie("PLAY_SESSION");
                 
                 assertNull("User was logged in while entering the wrong password.", loginCookie);                
@@ -59,7 +59,7 @@ public class AuthenticationTest {
             	
             	// Katse valede andmetega sisse logida.
             	
-                logTestUserIn(browser, "iDontExist@ontime.ee", "wrongPassword");              
+                logTestUserIn(browser, "iDontExist@tribalage.ee", "wrongPassword");              
                 Cookie loginCookie = browser.getCookie("PLAY_SESSION");
                 
                 assertNull("User was logged in while entering nonexistant username.", loginCookie);                

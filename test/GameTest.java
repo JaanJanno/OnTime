@@ -23,10 +23,10 @@ public class GameTest {
     public void moveToSameTest() {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
             public void invoke(TestBrowser browser) {             
-            	AuthenticationTest.logTestUserIn(browser, "jaan@ontime.ee", "jaan");          
+            	AuthenticationTest.logTestUserIn(browser, "jaan@tribalage.ee", "jaan");          
                 browser.goTo("http://localhost:3333/game");
                 
-                Tribe testTribe = User.find.byId("jaan@ontime.ee").tribe;               
+                Tribe testTribe = User.find.byId("jaan@tribalage.ee").tribe;               
                 int beforeX = testTribe.x;
                 int beforeY = testTribe.y;
                 
@@ -39,7 +39,7 @@ public class GameTest {
                  */
                 browser.goTo("http://localhost:3333/game");
                 
-                testTribe = User.find.byId("jaan@ontime.ee").tribe;               
+                testTribe = User.find.byId("jaan@tribalage.ee").tribe;               
                 int afterX = testTribe.x;
                 int afterY = testTribe.y;
                 
@@ -54,9 +54,9 @@ public class GameTest {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
             public void invoke(TestBrowser browser) {
                 
-            	AuthenticationTest.logTestUserIn(browser, "jaan@ontime.ee", "jaan");          
+            	AuthenticationTest.logTestUserIn(browser, "jaan@tribalage.ee", "jaan");          
                 browser.goTo("http://localhost:3333/game");             
-                Tribe testTribe = User.find.byId("jaan@ontime.ee").tribe;          
+                Tribe testTribe = User.find.byId("jaan@tribalage.ee").tribe;          
                 
                 moveTestUser(browser, -1, -1);
                 
@@ -67,7 +67,7 @@ public class GameTest {
                  */
                 browser.goTo("http://localhost:3333/game");
                 
-                testTribe = User.find.byId("jaan@ontime.ee").tribe;
+                testTribe = User.find.byId("jaan@tribalage.ee").tribe;
                 int afterX = testTribe.x;
                 int afterY = testTribe.y;
                 
@@ -85,10 +85,10 @@ public class GameTest {
             	int deltaX = 4;
             	int deltaY = 4;
             	
-            	AuthenticationTest.logTestUserIn(browser, "jaan@ontime.ee", "jaan");          
+            	AuthenticationTest.logTestUserIn(browser, "jaan@tribalage.ee", "jaan");          
                 browser.goTo("http://localhost:3333/game");
                 
-                Tribe testTribe = User.find.byId("jaan@ontime.ee").tribe;            
+                Tribe testTribe = User.find.byId("jaan@tribalage.ee").tribe;            
                 int beforeX = testTribe.x;
                 int beforeY = testTribe.y;
                 
@@ -101,7 +101,7 @@ public class GameTest {
                  */
                 browser.goTo("http://localhost:3333/game");
                 
-                testTribe = User.find.byId("jaan@ontime.ee").tribe;         
+                testTribe = User.find.byId("jaan@tribalage.ee").tribe;         
                 int afterX = testTribe.x;
                 int afterY = testTribe.y;
                 
