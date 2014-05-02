@@ -16,8 +16,8 @@ public class GridHandler {
 	}
 	
 	public static void sendTerrainStream(Tribe tribe){
-		WebSocket.Out<String> session = WebSocketSessionController.getTribeSocket(tribe);
-		if (session != null){
+		List<WebSocket.Out<String>> sessions = WebSocketSessionController.getTribeSockets(tribe);
+		for (WebSocket.Out<String> session: sessions){
 			String terrainStream = generateStreamFromList(TerrainStreamer.streamAllUrl(tribe));
 			session.write("r;" + terrainStream.substring(0, terrainStream.length()-1));
 		}

@@ -2,9 +2,9 @@
 # User
 
 - &a1 !!models.User
-    email: jaan@ontime.ee
+    email: jaan@tribalage.ee
     name: Jaan Janno
-    organizationName: OnTime
+    organizationName: TribalAge
     password: jaan
     
 - &a2 !!models.User
@@ -14,18 +14,12 @@
     password: test
     
 - &a3 !!models.User
-    email: kristiina@ontime.ee
+    email: kristiina@tribalage.ee
     name: Kristiina Ilves
-    organizationName: OnTime
+    organizationName: TribalAge
     password: kristiina
     
 - &a4 !!models.User
-    email: sixten@ontime.ee
-    name: Sixten Leemets
-    organizationName: OnTime
-    password: sixten
-    
-- &a5 !!models.User
     email: aurelius@rome.ee
     name: Aurelius Maximus
     organizationName: Rooma Leegion
