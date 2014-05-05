@@ -4,6 +4,7 @@ function writeToChat(message)
 	var li = document.createElement("LI");
 	chat.appendChild(li);
 	li.innerHTML = message;
+	$(chat).find('li').slice(0, -5).remove();
 }
 
 function writeToEvents(message)
@@ -12,6 +13,8 @@ function writeToEvents(message)
 	var li = document.createElement("LI");
 	chat.appendChild(li);
 	li.innerHTML = message;
+	$(chat).find('li').slice(0, -5).remove();
+	
 }
 
 function writeToWars(message)
