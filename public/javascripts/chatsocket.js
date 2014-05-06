@@ -23,6 +23,7 @@ function writeToWars(message)
 	var li = document.createElement("LI");
 	chat.appendChild(li);
 	li.innerHTML = message;
+	$(chat).find('li').slice(0, -5).remove();
 }
 
 function clear()
