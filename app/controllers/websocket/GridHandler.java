@@ -3,6 +3,7 @@ package controllers.websocket;
 import java.util.List;
 import models.game.Tribe;
 import play.mvc.WebSocket;
+import controllers.game.ObjectStreamer;
 import controllers.game.TerrainStreamer;
 
 public class GridHandler {
@@ -10,7 +11,7 @@ public class GridHandler {
 	public static void sendObjectStream(){	
 		for(WebSocket.Out<String> session: WebSocketSessionController.sessions.values()){				
 			Tribe currentTribe = Tribe.find.byId(WebSocketSessionController.userSessions.get(session).tribe.id);		
-			String objectStream = generateStreamFromList(TerrainStreamer.streamAllPlayerUrl(currentTribe));			
+			String objectStream = generateStreamFromList(ObjectStreamer.streamAllPlayerUrl(currentTribe));			
 			session.write("t;" + objectStream.substring(0, objectStream.length()-1));
 		}
 	}

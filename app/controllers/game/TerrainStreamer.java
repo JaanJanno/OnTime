@@ -2,75 +2,36 @@ package controllers.game;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import controllers.game.TerrainTypeController.TerrainType;
 import controllers.game.simplex.SimplexStreamer;
 import models.game.Tribe;
 
 public class TerrainStreamer {
 	
 	public static List<List<String>> streamAllUrl(Tribe target){
-		List<List<String>> tagastada = new ArrayList<List<String>>();
+		List<List<String>> view = initTerrainGrid(11);
+		
 		for(int j = 0; j < 11; j++){
+			for(int i = 0; i < 11; i++){
+				addTerrainToPlayerViewCoords(i, j, view, target);
+			}
+		}
+		return view;
+	}
+	
+	private static void addTerrainToPlayerViewCoords(int i, int j, List<List<String>> tagastada, Tribe target){
+		int xCoord = j+target.x-5;
+		int yCoord = i+target.y-5;
+		TerrainType atCoords = SimplexStreamer.getPointTerrain(xCoord, yCoord);
+		tagastada.get(j).add(TerrainTypeController.getImgUrl(atCoords));
+	}
+	
+	private static List<List<String>> initTerrainGrid(int h){
+		List<List<String>> tagastada = new ArrayList<List<String>>();
+		for(int j = 0; j < h; j++){
 			tagastada.add(new ArrayList<String>());
 		}
-		for(int j = 0; j < 11; j++){
-			for(int i = 0; i < 11; i++){
-				tagastada.get(j).add(TerrainTypeController.getImgUrl(SimplexStreamer.getPointTerrain(j+target.x, i+target.y)));
-			}
-		}
 		return tagastada;
-	}
-	
-	public static List<List<String>> streamAllPlayerUrl(Tribe tribe){
-		
-		List<Tribe> all = Tribe.find.all();
-		
-		List<List<String>> tagastada = new ArrayList<List<String>>();
-		for(int j = 0; j < 11; j++){
-			List<String> rida = new ArrayList<String>();
-			for(int i = 0; i < 11; i++){
-				rida.add("assets/images/game/tiles/void.png");
-			}	
-			tagastada.add(rida);
-		}
-		for(Tribe jupp: all){
-			if (Math.abs(getXDistance(tribe.x, jupp.x)) <= 5 && Math.abs(getYDistance(tribe.y, jupp.y)) <= 5){
-				tagastada.get(getXDistance(tribe.x, jupp.x) +5).remove(getYDistance(tribe.y, jupp.y) +5);
-				tagastada.get(getXDistance(tribe.x, jupp.x) +5).add	 (getYDistance(tribe.y, jupp.y) +5, "assets/images/game/tiles/vaenlased_p.png");				
-			}
-		}		
-		tagastada.get(5).remove(5);
-		tagastada.get(5).add(5, "assets/images/game/tiles/m2ngija_p.png");
-		
-		return tagastada;
-	}
-	
-	public static int getXDistance(int x1, int x2){
-		int distance1 = x2 - x1;
-		int distance2 = (x2 + TerrainController.getWorldWidth()) - x1;
-		int distance3 = (x2 - TerrainController.getWorldWidth()) - x1;
-		return findLowestDistance(distance1, distance2, distance3);
-	}
-	
-	public static int getYDistance(int x1, int x2){
-		int distance1 = x2 - x1;
-		int distance2 = (x2 + TerrainController.getWorldHeight()) - x1;
-		int distance3 = (x2 - TerrainController.getWorldHeight()) - x1;
-		return findLowestDistance(distance1, distance2, distance3);
-	}
-	
-	public static int findLowestDistance(int distance1, int distance2, int distance3){
-		if (Math.abs(distance2) < Math.abs(distance3)){
-			return findLowestDistance(distance1, distance2);
-		} else{
-			return findLowestDistance(distance1, distance3);
-		}
-	}
-	
-	public static int findLowestDistance(int distance1, int distance2){
-		if (Math.abs(distance1) < Math.abs(distance2)){
-			return distance1;
-		} else{
-			return distance2;
-		}
 	}
 }

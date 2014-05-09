@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.game.MovementController;
+import controllers.game.ObjectStreamer;
 import controllers.game.TerrainStreamer;
 import controllers.websocket.GridHandler;
 import play.mvc.*;
@@ -30,7 +31,7 @@ public class GameController extends Application {
 				GameEventQuery.getEventsStatistics(),
 				WarEvent.findTribeWarEvents(kasutaja.tribe),
 				SpecialEvent.findTribeEvents(kasutaja.tribe),
-				TerrainStreamer.streamAllPlayerUrl(kasutaja.tribe),
+				ObjectStreamer.streamAllPlayerUrl(kasutaja.tribe),
 				kasutaja.tribe,
 				TerrainStreamer.streamAllUrl(kasutaja.tribe),
 				form(Application.Login.class), 

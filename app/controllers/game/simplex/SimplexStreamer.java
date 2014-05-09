@@ -1,6 +1,7 @@
 package controllers.game.simplex;
 
 import controllers.game.TerrainController;
+import controllers.game.TerrainTypeController.TerrainType;
 
 public class SimplexStreamer {
 	
@@ -54,7 +55,7 @@ public class SimplexStreamer {
 		return SimplexLeveler.levelTransformColor(sim);
 	}
 	
-	public static int getPointTerrain(double x, double y) {
+	public static TerrainType getPointTerrain(double x, double y) {
 		int sim  = SimplexStreamer.plotOctave4D(defXSlices, defYSlices, x, y, defDiv, 0, defL1);
 		sim 	+= SimplexStreamer.plotOctave4D(defXSlices, defYSlices, x, y, defDiv, 1, defL2);
 		sim 	+= SimplexStreamer.plotOctave4D(defXSlices, defYSlices, x, y, defDiv, 2, defL3);

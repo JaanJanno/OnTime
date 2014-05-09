@@ -2,24 +2,26 @@ package controllers.game;
 
 public class TerrainTypeController{
 	
-	public static final int WATER  	= 0;
-	public static final int GRASS   = 1;
-	public static final int BUSHES1 = 2;
-	public static final int BUSHES2 = 3;
-	public static final int BUSHES3	= 4;
-	public static final int FOREST	= 5;
-	public static final int SAND	= 6;
+	public enum TerrainType{
+		WATER,
+		GRASS,
+		BUSHES1,
+		BUSHES2,
+		BUSHES3,
+		FOREST,
+		SAND
+	}
 	
-	public static final String WATER_URL	= "assets/images/game/tiles/water.png";
-	public static final String GRASS_URL 	= "assets/images/game/tiles/grass.png";
-	public static final String BUSHES1_URL 	= "assets/images/game/tiles/bushes1.png";
-	public static final String BUSHES2_URL 	= "assets/images/game/tiles/bushes2.png";
-	public static final String BUSHES3_URL 	= "assets/images/game/tiles/bushes3.png";
-	public static final String FOREST_URL	= "assets/images/game/tiles/forest.png";
-	public static final String SAND_URL		= "assets/images/game/tiles/liiv.png";
+	private static final String WATER_URL	= "assets/images/game/tiles/water.png";
+	private static final String GRASS_URL 	= "assets/images/game/tiles/grass.png";
+	private static final String BUSHES1_URL = "assets/images/game/tiles/bushes1.png";
+	private static final String BUSHES2_URL = "assets/images/game/tiles/bushes2.png";
+	private static final String BUSHES3_URL = "assets/images/game/tiles/bushes3.png";
+	private static final String FOREST_URL	= "assets/images/game/tiles/forest.png";
+	private static final String SAND_URL	= "assets/images/game/tiles/liiv.png";
 	
-	public static String getImgUrl(int i){
-		switch (i) {
+	public static String getImgUrl(TerrainType type){
+		switch (type) {
 		case WATER:
 			return WATER_URL;
 		case GRASS:

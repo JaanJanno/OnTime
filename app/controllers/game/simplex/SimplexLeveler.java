@@ -1,7 +1,7 @@
 package controllers.game.simplex;
 
 import java.awt.Color;
-import controllers.game.TerrainTypeController;
+import controllers.game.TerrainTypeController.TerrainType;
 
 public class SimplexLeveler {
 	
@@ -52,21 +52,21 @@ public class SimplexLeveler {
 		}
 	}
 	
-	public static int levelTransformTerrain(int i){
+	public static TerrainType levelTransformTerrain(int i){
 		if (i < level1){
-			return TerrainTypeController.WATER;
+			return TerrainType.WATER;
 		} else if (i < level1_liiv){
-			return TerrainTypeController.SAND;
+			return TerrainType.SAND;
 		} else if (i < level2){
-			return TerrainTypeController.GRASS;
+			return TerrainType.GRASS;
 		} else if (i < level3){
-			return TerrainTypeController.BUSHES1;
+			return TerrainType.BUSHES1;
 		} else if (i < level4){
-			return TerrainTypeController.BUSHES2;
+			return TerrainType.BUSHES2;
 		} else if (i < level5){
-			return TerrainTypeController.BUSHES3;
+			return TerrainType.BUSHES3;
 		} else{
-			return TerrainTypeController.FOREST;
+			return TerrainType.FOREST;
 		}
 	}
 	

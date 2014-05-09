@@ -1,12 +1,17 @@
 package models.game;
 
 import java.util.List;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 import com.avaje.ebean.Ebean;
+
 import controllers.SessionController;
+import controllers.game.TerrainTypeController.TerrainType;
+import controllers.game.simplex.SimplexStreamer;
 import models.User;
 import play.db.ebean.Model;
 
@@ -53,6 +58,10 @@ public class Tribe extends Model {
 		this.hunting 		= hunting;
 		this.tracking		= tracking;
 		this.food			= food;
+	}
+	
+	public boolean isSwimming(){
+		return SimplexStreamer.getPointTerrain(x, y) == TerrainType.WATER;
 	}
 	
 	public static Finder<Long, Tribe> find = new Finder<Long, Tribe> (Long.class, Tribe.class);
