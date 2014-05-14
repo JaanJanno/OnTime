@@ -2,12 +2,14 @@ package controllers.game;
 
 public class ObjectTypeController {
 
-	enum ObjectType{
+	public enum ObjectType{
 		EMPTY,
 		PLAYER,
 		PLAYER_SWIMMING,
 		ENEMY,
-		ENEMY_SWIMMING
+		ENEMY_SWIMMING,
+		BEAR,
+		DRAGON
 	}
 	
 	private static final String EMPTY_URL			= "assets/images/game/tiles/void.png";
@@ -15,6 +17,8 @@ public class ObjectTypeController {
 	private static final String PLAYER_SWIMMING_URL = "assets/images/game/tiles/m2ngija-ujub.png";	
 	private static final String ENEMY_URL 			= "assets/images/game/tiles/vaenlased_p.png";
 	private static final String ENEMY_SWIMMING_URL 	= "assets/images/game/tiles/vastane-ujub.png";
+	private static final String BEAR_URL 			= "assets/images/game/tiles/karu.png";
+	private static final String DRAGON_URL 			= "assets/images/game/tiles/dragon.png";
 
 	public static String getImgUrl(ObjectType type){
 		switch (type) {
@@ -28,6 +32,10 @@ public class ObjectTypeController {
 			return ENEMY_URL;
 		case ENEMY_SWIMMING:
 			return ENEMY_SWIMMING_URL;
+		case BEAR:
+			return BEAR_URL;
+		case DRAGON:
+			return DRAGON_URL;
 		default:
 			return EMPTY_URL;
 		}

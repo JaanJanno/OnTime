@@ -1,9 +1,13 @@
 import play.*;
 import play.libs.*;
+
 import com.avaje.ebean.Ebean;
+
+import controllers.game.ai.AiDirector;
 import models.*;
 import models.game.Tribe;
 import models.game.events.SpecialEvent;
+
 import java.util.*;
 
 public class Global extends GlobalSettings {
@@ -14,7 +18,8 @@ public class Global extends GlobalSettings {
         if (Event.find.findRowCount() == 0) {
             Ebean.save((List<?>) Yaml.load("test-data.yml"));
             addTestTribe();
-        }       
+        }  
+        AiDirector.initAi();
     }
     
     private static void addTestTribe(){

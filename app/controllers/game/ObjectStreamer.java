@@ -2,20 +2,23 @@ package controllers.game;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import controllers.game.ObjectTypeController.ObjectType;
+import models.game.Npc;
 import models.game.Tribe;
 
 public class ObjectStreamer {
 	
-public static List<List<String>> streamAllPlayerUrl(Tribe tribe){
+	public static List<List<String>> streamAllPlayerUrl(Tribe tribe){
 		
-		List<Tribe> all 			 = Tribe.find.all();		
+		List<Drawable> all = new ArrayList<>();
+		all.addAll(Tribe.find.all());
+		all.addAll(Npc.find.all());
+		
 		List<List<String>> tagastada = initObjectGrid(11, 11);
 		
-		for(Tribe enemy: all){
-			if (isInViewPort(tribe, enemy)){
-				addEnemyForPlayer(enemy, tribe, tagastada);			
+		for(Drawable object: all){
+			if (isInViewPort(tribe, object)){
+				addObjectForPlayer(object, tribe, tagastada);			
 			}
 		}		
 		addPlayer(tribe, tagastada);
@@ -33,15 +36,11 @@ public static List<List<String>> streamAllPlayerUrl(Tribe tribe){
 		}
 	}
 
-	private static void addEnemyForPlayer(Tribe enemy, Tribe player, List<List<String>> tagastada){
-		int xCoord = getXDistance(player.x, enemy.x) + 5;
-		int yCoord = getYDistance(player.y, enemy.y) + 5;
+	private static void addObjectForPlayer(Drawable enemy, Drawable player, List<List<String>> tagastada){
+		int xCoord = getXDistance(player.getXCoord(), enemy.getXCoord()) + 5;
+		int yCoord = getYDistance(player.getYCoord(), enemy.getYCoord()) + 5;
 		
-		if (enemy.isSwimming()){
-			addTypeToCoords(xCoord, yCoord, tagastada, ObjectType.ENEMY_SWIMMING);
-		} else{
-			addTypeToCoords(xCoord, yCoord, tagastada, ObjectType.ENEMY);
-		}
+		addTypeToCoords(xCoord, yCoord, tagastada, enemy.getObjectType());
 	}
 
 	private static void addTypeToCoords(int x, int y, List<List<String>> tagastada, ObjectType type){
@@ -49,8 +48,8 @@ public static List<List<String>> streamAllPlayerUrl(Tribe tribe){
 		tagastada.get(x).add(y, ObjectTypeController.getImgUrl(type));
 	}
 
-	private static boolean isInViewPort(Tribe player, Tribe enemy){
-		return Math.abs(getXDistance(player.x, enemy.x)) <= 5 && Math.abs(getYDistance(player.y, enemy.y)) <= 5;
+	private static boolean isInViewPort(Tribe player, Drawable enemy){
+		return Math.abs(getXDistance(player.x, enemy.getXCoord())) <= 5 && Math.abs(getYDistance(player.y, enemy.getYCoord())) <= 5;
 	}
 
 	private static List<List<String>> initObjectGrid(int w, int h){

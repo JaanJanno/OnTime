@@ -10,13 +10,15 @@ import javax.persistence.ManyToOne;
 import com.avaje.ebean.Ebean;
 
 import controllers.SessionController;
+import controllers.game.Drawable;
+import controllers.game.ObjectTypeController.ObjectType;
 import controllers.game.TerrainTypeController.TerrainType;
 import controllers.game.simplex.SimplexStreamer;
 import models.User;
 import play.db.ebean.Model;
 
 @javax.persistence.Entity
-public class Tribe extends Model {
+public class Tribe extends Model implements Drawable{
 	
 	private static final long serialVersionUID = -4000284550655639759L;
 	@Id
@@ -31,7 +33,7 @@ public class Tribe extends Model {
 	public byte fishing;
 	public byte hunting;
 	public byte tracking;
-	@ManyToOne
+
 	public int x = 0;
 	public int y = 0;
 	
@@ -83,5 +85,24 @@ public class Tribe extends Model {
 	
 	public static Tribe getCurrentTribe(){
 		return SessionController.getCurrentUser().tribe;
+	}
+
+	@Override
+	public int getXCoord() {
+		return x;
+	}
+
+	@Override
+	public int getYCoord() {
+		return y;
+	}
+
+	@Override
+	public ObjectType getObjectType() {
+		if (isSwimming()){
+			return ObjectType.ENEMY_SWIMMING;
+		} else{
+			return ObjectType.ENEMY;
+		}
 	}
 }
