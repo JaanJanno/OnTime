@@ -10,7 +10,7 @@ public class ObjectStreamer {
 	
 	public static List<List<String>> streamAllPlayerUrl(Tribe tribe){
 		
-		List<Drawable> all = new ArrayList<>();
+		List<Drawable> all = new ArrayList<Drawable>();
 		all.addAll(Tribe.find.all());
 		all.addAll(Npc.find.all());
 		

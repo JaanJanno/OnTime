@@ -12,23 +12,21 @@ public class AiDirector implements Runnable{
 	static double moveChance = 0.5;
 	
 	private Thread thread = new Thread(this);
-	private static AiDirector instance;
+	private static AiDirector instance = new AiDirector();
 	
-	private int bearCount;
-	private int dragonCount;
+	private static int bearCount;
+	private static int dragonCount;
 	
 	private int tick = 0;
 
 	private AiDirector() {
 		bearCount 	= 0;
 		dragonCount = 0;
-		start();
 	}
 	
 	public static void initAi(){
-		if (instance == null){
-			instance = new AiDirector();
-		}
+		instance = new AiDirector();
+		instance.start();
 	}
 
 	@Override

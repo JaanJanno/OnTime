@@ -18,7 +18,7 @@ public class Global extends GlobalSettings {
         if (Event.find.findRowCount() == 0) {
             Ebean.save((List<?>) Yaml.load("test-data.yml"));
             addTestTribe();
-        }  
+        } 
         AiDirector.initAi();
     }
     
