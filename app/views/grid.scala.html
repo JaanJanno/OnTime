@@ -24,10 +24,24 @@
         <div id="grid-view-container">
             <table id="grid-view-table">
 				@for( py <- 0 to 10){
-            		<tr>
+            		<tr class="
+                        @(if(py <= 0 || py >= 10){
+                            "outest-row"})
+                        @(if(py <= 1 || py >= 9){
+                            "outer-row"})
+                        @(if(py <= 2 || py >= 8){
+                            "inner-row"})
+                    ">
 					@for( px <- 0 to 10){
-						<td>
-							<a class="box" id="@(px)on@py" href="/game/@px/@py">
+						<td class="
+                            @(if(px <= 0 || px >= 10){
+                                "outest-col"})
+                            @(if(px <= 1 || px >= 9){
+                                "outer-col"})
+                            @(if(px <= 2 || px >= 8){
+                                "inner-col"})
+                        ">
+							<a class="box" id="g@(px)on@py" href="/game/@px/@py">
 								<div class="inner-box">
 									<img alt="O" id="b+@px+@py" src="@list.get(px).get(py)"/>
 								</div>

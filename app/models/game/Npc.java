@@ -3,15 +3,12 @@ package models.game;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import com.avaje.ebean.Ebean;
-
 import controllers.game.Drawable;
 import controllers.game.ObjectTypeController.ObjectType;
 import controllers.game.TerrainController;
 import controllers.game.TerrainTypeController.TerrainType;
 import controllers.game.simplex.SimplexStreamer;
-import controllers.websocket.GridHandler;
 import play.db.ebean.Model;
 
 @javax.persistence.Entity

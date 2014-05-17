@@ -1,14 +1,10 @@
 package models.game;
 
 import java.util.List;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
 import com.avaje.ebean.Ebean;
-
 import controllers.SessionController;
 import controllers.game.Drawable;
 import controllers.game.ObjectTypeController.ObjectType;
