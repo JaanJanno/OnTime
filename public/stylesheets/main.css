@@ -1,9 +1,10 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 header{
     height:50px;
     margin:-8px -8px 15px;
+    background-color:#000;
     background-image:linear-gradient(to bottom, #3b3b3b 0px, #242424 100%);
 }
 
