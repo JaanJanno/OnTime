@@ -10,6 +10,7 @@
     border-spacing: 0px;
     margin-top:0px;
     min-width: 704px;
+    margin-bottom:25px;
 }
 
 #grid-view-table td {
@@ -81,6 +82,7 @@
 
     #grid-view-table {
         min-width: 320px;
+        margin-bottom:25px;
     }
 }
 
