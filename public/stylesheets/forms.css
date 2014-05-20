@@ -1,8 +1,7 @@
 ﻿.sign-up-form-container{
     width:40%;
-    min-width:300px;
+    min-width:280px;
     margin:auto;
-    
 }
 
 #sign-up-form{
@@ -12,7 +11,7 @@
 
 .log-in-form-container{
     width:40%;
-    min-width:300px;
+    min-width:280px;
     margin:auto;
 
 }
@@ -116,6 +115,6 @@
 	}
 	
 	.content {
-		width:80%;
+		width:100%;
 	}
 }
