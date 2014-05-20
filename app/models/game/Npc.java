@@ -1,13 +1,18 @@
 package models.game;
 
+import java.util.List;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import com.avaje.ebean.Ebean;
+
 import controllers.game.Drawable;
 import controllers.game.ObjectTypeController.ObjectType;
 import controllers.game.TerrainController;
 import controllers.game.TerrainTypeController.TerrainType;
+import controllers.game.ai.AiDirector;
 import controllers.game.simplex.SimplexStreamer;
 import play.db.ebean.Model;
 
@@ -44,7 +49,27 @@ public class Npc extends Model implements Drawable{
 		if (SimplexStreamer.getPointTerrain(xMove, yMove) != TerrainType.WATER){
 			x = xMove;
 			y = yMove;
-			Ebean.save(this);
+			Ebean.update(this);
+		}
+	}
+	
+	public void handleDeath(){
+		Ebean.delete(this);
+		AiDirector.reportDeath();
+	}
+	
+	public static List<Npc> findEnemies(Tribe tribe){
+		return Ebean.find(Npc.class).where().eq("X", tribe.x).eq("Y", tribe.y).findList();
+	}
+	
+	public String getTypeString(){
+		switch (type) {
+		case BEAR:
+			return "bear";
+		case DRAGON:
+			return "dragon";
+		default:
+			return "";
 		}
 	}
 

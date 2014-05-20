@@ -1,8 +1,10 @@
 package controllers.game;
 
+import models.game.Npc;
 import models.game.Tribe;
 import models.game.events.SpecialEvent;
 import models.game.events.WarEvent;
+
 import com.avaje.ebean.Ebean;
 
 public class MovementController {
@@ -11,6 +13,7 @@ public class MovementController {
 	    if (isValidMove(x, y)){
 	    	handleMove(muuta, x, y);
 	    	generateEvents(muuta);
+	    	muuta.handleLives();
 	    }
 	}
 	
@@ -37,6 +40,11 @@ public class MovementController {
 		SpecialEvent.rollSpecialEvent(muuta);
     	for(Tribe tribe: Tribe.findEnemies(muuta)){
     		WarEvent.rollWarEvent(muuta, tribe);
+    		tribe.handleLives(muuta);
+    	}
+    	for(Npc npc: Npc.findEnemies(muuta)){
+    		SpecialEvent.generateHuntingEvent(muuta, npc);
+    		npc.handleDeath();
     	}
     	Ebean.update(muuta);
 	}

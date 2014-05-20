@@ -32,7 +32,10 @@ public class ObjectStreamer {
 		if (player.isSwimming()) {
 			tagastada.get(5).add(5, ObjectTypeController.getImgUrl(ObjectType.PLAYER_SWIMMING));
 		} else {
-			tagastada.get(5).add(5, ObjectTypeController.getImgUrl(ObjectType.PLAYER));
+			if (Tribe.findEnemies(player).isEmpty())
+				tagastada.get(5).add(5, ObjectTypeController.getImgUrl(ObjectType.PLAYER));
+			else
+				tagastada.get(5).add(5, ObjectTypeController.getImgUrl(ObjectType.PLAYER_FIGHTING));
 		}
 	}
 

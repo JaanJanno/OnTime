@@ -6,6 +6,7 @@ public class ObjectTypeController {
 		EMPTY,
 		PLAYER,
 		PLAYER_SWIMMING,
+		PLAYER_FIGHTING,
 		ENEMY,
 		ENEMY_SWIMMING,
 		BEAR,
@@ -19,6 +20,7 @@ public class ObjectTypeController {
 	private static final String ENEMY_SWIMMING_URL 	= "assets/images/game/tiles/vastane-ujub.png";
 	private static final String BEAR_URL 			= "assets/images/game/tiles/karu.png";
 	private static final String DRAGON_URL 			= "assets/images/game/tiles/dragon.png";
+	private static final String FIGHTING_URL 		= "assets/images/game/tiles/fight.png";
 
 	public static String getImgUrl(ObjectType type){
 		switch (type) {
@@ -36,6 +38,8 @@ public class ObjectTypeController {
 			return BEAR_URL;
 		case DRAGON:
 			return DRAGON_URL;
+		case PLAYER_FIGHTING:
+			return FIGHTING_URL;
 		default:
 			return EMPTY_URL;
 		}

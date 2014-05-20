@@ -7,10 +7,13 @@ import javax.persistence.Id;
 import com.avaje.ebean.Ebean;
 import controllers.SessionController;
 import controllers.game.Drawable;
+import controllers.game.TerrainController;
 import controllers.game.ObjectTypeController.ObjectType;
 import controllers.game.TerrainTypeController.TerrainType;
 import controllers.game.simplex.SimplexStreamer;
+import controllers.websocket.GridHandler;
 import models.User;
+import models.game.events.SpecialEvent;
 import play.db.ebean.Model;
 
 @javax.persistence.Entity
@@ -79,6 +82,31 @@ public class Tribe extends Model implements Drawable{
 		Ebean.update(user);
 	}
 	
+	public void handleLives(Tribe attacker){
+		if (peopleAmount <= 0){
+			handleDeath();
+			SpecialEvent.generateKillEvent(attacker, this);
+		}
+	}
+	
+	public void handleLives(){
+		if (peopleAmount <= 0){
+			handleDeath();
+		}
+	}
+	
+	private void handleDeath() {
+		this.x = (int)(Math.random()*TerrainController.getWorldWidth());
+		this.y = (int)(Math.random()*TerrainController.getWorldHeight());
+		this.peopleAmount = 25;
+		this.food = 100;
+		Ebean.update(this);
+		
+		SpecialEvent.generateDeathEvent(this);
+		GridHandler.sendObjectStream();
+		
+	}
+
 	public static Tribe getCurrentTribe(){
 		return SessionController.getCurrentUser().tribe;
 	}

@@ -1,11 +1,7 @@
 package controllers.game.ai;
 
 import org.h2.jdbc.JdbcSQLException;
-
 import models.game.Npc;
-
-import com.avaje.ebean.Ebean;
-
 import controllers.game.ObjectTypeController.ObjectType;
 import controllers.websocket.GridHandler;
 
@@ -16,9 +12,9 @@ public class AiDirector implements Runnable{
 	private Thread thread = new Thread(this);
 	private static AiDirector instance = new AiDirector();
 	
-	private static int bearCount = 0;
-	private static int dragonCount = 0;
-	
+	private static int npcCount = Npc.find.all().size();
+	private static final int maxAnimals = 20;
+
 	private int tick = 0;
 
 	private AiDirector() {
@@ -30,22 +26,27 @@ public class AiDirector implements Runnable{
 		instance.start();
 	}
 	
+	private void generateNpcs(){
+		while (npcCount < maxAnimals){
+			new Npc(ObjectType.BEAR);	
+			new Npc(ObjectType.DRAGON);
+			npcCount += 2;
+		}
+	}
+	
+	private void moveNpcs(){
+		for(Npc actor: Npc.find.all()){
+			if (Math.random() < moveChance)
+				actor.handleMove();
+		}
+		GridHandler.sendObjectStream();
+	}
+	
 	private void aiTick() throws JdbcSQLException{
-		while (bearCount < 10){
-			Ebean.save(new Npc(ObjectType.BEAR));			
-			bearCount ++;
-		}
-		while (dragonCount < 10){
-			Ebean.save(new Npc(ObjectType.DRAGON));
-			dragonCount ++;
-		}
 		
+		generateNpcs();	
 		if (tick % 2 == 0){
-			for(Npc actor: Npc.find.all()){
-				if (Math.random() < moveChance)
-					actor.handleMove();
-			}
-			GridHandler.sendObjectStream();
+			moveNpcs();
 		}
 	}
 
@@ -70,5 +71,9 @@ public class AiDirector implements Runnable{
 	
 	private void start(){
 		thread.start();
+	}
+
+	public static void reportDeath() {
+		npcCount --;
 	}
 }

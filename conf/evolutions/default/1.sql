@@ -33,7 +33,7 @@ create table npc (
   type                      integer,
   x                         integer,
   y                         integer,
-  constraint ck_npc_type check (type in (0,1,2,3,4,5,6)),
+  constraint ck_npc_type check (type in (0,1,2,3,4,5,6,7)),
   constraint pk_npc primary key (id))
 ;
 
