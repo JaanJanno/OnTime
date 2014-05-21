@@ -81,6 +81,7 @@ public class WarEvent {
 		Ebean.update(tribe);
 				
 		WarEvent event = new WarEvent("You have hunted down a " + npc.getTypeString() + ". +100 food +1 hunting skill.", tribe);
+		Ebean.save(event);
 		EventHandler.sendWarEvent(tribe, event.text);
 	}
 	
