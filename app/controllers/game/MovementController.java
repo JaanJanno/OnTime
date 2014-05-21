@@ -43,7 +43,7 @@ public class MovementController {
     		tribe.handleLives(muuta);
     	}
     	for(Npc npc: Npc.findEnemies(muuta)){
-    		SpecialEvent.generateHuntingEvent(muuta, npc);
+    		WarEvent.generateHuntingEvent(muuta, npc);
     		npc.handleDeath();
     	}
     	Ebean.update(muuta);

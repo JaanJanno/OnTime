@@ -13,7 +13,7 @@ import controllers.game.TerrainTypeController.TerrainType;
 import controllers.game.simplex.SimplexStreamer;
 import controllers.websocket.GridHandler;
 import models.User;
-import models.game.events.SpecialEvent;
+import models.game.events.WarEvent;
 import play.db.ebean.Model;
 
 @javax.persistence.Entity
@@ -85,7 +85,7 @@ public class Tribe extends Model implements Drawable{
 	public void handleLives(Tribe attacker){
 		if (peopleAmount <= 0){
 			handleDeath();
-			SpecialEvent.generateKillEvent(attacker, this);
+			WarEvent.generateKillEvent(attacker, this);
 		}
 	}
 	
@@ -102,7 +102,7 @@ public class Tribe extends Model implements Drawable{
 		this.food = 100;
 		Ebean.update(this);
 		
-		SpecialEvent.generateDeathEvent(this);
+		WarEvent.generateDeathEvent(this);
 		GridHandler.sendObjectStream();
 		
 	}

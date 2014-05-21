@@ -13,6 +13,7 @@ import play.db.ebean.Model.Finder;
 import com.avaje.ebean.Ebean;
 
 import controllers.websocket.EventHandler;
+import models.game.Npc;
 import models.game.Tribe;
 
 @javax.persistence.Entity
@@ -72,6 +73,27 @@ public class WarEvent {
 		WarEvent event = new WarEvent("You were attacked by a tribe called "+tribeEnemy.name+". You lost "+deathMsg+" warriors and killed "+killMsg+". They tried to steal yout food: (-"+foodMsg+" food).", tribe);
 		Ebean.save(event);
 		EventHandler.sendWarEvent(tribe, event.text);
+	}
+	
+	public static void generateHuntingEvent(Tribe tribe, Npc npc) {
+		tribe.food += 100;
+		tribe.hunting += 1;
+		Ebean.update(tribe);
+				
+		WarEvent event = new WarEvent("You have hunted down a " + npc.getTypeString() + ". +100 food +1 hunting skill.", tribe);
+		EventHandler.sendWarEvent(tribe, event.text);
+	}
+	
+	public static void generateDeathEvent(Tribe tribe){
+		WarEvent event = new WarEvent("All the members of your tribe have perished. But it's ok! You were chosen to lead a new tribe to victory. Good luck!", tribe);
+		Ebean.save(event);
+		EventHandler.sendWarEvent(tribe, event.text);
+	}
+	
+	public static void generateKillEvent(Tribe attacker, Tribe defender) {
+		WarEvent event = new WarEvent("You killed " + defender.name + " Way to go!", attacker);
+		Ebean.save(event);
+		EventHandler.sendWarEvent(attacker, event.text);
 	}
 	
 	public static Finder<Long, Tribe> find = new Finder<Long, Tribe> (Long.class, Tribe.class);

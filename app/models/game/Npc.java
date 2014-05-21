@@ -1,13 +1,10 @@
 package models.game;
 
 import java.util.List;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import com.avaje.ebean.Ebean;
-
 import controllers.game.Drawable;
 import controllers.game.ObjectTypeController.ObjectType;
 import controllers.game.TerrainController;
@@ -47,10 +44,20 @@ public class Npc extends Model implements Drawable{
 		int yMove = y -1 + (int)(Math.random()*2) * 2;
 		
 		if (SimplexStreamer.getPointTerrain(xMove, yMove) != TerrainType.WATER){
-			x = xMove;
-			y = yMove;
+			x = xMove % TerrainController.getWorldWidth();
+			y = yMove % TerrainController.getWorldHeight();
+			handleMoveWraparound();
 			Ebean.update(this);
 		}
+	}
+	
+	private void handleMoveWraparound(){
+    	if (x < 0){
+    		x += TerrainController.getWorldWidth();
+    	}
+    	if (y < 0){
+    		y += TerrainController.getWorldHeight();
+    	}
 	}
 	
 	public void handleDeath(){

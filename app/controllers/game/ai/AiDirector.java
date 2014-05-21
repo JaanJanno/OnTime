@@ -43,7 +43,6 @@ public class AiDirector implements Runnable{
 	}
 	
 	private void aiTick() throws JdbcSQLException{
-		
 		generateNpcs();	
 		if (tick % 2 == 0){
 			moveNpcs();
@@ -60,10 +59,8 @@ public class AiDirector implements Runnable{
 			try {
 				Thread.sleep(1000);
 				aiTick();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (JdbcSQLException e){
-				System.out.println("Ai paused - going through DB restart.");
+			} catch (Exception e){
+
 			}
 			tick ++;
 		}
