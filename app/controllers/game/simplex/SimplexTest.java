@@ -5,8 +5,11 @@ import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import controllers.game.simplex.opencl.SimplexGpuNoise;
 
 public class SimplexTest extends JPanel {
 	
@@ -45,6 +48,9 @@ public class SimplexTest extends JPanel {
 		}else if (mode == 1){
 			img = new BufferedImage(x, x, BufferedImage.TYPE_INT_ARGB);
 			plotSimplex4D(img, x, x, frequency);
+		}else if (mode == 0){
+				img = new BufferedImage(x*3, x*3, BufferedImage.TYPE_INT_ARGB);
+				plotSimplex4DOpenCl(img, x*3, x*3, frequency);
 		} else{
 			img = new BufferedImage(x, x, BufferedImage.TYPE_INT_ARGB);
 			plotSimplex2D(img, x, x, frequency);
@@ -66,6 +72,20 @@ public class SimplexTest extends JPanel {
 		for (int i = 0; i < x; i++){
 			for (int j = 0; j < x; j++){
 				img.setRGB(i, j, SimplexStreamer.getPointColor(i+xc, j+yc, suurus, suurus));
+			}
+		}
+	}
+	
+	public void plotSimplex4DOpenCl(BufferedImage img, int x, int y, double div){
+		float[] grid = SimplexGpuNoise.calculateOctaveGrid (700, 700, xc, yc, 450, 450, 900, 0);
+		float[] grid1 = SimplexGpuNoise.calculateOctaveGrid(700, 700, xc, yc, 450, 450, 900, 1);
+
+		for (int i = 0; i < x; i++){
+			for (int j = 0; j < x; j++){
+				img.setRGB(i, j, SimplexLeveler.levelTransformColorAdvanced((int) (
+							grid[(j*450 + i)]*125f +
+							grid1[(j*450 + i)]*60f 
+						)));
 			}
 		}
 	}
@@ -129,7 +149,7 @@ public class SimplexTest extends JPanel {
 			if (key == KeyEvent.VK_ENTER){
 				m.xc = 0;
 				m.yc = 0;
-				m.mode = (m.mode + 1) % 3;
+				m.mode = (m.mode + 1) % 4;
 			}
 			m.repaint();
 		} 
